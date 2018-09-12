@@ -46,7 +46,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
