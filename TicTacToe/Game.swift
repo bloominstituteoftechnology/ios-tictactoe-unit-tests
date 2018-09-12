@@ -11,7 +11,7 @@ import Foundation
 struct Game {
     init(board: GameBoard,
          activePlayer: GameBoard.Mark,
-         winningPlayer: GameBoard.Mark?,
+         winningPlayer: GameBoard.Mark? = nil,
          gameIsOver: Bool = false) {
         self.board = board
         self.activePlayer = activePlayer

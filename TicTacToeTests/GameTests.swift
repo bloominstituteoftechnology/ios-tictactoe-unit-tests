@@ -11,10 +11,8 @@ import XCTest
 
 class GameTests: XCTestCase {
     
-    func testGameMakeMark() {
-        var game = Game(board: GameBoard(),
-                        activePlayer: .o,
-                        winningPlayer: nil)
+    func testGameMakeMarkOnBoard() {
+        var game = Game(board: GameBoard(), activePlayer: .o)
         
         try! game.makeMark(at: (0, 0))
         try! game.makeMark(at: (0, 1))
@@ -25,24 +23,28 @@ class GameTests: XCTestCase {
     }
     
     func testGameRestartWillResetBoard() {
-        var game = Game(board: GameBoard(),
-                        activePlayer: .o,
-                        winningPlayer: nil)
+        /*
+         Create new game with active player .o
+         Place mark at (0, 0) with .o
+         Restart the game
+         Place mark at (0, 0) with .x
+        */
         
-        try! game.makeMark(at: (0, 0)) // Place .o at (0, 0)
-        XCTAssertEqual(.o, game.board[(0, 0)]) // Make sure it's there
+        var game = Game(board: GameBoard(), activePlayer: .o)
         
-        game.restart() // Restart
-        try! game.makeMark(at: (0, 0)) // Place .x at (0, 0)
+        try! game.makeMark(at: (0, 0))
+        XCTAssertEqual(.o, game.board[(0, 0)])
+        
+        game.restart()
+        try! game.makeMark(at: (0, 0))
         
         XCTAssertNotEqual(.o, game.board[(0, 0)])
         XCTAssertEqual(.x, game.board[(0, 0)])
     }
     
-    func testGameCanHaveWinner() {
-        var game = Game(board: GameBoard(),
-                        activePlayer: .x,
-                        winningPlayer: nil)
+    func testGameCanHaveWinnerAndBeOver() {
+        var game = Game(board: GameBoard(), activePlayer: .x)
+        
         try! game.makeMark(at: (0, 2))
         try! game.makeMark(at: (0, 0))
         try! game.makeMark(at: (1, 2))
