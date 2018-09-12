@@ -22,15 +22,18 @@ struct Game {
     mutating func restart() {
         board = GameBoard()
         activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
         do {
-            guard let activePlayer = activePlayer else { return }
             try board.place(mark: activePlayer, on: coordinate)
             
             if game(board: board, isWonBy: activePlayer) {
                 winningPlayer = activePlayer
+                gameIsOver = true
+            } else if board.isFull {
                 gameIsOver = true
             }
             
@@ -45,7 +48,7 @@ struct Game {
     }
     
     private(set) var board: GameBoard
-    private var activePlayer: GameBoard.Mark?
+    var activePlayer: GameBoard.Mark
     var winningPlayer: GameBoard.Mark?
     var gameIsOver: Bool
 }
