@@ -14,7 +14,8 @@ enum GameState {
 	case won(GameBoard.Mark) // Winning player
 }
 
-func checkForGameOver(_ board:GameBoard) -> GameState
+
+func checkForGameOver(_ board:GameBoard, current:GameBoard.Mark) -> GameState
 {
 	if gameWon(board: board, by: .x) {
 		return .won(.x)
@@ -22,6 +23,17 @@ func checkForGameOver(_ board:GameBoard) -> GameState
 		return .won(.o)
 	} else if board.isFull {
 		return .cat
+	}
+
+	return GameState.active(getEnemy(current))
+}
+
+func getEnemy(_ player:GameBoard.Mark) -> GameBoard.Mark
+{
+	if player == .x {
+		return .o
+	} else {
+		return .x
 	}
 }
 
@@ -44,11 +56,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate
         
         do {
             try board.place(mark: player, on: coordinate)
-			gameState = checkForGameOver(board)
+			gameState = checkForGameOver(board, current:player)
+			if gameState ==
 
-			let pos = nextMove(board, for: GameBoard.Mark.o)
-			try board.place(mark: GameBoard.Mark.o, at: pos)
-			gameState = checkForGameOver(board)
+				let pos = nextMove(board, for: GameBoard.Mark.o)
+				try board.place(mark: GameBoard.Mark.o, at: pos)
+				gameState = checkForGameOver(board, current:getEnemy(player))
+
         } catch {
             NSLog("Illegal move")
         }

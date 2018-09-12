@@ -6,13 +6,34 @@
 //  Copyright © 2018 Lambda School. All rights reserved.
 //
 
+import XCTest
+
 import Foundation
 @testable import TicTacToe
+
 class GameAITests: XCTestCase {
 	func testAIDisruption()
 	{
+		var board = GameBoard()
+		try! board.place(mark: .x, at: 0)
+		try! board.place(mark: .x, at: 3)
+		XCTAssert(nextMove(board, for: .x) == 6)
+		XCTAssert(nextMove(board, for: .o) == 6)
+
+		board = GameBoard()
+		try! board.place(mark: .x, at: 0)
+		try! board.place(mark: .x, at: 4)
+		XCTAssert(nextMove(board, for: .x) == 8)
+		XCTAssert(nextMove(board, for: .o) == 8)
+
+		board = GameBoard()
+		try! board.place(mark: .x, at: 0)
+		try! board.place(mark: .x, at: 1)
+		XCTAssert(nextMove(board, for: .x) == 2)
+		XCTAssert(nextMove(board, for: .o) == 2)
 
 	}
+
 	func testAllWins() {
 		for (player,enemy) in [(Mark.x, Mark.o), (Mark.o, Mark.x)] {
 			// rows
