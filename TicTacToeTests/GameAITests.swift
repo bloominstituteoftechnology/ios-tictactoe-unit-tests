@@ -161,6 +161,7 @@ class GameAITests: XCTestCase {
         try! board.place(mark: .o, on: (2, 2))
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertTrue(board.isFull)
     }
 
 }
