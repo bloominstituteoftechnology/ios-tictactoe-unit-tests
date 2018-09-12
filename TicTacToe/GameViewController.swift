@@ -40,6 +40,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         } else if isOver && game.winningPlayer != nil {
             guard let winningPlayer = game.winningPlayer else { return }
             statusLabel.text = "Player \(winningPlayer.stringValue) won!"
+            boardViewController?.delegate = nil
         } else {
             statusLabel.text = "Player \(game.activePlayer.stringValue)'s turn"
         }
