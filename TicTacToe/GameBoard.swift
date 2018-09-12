@@ -41,12 +41,28 @@ struct GameBoard {
             return nil
         }
     }
+
+	subscript(coordinate: Int) -> Mark? {
+		let square = squares[coordinate]
+		if case let Square.filled(mark) = square {
+			return mark
+		} else {
+			return nil
+		}
+	}
     
-    mutating func place(mark: Mark, on square: Coordinate) throws {
-        if self[square] != nil {
+	mutating func place(mark: Mark, on square: Coordinate) throws {
+		if self[square] != nil {
+			throw GameBoardError.invalidSquare
+		}
+		squares[arrayIndex(for: square)] = .filled(mark)
+	}
+
+    mutating func place(mark: Mark, at pos: Int) throws {
+        if self[pos] != nil {
             throw GameBoardError.invalidSquare
         }
-        squares[arrayIndex(for: square)] = .filled(mark)
+        squares[pos] = .filled(mark)
     }
     
     var isFull: Bool {
@@ -57,6 +73,15 @@ struct GameBoard {
         }
         return true
     }
+
+	var isEmpty: Bool {
+		for square in squares {
+			if square != .empty {
+				return false
+			}
+		}
+		return true
+	}
     
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x

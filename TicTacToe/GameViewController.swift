@@ -8,14 +8,27 @@
 
 import UIKit
 
-class GameViewController: UIViewController, BoardViewControllerDelegate {
-    
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-    }
-    
+enum GameState {
+	case active(GameBoard.Mark) // Active player
+	case cat
+	case won(GameBoard.Mark) // Winning player
+}
+
+func checkForGameOver(_ board:GameBoard) -> GameState
+{
+	if gameWon(board: board, by: .x) {
+		return .won(.x)
+	} else if gameWon(board: board, by: .o){
+		return .won(.o)
+	} else if board.isFull {
+		return .cat
+	}
+}
+
+
+class GameViewController: UIViewController, BoardViewControllerDelegate
+{
+
     @IBAction func restartGame(_ sender: Any) {
         board = GameBoard()
         gameState = .active(.x)
@@ -31,14 +44,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         
         do {
             try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+			gameState = checkForGameOver(board)
+
+			let pos = nextMove(board, for: GameBoard.Mark.o)
+			try board.place(mark: GameBoard.Mark.o, at: pos)
+			gameState = checkForGameOver(board)
         } catch {
             NSLog("Illegal move")
         }
