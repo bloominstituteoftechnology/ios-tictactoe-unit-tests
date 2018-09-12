@@ -19,6 +19,16 @@ class GameBoardTests: XCTestCase {
         for x in 0..<3 {
             for y in 0..<3 {
                 XCTAssertNil(board[(x, y)])
+                
+                /* Other ways to check if the coordinate on the board is nil
+                 XCTAssert(board[(x, y)] == nil)
+                 
+                 Or...
+                 
+                 if board[(x, y)] != nil {
+                    // Test failed
+                 }
+                 */
             }
         }
     }
@@ -27,6 +37,8 @@ class GameBoardTests: XCTestCase {
         var board = GameBoard()
         
         /*
+         // This way is more thorough, if it fails, we know exactly which line doesn't work
+         
         XCTAssertNoThrow(try board.place(mark: .o, on: (0, 0)))
         // check to make sure the coordinate has the same mark that we place there
         XCTAssertEqual(board[(0,0)], .o)
@@ -89,6 +101,8 @@ class GameBoardTests: XCTestCase {
                 try! board.place(mark: .x, on: (x, y))
             }
          }
+         
+         // Board shouldn't be full until all coordinates are filled. If the board isn't full, meaning the condition is false, XCTAssertTrue will throw an arror.
          XCTAssertTrue(board.isFull)
         */
     }
