@@ -10,7 +10,7 @@ import Foundation
 
 func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     // Check verticals
-    for x in 0..<3 {
+    for x in 0..<3 {    // does this check for if the boxes are in one row or just if the numMarks = 3?
         var numMarks = 0
         for y in 0..<3 {
             if board[(x, y)] == player {

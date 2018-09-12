@@ -70,6 +70,8 @@ class GameAITests: XCTestCase {
          x x x
          o o -
          - - -
+         
+         Don't need to check for o's in the first row, because the way the code in written in GameAI, we're checking to make sure the row is filled, it doesn't matter whether it is x or o.
          */
         
         try! board.place(mark: .x, on: (0, 0))
@@ -177,4 +179,8 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
+    
+    /*
+     Don't need check functions in GameAI for incomplete game and cat's game becasue if we check for all the winning posibilities and don't get a win, then we are in the false state for either x or o.
+    */
 }
