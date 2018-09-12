@@ -29,7 +29,14 @@ class GameTests: XCTestCase {
                         activePlayer: .o,
                         winningPlayer: nil)
         
-        game.restart()
+        try! game.makeMark(at: (0, 0)) // Place .o at (0, 0)
+        XCTAssertEqual(.o, game.board[(0, 0)]) // Make sure it's there
+        
+        game.restart() // Restart
+        try! game.makeMark(at: (0, 0)) // Place .x at (0, 0)
+        
+        XCTAssertNotEqual(.o, game.board[(0, 0)])
+        XCTAssertEqual(.x, game.board[(0, 0)])
     }
     
 }
