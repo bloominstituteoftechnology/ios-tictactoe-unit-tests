@@ -36,19 +36,19 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     }
     
     // Check diagonals
-    let ltr: [Coordinate] = [(0,0), (1, 1), (2,2)]
+    let leftToRight: [Coordinate] = [(0,0), (1, 1), (2,2)]
     var numMatches = 0
-    for coord in ltr {
-        if board[coord] == player {
+    for coordinate in leftToRight {
+        if board[coordinate] == player {
             numMatches += 1
         }
     }
     if numMatches == 3 { return true }
-    
-    let rtl: [Coordinate] = [(2,0), (1, 1), (0,2)]
+
+    let rightToLeft: [Coordinate] = [(2,0), (1, 1), (0,2)]
     numMatches = 0
-    for coord in rtl {
-        if board[coord] == player {
+    for coordinate in rightToLeft {
+        if board[coordinate] == player {
             numMatches += 1
         }
     }
