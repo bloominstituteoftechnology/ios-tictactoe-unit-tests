@@ -32,7 +32,6 @@ struct Game {
             if game(board: board, isWonBy: activePlayer) {
                 winningPlayer = activePlayer
                 gameIsOver = true
-                return
             }
             
             if activePlayer == .x {
