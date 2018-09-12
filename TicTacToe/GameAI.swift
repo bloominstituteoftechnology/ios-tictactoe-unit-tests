@@ -9,6 +9,11 @@
 import Foundation
 
 func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
+    /*
+     0,0 1,0 2,0
+     0,1 1,1 2,1
+     0,2 1,2 2,2
+    */
     // Check verticals
     for x in 0..<3 {
         var numMarks = 0
