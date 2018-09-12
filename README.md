@@ -13,7 +13,7 @@ The goal of this project is practice writing unit tests, and additionally using 
 You'll be starting with the Tic Tac Toe app as we left it earlier. This repo includes the partly-finished version of the app that we've worked on before. In order to ensure that you're at a consistent starting point, you should consider using the repo's version rather than the app you built yourself following along with the guided project. Do the following:
 
 1. If you haven't done so already, commit and push your own guided project version on `master`.
-2. Check out the `afternoon-start` branch using `git checkout -b afternoon-start`.
+2. Check out the `afternoon-start` branch using `git checkout afternoon-start`.
 3. Open TicTacToe.xcodeproj
 
 If everything worked, you'll see the tests we wrote in `GameBoardTests.swift` and `GameAITests.swift`, along with some empty test methods in `GameAITests.swift`.
