@@ -10,11 +10,37 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // MARK: - Properties
+    
+    private var gameState = GameState.active(.x) {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    private var board = GameBoard() {
+        didSet {
+            boardViewController.board = board
+        }
+    }
+    
+    private var boardViewController: BoardViewController! {
+        willSet {
+            boardViewController?.delegate = nil
+        }
+        didSet {
+            boardViewController?.board = board
+            boardViewController?.delegate = self
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
+    
+    @IBOutlet weak var statusLabel: UILabel!
     
     @IBAction func restartGame(_ sender: Any) {
         board = GameBoard()
@@ -67,27 +93,5 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var boardViewController: BoardViewController! {
-        willSet {
-            boardViewController?.delegate = nil
-        }
-        didSet {
-            boardViewController?.board = board
-            boardViewController?.delegate = self
-        }
-    }
     
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
 }
