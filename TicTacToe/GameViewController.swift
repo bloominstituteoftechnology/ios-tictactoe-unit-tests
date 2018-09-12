@@ -9,9 +9,14 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
-        
+    
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
+    }
+    
+    @IBAction func undo(_ sender: Any) {
+        game.undo()
+        updateViews()
     }
     
     // MARK: - BoardViewControllerDelegate

@@ -21,6 +21,7 @@ struct Game {
     var activePlayer: GameBoard.Mark?
     var gameIsOver: Bool
     var winningPlayer: GameBoard.Mark?
+    var previousMove: Coordinate?
     private(set) var board : GameBoard
     
     // MARK: - Methods
@@ -29,6 +30,12 @@ struct Game {
         board = GameBoard()
         activePlayer = .x
         gameIsOver = false
+    }
+    
+    mutating func undo() {
+        guard let previousMove = previousMove else { NSLog("No previous move available"); return }
+        board.remove(on: previousMove)
+        activePlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
@@ -53,6 +60,7 @@ struct Game {
         } catch {
             NSLog("Illegal move")
         }
+        previousMove = coordinate
     }
     
 }

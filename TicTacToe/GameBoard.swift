@@ -42,6 +42,10 @@ struct GameBoard {
         }
     }
     
+    mutating func remove(on square: Coordinate) {
+        squares[arrayIndex(for: square)] = .empty
+    }
+    
     mutating func place(mark: Mark, on square: Coordinate) throws {
         if self[square] != nil {
             throw GameBoardError.invalidSquare
