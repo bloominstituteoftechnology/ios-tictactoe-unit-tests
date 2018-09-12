@@ -18,6 +18,7 @@ struct Game {
         self.winningPlayer = winningPlayer
         self.gameIsOver = gameIsOver
     }
+    
     mutating func restart() {
         board = GameBoard()
         activePlayer = .x
@@ -27,6 +28,13 @@ struct Game {
         do {
             guard let activePlayer = activePlayer else { return }
             try board.place(mark: activePlayer, on: coordinate)
+            
+            if game(board: board, isWonBy: activePlayer) {
+                winningPlayer = activePlayer
+                gameIsOver = true
+                return
+            }
+            
             if activePlayer == .x {
                 self.activePlayer = .o
             } else {
@@ -39,6 +47,6 @@ struct Game {
     
     private(set) var board: GameBoard
     private var activePlayer: GameBoard.Mark?
-    private var winningPlayer: GameBoard.Mark?
-    private var gameIsOver: Bool
+    var winningPlayer: GameBoard.Mark?
+    var gameIsOver: Bool
 }
