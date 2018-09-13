@@ -25,8 +25,8 @@ struct Game {
         }
     }
     
-    private(set) var board: GameBoard
-    var activePlayer:GameBoard.Mark?
-    var gameIsOver: Bool
-    var winningPlayer: GameBoard.Mark?
+    private(set) var board = GameBoard()
+    var activePlayer: GameBoard.Mark? = .x
+    var gameIsOver: Bool = false
+    var winningPlayer: GameBoard.Mark? = nil
 }

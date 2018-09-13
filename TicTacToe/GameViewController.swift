@@ -31,7 +31,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         
         do {
             try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
+            if checkGame(board: board, isWonBy: player) {
                 gameState = .won(player)
             } else if board.isFull {
                 gameState = .cat
