@@ -22,10 +22,10 @@ struct Game {
     mutating internal func restart() {
         // make empty board
         board = GameBoard()
-        
+
         gameIsOver = false
         winningPlayer = nil
-        
+
         // player X starts
         activePlayer = .x
     }
@@ -33,9 +33,9 @@ struct Game {
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         
         guard let currentlyActivePlayer = activePlayer else { return }
-        
+
         try board.place(mark: currentlyActivePlayer, on: coordinate)
-        
+
         if game(board: board, isWonBy: currentlyActivePlayer) {
             gameIsOver = true
             winningPlayer = currentlyActivePlayer
@@ -52,6 +52,11 @@ struct Game {
                 activePlayer = .x
             }
         }
+        
+        
+        
+        
+        
         
 //        // if player is x, want o to go, if player is o, want x to go
 //        if activePlayer == .x {
