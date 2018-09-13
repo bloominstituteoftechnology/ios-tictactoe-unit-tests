@@ -18,7 +18,11 @@ struct Game {
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
-        guard let activePlayer = activePlayer else { return }
+        guard let activePlayer = activePlayer else {
+            NSLog("Game is over.")
+            return
+        }
+        
         try board.place(mark: activePlayer, on: coordinate)
         if checkGame(board: board, isWonBy: activePlayer) {
             winningPlayer = activePlayer
@@ -26,11 +30,13 @@ struct Game {
             self.activePlayer = nil
             return
         }
+        
         if activePlayer == .x {
             self.activePlayer = .o
         } else {
             self.activePlayer = .x
         }
+        
         if board.isFull {
             gameIsOver = true
             self.activePlayer = nil
