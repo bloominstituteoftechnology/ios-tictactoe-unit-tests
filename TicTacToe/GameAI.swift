@@ -8,7 +8,7 @@
 
 import Foundation
 
-func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
+func checkGame(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     // Check verticals
     for x in 0..<3 {
         var numMarks = 0

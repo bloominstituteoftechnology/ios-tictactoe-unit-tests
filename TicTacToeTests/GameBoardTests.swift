@@ -14,6 +14,7 @@ class GameBoardTests: XCTestCase {
     func testCreatingEmptyBoard() {
         let board = GameBoard()
 
+        XCTAssertFalse(board.isFull)
         for x in 0..<3 {
             for y in 0..<3 {
                 XCTAssertNil(board[(x, y)])
@@ -23,6 +24,7 @@ class GameBoardTests: XCTestCase {
     
     func testPlacingMarks() {
         var board = GameBoard()
+        
         XCTAssertNoThrow(try board.place(mark: .o, on: (0, 0)))
         XCTAssertEqual(board[(0, 0)], .o)
         XCTAssertNoThrow(try board.place(mark: .x, on: (2, 2)))
