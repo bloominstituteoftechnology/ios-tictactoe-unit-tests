@@ -10,6 +10,7 @@ import Foundation
 
 struct Game {
     private(set) var board = GameBoard()
+    private(set) var lastMove: Coordinate?
     var activePlayer: GameBoard.Mark? = .x
     var gameIsOver: Bool = false
     var winningPlayer: GameBoard.Mark?
@@ -19,6 +20,7 @@ struct Game {
         activePlayer = .x
         winningPlayer = nil
         gameIsOver = false
+        lastMove = nil
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
@@ -35,8 +37,16 @@ struct Game {
                 gameIsOver = true
                 winningPlayer = nil
             } else {
+                lastMove = coordinate
                 togglePlayer()
             }
+    }
+    
+    mutating func undoMove() {
+        if let lastMove = lastMove {
+            board.removeMark(from: lastMove)
+            togglePlayer()
+        }
     }
     
     private mutating func togglePlayer() {

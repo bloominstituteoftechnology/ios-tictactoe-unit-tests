@@ -18,7 +18,7 @@ class GameTests: XCTestCase {
         game.restart()
     }
     
-    // Test restarting a game
+    /// Tests restarting a game
     func testRestart() {
         
         // Check that the board is empty
@@ -49,7 +49,7 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game.gameIsOver)
     }
 
-    // Test making a mark
+    /// Tests making a mark
     func testMakingMark() {
         // Have the first player make a mark
         XCTAssertNoThrow(try game.makeMark(at: (1,1)))
@@ -62,7 +62,23 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.winningPlayer)
     }
     
-    // Test X winning a game
+    /// Tests undoing a move
+    func testUndoingMove() {
+        // Check that X is the active player
+        XCTAssertEqual(game.activePlayer, .x)
+        try! game.makeMark(at: (1,1))
+        // Check that the active player has switched to O and that a mark was made
+        XCTAssertEqual(game.board[(1,1)], .x)
+        XCTAssertEqual(game.activePlayer, .o)
+        // Undo the move
+        game.undoMove()
+        // Check that the active player is X again and that the mark was removed
+        XCTAssertEqual(game.activePlayer, .x)
+        XCTAssertNil(game.board[(1,1)])
+        
+    }
+    
+    /// Test X winning a game
     func testWinningGameX() {
         // Play out the game
         /*
@@ -89,7 +105,7 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.winningPlayer)
     }
     
-    // Test O winning a game
+    /// Test O winning a game
     func testWinningGameO() {
         // Play out the game
         /*
@@ -117,7 +133,7 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.winningPlayer)
     }
     
-    // Test Cat's game
+    /// Test Cat's game
     func testCatsGame() {
         // Play out the game
         /*

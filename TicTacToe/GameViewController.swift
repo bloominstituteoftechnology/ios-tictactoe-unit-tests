@@ -28,6 +28,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var undoButton: UIButton!
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -38,6 +39,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
+    }
+    
+    @IBAction func undo(_ sender: Any) {
+        game.undoMove()
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -55,11 +60,14 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
+        undoButton.isHidden = true
         if !game.gameIsOver {
+            if game.lastMove != nil { undoButton.isHidden = false }
             if let player = game.activePlayer {
                 statusLabel.text = "Player \(player.stringValue)'s turn"
             }
         } else {
+            //undoButton.isHidden = true
             if let winner = game.winningPlayer {
                 statusLabel.text = "Player \(winner.stringValue) won!"
             } else {

@@ -57,5 +57,18 @@ class GameBoardTests: XCTestCase {
         try! board.place(mark: .x, on: (2, 2))
         XCTAssertTrue(board.isFull)
     }
+    
+    func testRemovingMark() {
+        var board = GameBoard()
+        
+        let coordinate = (0,0)
+        
+        try! board.place(mark: .x, on: coordinate)
+        XCTAssertEqual(board[coordinate], .x)
+        
+        board.removeMark(from: coordinate)
+        XCTAssertNil(board[coordinate])
+        
+    }
 
 }

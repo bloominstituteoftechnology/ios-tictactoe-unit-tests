@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,6 +46,16 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w52-S3-7j6">
+                                <rect key="frame" x="169" y="493" width="37" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Undo">
+                                    <color key="titleColor" red="0.81287977430000002" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="undo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1uG-Ro-QUm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -59,16 +67,19 @@
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QeD-8D-U0w"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" secondItem="JbU-62-13k" secondAttribute="bottom" priority="999" constant="40" id="ShA-bE-mk0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JbU-62-13k" secondAttribute="trailing" constant="20" id="d15-n8-8bs"/>
+                            <constraint firstItem="w52-S3-7j6" firstAttribute="centerX" secondItem="Bdp-7J-yOK" secondAttribute="centerX" id="dx2-rS-89V"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fjL-OP-WuV"/>
                             <constraint firstItem="JbU-62-13k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="gj2-ne-VUP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bdp-7J-yOK" secondAttribute="trailing" constant="40" id="hVg-OK-aep"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="ndw-dQ-dUp"/>
+                            <constraint firstItem="w52-S3-7j6" firstAttribute="top" secondItem="Bdp-7J-yOK" secondAttribute="bottom" constant="12" id="vwl-rv-1V2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bdp-7J-yOK" secondAttribute="trailing" priority="999" constant="40" id="wUu-f9-QpZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
+                        <outlet property="undoButton" destination="w52-S3-7j6" id="fx4-iB-Bn0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -239,6 +250,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="9Gn-vT-zkr"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
