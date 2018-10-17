@@ -33,6 +33,7 @@ struct Game {
             gameOver()
         } else if board.isFull {
             gameOver()
+            activePlayer = nil
         } else {
             updatePlayer()
         }
