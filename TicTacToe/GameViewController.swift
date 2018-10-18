@@ -31,7 +31,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         
         do {
             try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
+            if currentGame(board: board, isWonBy: player) {
                 gameState = .won(player)
             } else if board.isFull {
                 gameState = .cat
@@ -63,7 +63,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
@@ -78,6 +78,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
+    
+    var game: Game? {
+        didSet{
+
+        }
+    }
     
     private var gameState = GameState.active(.x) {
         didSet {
