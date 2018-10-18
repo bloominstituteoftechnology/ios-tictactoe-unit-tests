@@ -17,31 +17,18 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+          try game.makeMark(at: coordinate)
         } catch {
-            NSLog("Illegal move")
+            NSLog("Error making Mark: \(error)")
         }
+
     }
     
     // MARK: - Private
@@ -49,14 +36,28 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
+        if game.board.isFull && game.gameIsOver && game.winningPlayer == nil {
+            statusLabel.text = "Cat's game"
         }
+        
+        if game.gameIsOver && game.winningPlayer == .o {
+            statusLabel.text = "Player O Won!"
+            return
+        }
+        
+        if game.gameIsOver && game.winningPlayer == .x {
+            statusLabel.text = "Player X Won!"
+            return
+        }
+        
+        if !game.board.isFull && !game.gameIsOver && game.activePlayer == .x {
+            statusLabel.text = "Player X's turn"
+        }
+        
+        if !game.board.isFull && !game.gameIsOver && game.activePlayer == .o {
+            statusLabel.text = "Player O's turn"
+        }
+        
     }
     
     // MARK: - Navigation
@@ -72,22 +73,17 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
     
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
+    var game: Game = Game() {
         didSet {
             updateViews()
+            boardViewController.board = game.board
         }
     }
     
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
+    @IBOutlet weak var statusLabel: UILabel!
 }
