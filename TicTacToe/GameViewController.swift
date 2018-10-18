@@ -16,42 +16,21 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     var game2 = Game() {
         didSet {
-            boardViewController.board = game2.board
+            boardViewController.board = game2.board // Why??
             updateViews()
             
         }
     }
     
-//    private enum GameState {
-//        case active(GameBoard.Mark) // Active player
-//        case cat
-//        case won(GameBoard.Mark) // Winning player
-//    }
-    
     @IBAction func restartGame(_ sender: Any) {
-//        board = GameBoard()
-//        gameState = .active(.x)
         game2.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-//        guard case let GameState.active(player) = gameState else {
-//            NSLog("Game is over")
-//            return
-//        }
 
         do {
-//            try board.place(mark: player, on: coordinate)
-//            if game(board: board, isWonBy: player) {
-//                gameState = .won(player)
-//            } else if board.isFull {
-//                gameState = .cat
-//            } else {
-//                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-//                gameState = .active(newPlayer)
-//            }
             try game2.makeMark(at: coordinate)
         } catch {
             NSLog("Illegal move")
@@ -75,15 +54,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         } else {
             statusLabel.text = "Cat's game"
         }
-        
-//        switch gameState {
-//        case let .active(player):
-//            statusLabel.text = "Player \(player.stringValue)'s turn"
-//        case .cat:
-//            statusLabel.text = "Cat's game!"
-//        case let .won(player):
-//            statusLabel.text = "Player \(player.stringValue) won!"
-//        }
     }
     
     // MARK: - Navigation
@@ -105,12 +75,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
-    
-//    private var gameState = GameState.active(.x) {
-//        didSet {
-//            updateViews()
-//        }
-//    }
     
     private var board = GameBoard() {
         didSet {

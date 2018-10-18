@@ -11,8 +11,9 @@ import XCTest
 
 class GameTests: XCTestCase {
     
+    var board = GameBoard()
+    
     func testWinCheckingVertical0() {
-        var board = GameBoard()
         /*
          x o -
          x o -
