@@ -26,7 +26,7 @@ struct Game {
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         guard let currentPlayer = activePlayer else { return }
         
-        try! board.place(mark: currentPlayer, on: coordinate)
+        try board.place(mark: currentPlayer, on: coordinate)
         
         if game(board: board, isWonBy: currentPlayer) {
             winnigPlayer = currentPlayer

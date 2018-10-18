@@ -11,21 +11,23 @@ import XCTest
 
 class GameTests: XCTestCase {
     
-    var board = GameBoard()
+    var game = Game()
     
-    func testWinCheckingVertical0() {
-        /*
-         x o -
-         x o -
-         x - -
-         */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 2))
-        XCTAssertTrue(game(board: board, isWonBy: .x))
-        XCTAssertFalse(game(board: board, isWonBy: .o))
+    func testRestart() {
+        game.restart() // Start game
+        
+        XCTAssertFalse(game.gameIsOver) // Make sure game is not over
+        XCTAssertNil(game.winnigPlayer) // Make sure there is not a winnig player
+        XCTAssertEqual(game.activePlayer, .x) // Make sure first player is .x
+    }
+    
+    func testMakeMark() {
+        let coordinate = (1, 2)
+        
+        XCTAssertEqual(game.activePlayer, .x) // Check first player
+        XCTAssertNoThrow(try game.makeMark(at: coordinate)) // Make a mark
+        XCTAssertEqual(game.activePlayer, .o) // Check if it's changing to second player
+        XCTAssertFalse(game.board.isFull)
     }
     
 }
