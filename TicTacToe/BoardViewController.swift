@@ -43,6 +43,7 @@ class BoardViewController: UIViewController {
                 } else {
                     button.setTitle(" ", for: .normal)
                 }
+                button.isEnabled = self.isEnabled
             }
         }
     }
@@ -62,6 +63,11 @@ class BoardViewController: UIViewController {
     // MARK: - Properties
     
     var board: GameBoard? {
+        didSet {
+            updateButtons()
+        }
+    }
+    var isEnabled: Bool = true {
         didSet {
             updateButtons()
         }

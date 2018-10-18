@@ -39,6 +39,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
+        boardViewController.isEnabled = true
     }
     
     @IBAction func undo(_ sender: Any) {
@@ -67,7 +68,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
                 statusLabel.text = "Player \(player.stringValue)'s turn"
             }
         } else {
-            //undoButton.isHidden = true
+            boardViewController.isEnabled = false
             if let winner = game.winningPlayer {
                 statusLabel.text = "Player \(winner.stringValue) won!"
             } else {

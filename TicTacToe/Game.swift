@@ -47,6 +47,7 @@ struct Game {
             board.removeMark(from: lastMove)
             togglePlayer()
         }
+        lastMove = nil
     }
     
     private mutating func togglePlayer() {
