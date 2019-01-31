@@ -49,6 +49,15 @@ struct GameBoard {
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
+    var isEmpty: Bool {
+        for square in squares {
+            if square == .filled(.o) || square == .filled(.x) {
+                return false
+            }
+        }
+        return true
+    }
+    
     var isFull: Bool {
         for square in squares {
             if square == .empty {
