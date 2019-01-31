@@ -65,5 +65,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    var game = Game(board: GameBoard(), gameState: .active(.x), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+    var game = Game(board: GameBoard(), gameState: .active(.x), activePlayer: .x, gameIsOver: false, winningPlayer: nil) {
+        didSet {
+            boardViewController.board = game.board
+            
+        }
+    }
 }
