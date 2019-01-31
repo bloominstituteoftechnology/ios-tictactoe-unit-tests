@@ -54,6 +54,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -63,6 +64,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     var game : Game = Game() {
         didSet {
             updateViews()
+            boardViewController.board = game.board
         }
     }
     
