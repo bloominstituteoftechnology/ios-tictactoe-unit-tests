@@ -53,17 +53,21 @@ class GameTests: XCTestCase {
         
         var newGame = Game()
         /*
+         - - -
+         - - -
+         - - -
+         */
+        
+        XCTAssertTrue(newGame.activePlayer == GameBoard.Mark.x)
+        
+        /*
          x - -
          - - -
          - - -
          */
         try! newGame.makeMark(at: (0, 0)) // x
         
-        guard let activePlayer = newGame.activePlayer else {
-            XCTAssertTrue(false)
-            return
-        }
-        XCTAssertTrue(activePlayer == GameBoard.Mark.o)
+        XCTAssertTrue(newGame.activePlayer == GameBoard.Mark.o)
         
     }
     
@@ -140,6 +144,10 @@ class GameTests: XCTestCase {
                 XCTAssertNil(newGame.board[(x, y)])
             }
         }
+        
+        XCTAssert(newGame.activePlayer == GameBoard.Mark.x)
+        XCTAssertNil(newGame.winningPlayer)
+        XCTAssert(newGame.gameIsOver != true)
         
     }
     
