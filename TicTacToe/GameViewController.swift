@@ -10,35 +10,22 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        statusLabel.text = "Player X's turn"
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
         } catch {
             NSLog("Illegal move")
         }
@@ -49,14 +36,15 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
+        if game.gameIsOver != true {
+            guard let activePlayer = game.activePlayer else { return }
+            statusLabel.text = "Player \(activePlayer.stringValue)'s turn"
+        } else if let winningPlayer = game.winningPlayer {
+            statusLabel.text = "Player \(winningPlayer.stringValue) won!"
+        } else {
             statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
         }
+        
     }
     
     // MARK: - Navigation
@@ -72,22 +60,20 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    private var gameState = GameState.active(.x) {
+    var game : Game = Game() {
         didSet {
             updateViews()
+            boardViewController.board = game.board
         }
     }
     
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
+    
+    
 }
