@@ -13,6 +13,7 @@ struct Game {
     mutating internal func restart() {
         self.board = GameBoard()
         activePlayer = .x
+        winningPlayer = nil
         gameIsOver = false
     }
     

@@ -10,6 +10,12 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        statusLabel.text = "Player X's turn"
+    }
+    
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
     }
