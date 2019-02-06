@@ -107,9 +107,29 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
     
+    
     func testIncompleteGame() {
     }
 
     func testCatsGame() {
+        
+        var board = GameBoard()
+        
+        try! board.place(mark: .x, on: (x: 0, y: 0))
+        try! board.place(mark: .o, on: (x: 1, y: 0))
+        try! board.place(mark: .x, on: (x: 2, y: 0))
+        try! board.place(mark: .x, on: (x: 0, y: 1))
+        try! board.place(mark: .o, on: (x: 1, y: 1))
+        try! board.place(mark: .x, on: (x: 2, y: 1))
+        try! board.place(mark: .o, on: (x: 0, y: 2))
+        try! board.place(mark: .x, on: (x: 1, y: 2))
+        try! board.place(mark: .o, on: (x: 2, y: 2))
+        
+        XCTAssertTrue(board.isFull, "Tie games only occur with a full board")
+        
+        let isWonByX = game(board: board, isWonBy: .x)
+        XCTAssertFalse(isWonByX, "Tie games cannot have a winner")
+        let isWonByO = game(board: board, isWonBy: .o)
+        XCTAssertFalse(isWonByO, "Time games cannot have a winner")
     }
 }
