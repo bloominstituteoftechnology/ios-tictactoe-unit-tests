@@ -58,6 +58,8 @@ struct GameBoard {
         return true
     }
     
+     
+    
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
