@@ -109,6 +109,15 @@ class GameAITests: XCTestCase {
     
     
     func testIncompleteGame() {
+        // FIXME: - not sure what constitutes an incomplete
+        let incomplete = GameBoard()
+        
+        XCTAssertFalse(incomplete.isFull)
+        
+        let isWonByX = game(board: incomplete, isWonBy: .x)
+        XCTAssertFalse(isWonByX, "Its X's Turn.")
+        let isWonByO = game(board: incomplete, isWonBy: .o)
+        XCTAssertFalse(isWonByO, "Its O's Turn.")
     }
 
     func testCatsGame() {
@@ -131,5 +140,15 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(isWonByX, "Tie games cannot have a winner")
         let isWonByO = game(board: board, isWonBy: .o)
         XCTAssertFalse(isWonByO, "Time games cannot have a winner")
+    }
+    
+    func testEmptyBoard() {
+        let empty = GameBoard()
+        for x in 0 ..< 3 {
+            for y in 0 ..< 3 {
+                let mark = empty[(x: x, y: y)]
+                XCTAssertNil(mark, "Postion (\(x), \(y)) should be empty")
+            }
+        }
     }
 }
