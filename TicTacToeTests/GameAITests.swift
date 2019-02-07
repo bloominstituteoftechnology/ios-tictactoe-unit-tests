@@ -14,10 +14,10 @@ class GameAITests: XCTestCase {
     func testWinCheckingVertical1() {
         var board = GameBoard()
         /*
-        x o -
-        x o -
-        x - -
-        */
+         x o -
+         x o -
+         x - -
+         */
         try! board.place(mark: .x, on: (0, 0))
         try! board.place(mark: .o, on: (1, 0))
         try! board.place(mark: .x, on: (0, 1))
@@ -119,7 +119,7 @@ class GameAITests: XCTestCase {
         let isWonByO = game(board: incomplete, isWonBy: .o)
         XCTAssertFalse(isWonByO, "Its O's Turn.")
     }
-
+    
     func testCatsGame() {
         
         var board = GameBoard()

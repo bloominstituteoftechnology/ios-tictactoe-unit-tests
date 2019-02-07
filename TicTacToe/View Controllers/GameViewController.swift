@@ -15,16 +15,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         updateViews()
     }
     
-//    private enum GameState {
-//        case active(GameBoard.Mark) // Active player
-//        case cat
-//        case won(GameBoard.Mark) // Winning player
-//    }
-    
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
-//        board = GameBoard()
-//        gameState = .active(.x)
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -33,41 +25,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         
         do {
             print(coordinate)
-          try game.makeMark(at: coordinate)
-            
+            try game.makeMark(at: coordinate)
         }catch {
-            
-            NSLog("Cannot mark at: \(coordinate)")
+            NSLog("Illegal move at: \(coordinate)")
         }
-     
-        
-//        //is the game over?
-//        guard case let GameState.active(player) = gameState else {
-//            // YES IT IS OVER
-//            NSLog("Game is over")
-//            return
-//        }
-//        // NO IT IS NOT OVER
-//        do {
-//            //make a move
-//            try board.place(mark: player, on: coordinate)
-//
-//            // did the player win with htis move?
-//            if game(board: board, isWonBy: player) {
-//                //YES THEY WON
-//                gameState = .won(player)
-//                // ITS A TIE
-//            } else if board.isFull {
-//                gameState = .cat
-//                //NEXT PLAYERS TURN
-//            } else {
-//                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-//                gameState = .active(newPlayer)
-//            }
-//            // MOVE IS ILLEGAL
-//        } catch {
-//            NSLog("Illegal move")
-//        }
     }
     
     // MARK: - Private
@@ -100,37 +61,16 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    private var gameState = Game.GameState.active(.x) {
-        didSet {
-            updateViews()
-            print("gameState changed: \(gameState)")
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = game.board
-            updateViews()
-        }
-    }
-    
-    private var activePlayer: GameBoard.Mark = .x {
-        didSet {
-            print("Active player is now: \(game.activePlayer)")
-            updateViews()
-        }
-    }
-    
     private var game: Game = Game()  {
         didSet {
-            print("game changed: \(String(describing: game))")
+            boardViewController.board = game.board
             updateViews()
         }
     }

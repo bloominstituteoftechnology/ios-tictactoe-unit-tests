@@ -10,7 +10,7 @@ import XCTest
 @testable import TicTacToe
 
 class GameTests: XCTestCase {
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
@@ -31,7 +31,7 @@ class GameTests: XCTestCase {
         XCTAssertTrue(testGame.gameIsOver == false)
         XCTAssertTrue(testGame.activePlayer == (.x))
     }
-
+    
     func testCreatingEmptyBoard() {
         let board = GameBoard()
         
@@ -78,5 +78,5 @@ class GameTests: XCTestCase {
         try! board.place(mark: .x, on: (2, 2))
         XCTAssertTrue(board.isFull)
     }
-
+    
 }

@@ -27,21 +27,21 @@ class BoardViewController: UIViewController {
     
     @IBAction func mark(_ sender: UIButton) {
         delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
+        updateButtons()
     }
     
     // MARK: - Private
-
-    public func updateButtons() {
+    
+    private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
         for x in 0..<3 {
             for y in 0..<3 {
+                
                 let coord = (x, y)
                 let button = self.button(for: coord)
-                print(board[coord] as Any)
                 
                 if let mark = board[coord] {
-                    print("Success placing mark: \(mark)")
                     button.setTitle(mark.stringValue, for: [])
                 } else {
                     button.setTitle(" ", for: [])
@@ -71,12 +71,6 @@ class BoardViewController: UIViewController {
         }
     }
     
-//    var game: Game? {
-//        didSet {
-//            print("Changes: ")
-//            updateButtons()
-//        }
-//    }
     
     weak var delegate: BoardViewControllerDelegate?
     
