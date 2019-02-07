@@ -145,6 +145,9 @@ class GameAITests: XCTestCase {
             }
             return count
         }
+        
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
     }
 
     func testCatsGame() {
