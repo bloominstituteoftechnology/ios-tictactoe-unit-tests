@@ -71,7 +71,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = (segue.destination as! BoardViewController)
         }
     }
     
@@ -92,7 +92,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 //            updateViews()
 //        }
 //    }
-    var game = Game(board: GameBoard(), gameState: .active(.x), activePlayer: .x, gameIsOver: false, winningPlayer: nil) {
+    var game = Game() {
         didSet {
             boardViewController.board = game.board
         }

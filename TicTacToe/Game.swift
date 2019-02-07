@@ -20,7 +20,9 @@ struct Game {
     mutating internal func restart() {
         board = GameBoard()
         gameState = .active(.x)
+        activePlayer = .x
         gameIsOver = false
+        winningPlayer = nil
     }
     mutating internal func makeMark(at coordinate: Coordinate) throws {
     
@@ -40,6 +42,7 @@ struct Game {
                 gameState = .cat
                 gameIsOver = true
                 activePlayer = nil
+                winningPlayer = nil
             } else {
                 let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
                 gameState = .active(newPlayer)
@@ -50,11 +53,11 @@ struct Game {
         }
         
     }
-    private(set) var board: GameBoard
+    private(set) var board = GameBoard()
     internal var gameState = GameState.active(.x)
     internal var activePlayer: GameBoard.Mark? = .x
-    internal var gameIsOver: Bool
-    internal var winningPlayer: GameBoard.Mark?
+    internal var gameIsOver: Bool = false
+    internal var winningPlayer: GameBoard.Mark? = nil
     
    
 }
