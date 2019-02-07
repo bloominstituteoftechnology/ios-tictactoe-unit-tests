@@ -10,6 +10,7 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -24,21 +25,33 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
+        
+        //makeMark(at: coordinate)
+        
+        //is the game over?
         guard case let GameState.active(player) = gameState else {
+            // YES IT IS OVER
             NSLog("Game is over")
             return
         }
-        
+        // NO IT IS NOT OVER
         do {
+            //make a move
             try board.place(mark: player, on: coordinate)
+            
+            // did the player win with htis move?
             if game(board: board, isWonBy: player) {
+                //YES THEY WON
                 gameState = .won(player)
+                // ITS A TIE
             } else if board.isFull {
                 gameState = .cat
+                //NEXT PLAYERS TURN
             } else {
                 let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
                 gameState = .active(newPlayer)
             }
+            // MOVE IS ILLEGAL
         } catch {
             NSLog("Illegal move")
         }
@@ -63,7 +76,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
@@ -88,6 +101,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private var board = GameBoard() {
         didSet {
             boardViewController.board = board
+        }
+    }
+    
+    private var gameGame: Game = Game() {
+        didSet {
+            updateViews()
         }
     }
 }
