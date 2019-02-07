@@ -3,20 +3,27 @@ import Foundation
 
 struct Game {
     
-    static let shared = Game()
+    //static let shared = Game()
     
-    init(){}
+    //init(){}
     
     // Restarts the game to a fresh state with an empty board, and player X starting.
     mutating internal func restart() {
         gameIsOver = false
-        board = GameBoard()
+        //board = GameBoard()
         gameState = .active(.x)
         activePlayer = .x
+        winningPlayer = nil
     }
     
     // adds a mark for the currently active player at the given coordinate. Updates game state.
     mutating internal func makeMark(at coordinate: Coordinate) throws {
+        
+        guard gameIsOver == false else {
+            // YES IT IS OVER
+            NSLog("Game is over")
+            return
+        }
         
         do {
             //make a move
@@ -34,9 +41,9 @@ struct Game {
                 gameIsOver = true
                 //NEXT PLAYERS TURN
             } else {
-                let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-                activePlayer = newPlayer
+                let nextPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+                gameState = .active(nextPlayer)
+                activePlayer = nextPlayer
             }
             // MOVE IS ILLEGAL
         } catch {
