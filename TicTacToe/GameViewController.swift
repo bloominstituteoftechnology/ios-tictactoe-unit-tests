@@ -90,4 +90,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController.board = board
         }
     }
+    
+    private var game: Game = Game() {
+        didSet {
+            boardViewController.board = game.board
+            updateViews()
+        }
+    }
 }
