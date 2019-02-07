@@ -13,7 +13,6 @@ class GameBoardTests: XCTestCase {
     
     func testCreatingEmptyBoard() {
         let board = GameBoard()
-
         for x in 0..<3 {
             for y in 0..<3 {
                 XCTAssertNil(board[(x, y)])

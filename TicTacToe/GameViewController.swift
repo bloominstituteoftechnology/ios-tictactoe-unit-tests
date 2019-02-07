@@ -22,13 +22,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     // MARK: - BoardViewControllerDelegate
-    
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
         guard case let GameState.active(player) = gameState else {
             NSLog("Game is over")
             return
         }
-        
         do {
             try board.place(mark: player, on: coordinate)
             if game(board: board, isWonBy: player) {
@@ -45,7 +43,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     // MARK: - Private
-    
     private func updateViews() {
         guard isViewLoaded else { return }
         
@@ -60,7 +57,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
@@ -78,7 +74,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
-    
     private var gameState = GameState.active(.x) {
         didSet {
             updateViews()
