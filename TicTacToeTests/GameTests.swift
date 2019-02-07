@@ -1,15 +1,36 @@
 //
-//  GameBoardTests.swift
+//  GameTests.swift
 //  TicTacToeTests
 //
-//  Created by Andrew R Madsen on 9/11/18.
-//  Copyright © 2018 Lambda School. All rights reserved.
+//  Created by TuneUp Shop  on 2/6/19.
+//  Copyright © 2019 Lambda School. All rights reserved.
 //
 
 import XCTest
 @testable import TicTacToe
 
-class GameBoardTests: XCTestCase {
+class GameTests: XCTestCase {
+    
+    override func setUp() {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+    }
+    
+    func testCreatingGame() {
+        let testGame = Game()
+        XCTAssertNotNil(testGame, "There is no valid game.")
+    }
+    
+    func testRestartGame() {
+        var testGame = Game()
+        XCTAssertNotNil(testGame, "There is no valid game.")
+        
+        testGame.restart()
+        
+        XCTAssertNotNil(testGame.board, "There is no valid game board.")
+        XCTAssertTrue(testGame.gameIsOver == false)
+        XCTAssertTrue(testGame.activePlayer == (.x))
+    }
     
     func testCreatingEmptyBoard() {
         let board = GameBoard()

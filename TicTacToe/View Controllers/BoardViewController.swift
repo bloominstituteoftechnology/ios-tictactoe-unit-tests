@@ -27,21 +27,25 @@ class BoardViewController: UIViewController {
     
     @IBAction func mark(_ sender: UIButton) {
         delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
+        updateButtons()
     }
     
     // MARK: - Private
-
+    
     private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
         for x in 0..<3 {
             for y in 0..<3 {
+                
                 let coord = (x, y)
                 let button = self.button(for: coord)
+                
                 if let mark = board[coord] {
-                    button.setTitle(mark.stringValue, for: .normal)
+                    button.setTitle(mark.stringValue, for: [])
                 } else {
-                    button.setTitle(" ", for: .normal)
+                    button.setTitle(" ", for: [])
+                    
                 }
             }
         }
@@ -66,6 +70,7 @@ class BoardViewController: UIViewController {
             updateButtons()
         }
     }
+    
     
     weak var delegate: BoardViewControllerDelegate?
     
