@@ -11,8 +11,13 @@ import XCTest
 
 class GameAITests: XCTestCase {
     
+    var board: GameBoard!
+    
+    override func setUp() {
+        board = GameBoard()
+    }
+    
     func testWinCheckingVertical1() {
-        var board = GameBoard()
         /*
         x o -
         x o -
@@ -28,7 +33,6 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingVertical2() {
-        var board = GameBoard()
         /*
          x o -
          x o -
@@ -44,39 +48,39 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingHorizontal1() {
-        var board = GameBoard()
         /*
          - o -
          x x x
          o - -
          */
+        
     }
     
     func testWinCheckingHorizontal2() {
-        var board = GameBoard()
         /*
          x - -
          - x -
          o o o
          */
+        
     }
     
     func testWinCheckingDiagonal1() {
-        var board = GameBoard()
         /*
          x - -
          - x -
          o o x
          */
+        
     }
     
     func testWinCheckingDiagonal2() {
-        var board = GameBoard()
         /*
          x - o
          - o -
          o x -
          */
+        
     }
     
     func testIncompleteGame() {
