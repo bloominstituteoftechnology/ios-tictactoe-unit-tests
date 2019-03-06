@@ -12,24 +12,18 @@ import XCTest
 //TDD or Test Driven Development
 
 class GameATests: XCTestCase {
-
-    func testMethod() {
-        //arrange, set up values we need
-        
-        //act, method being tested
-        
-        //assert, verifying that we were adding works XCTasserts
-        
-    }
     
     //RED, GREEN, REFACTOR loop
     //red = failing test (compile fail or assert fail)
     //green = writing logic to pass the test
     //refactor = cleaning up
-    
-    //(0, 0) = top left
-    //(0, 1)
-    //(0, 2)
+
+    func testMethod() {
+        //arrange, set up values we need
+        //act, method being tested
+        //assert, verifying that we were adding works XCTasserts
+        
+    }
     
     func testWinCheckingVertical1() throws {
         
@@ -87,5 +81,70 @@ class GameATests: XCTestCase {
         //assert
         XCTAssertTrue(game(board: board, isWonBy: .x))
         XCTAssertFalse(game(board: board, isWonBy: .o))
+    }
+    
+    func testWinCheckingHorizontal2() throws {
+        /*
+         x x -
+         o o o
+         - - -
+         */
+        //arrange
+        var board = GameBoard()
+        //act
+        try board.place(mark: .o, on: (0, 1))
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (0, 1))
+        try board.place(mark: .o, on: (2, 1))
+        //assert
+        XCTAssertTrue(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+    }
+    
+    func testWinCheckingDiagnal1() throws {
+        /*
+         x - -
+         - x -
+         o o x
+         */
+        //arrange
+        var board = GameBoard()
+        //act
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (0, 2))
+        try board.place(mark: .x, on: (1, 1))
+        try board.place(mark: .o, on: (1, 2))
+        try board.place(mark: .x, on: (2, 2))
+        //assert
+        XCTAssertTrue(game(board: board, isWonBy: .x))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+    }
+    
+    func testWinCheckingDiagnal2() throws {
+        /*
+         x - o
+         - o -
+         o x -
+         */
+        //arrange
+        var board = GameBoard()
+        //act
+        try board.place(mark: .o, on: (2, 0))
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (1, 2))
+        try board.place(mark: .o, on: (0, 2))
+        //assert
+        XCTAssertTrue(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+    }
+    
+    func testIncompleteGame() {
+        
+    }
+    
+    func testCatsGame() {
+        
     }
 }

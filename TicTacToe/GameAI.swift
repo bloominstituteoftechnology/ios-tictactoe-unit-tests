@@ -17,7 +17,7 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     //        return true
     //    }
     
-    //checks all column
+    //checks all column, verticals
     for x in 0..<3 {
         var numMarks = 0
         for y in 0..<3 {
@@ -31,7 +31,6 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         }
     }
     //testing horizontals
-    let y = 0
     for y in 0..<3 {
         var numMarks = 0
         
@@ -45,7 +44,8 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         }
         //testing diagnols
         //backwards slash: (0, 0)(1, 1), (2, 2)
-        //forward slash: (0, 2), (1, 1) (2, )
+        //forward slash: (0, 2), (1, 1) (2, 2)
+        //non winning cases
         
     }
     return false
