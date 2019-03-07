@@ -140,11 +140,52 @@ class GameATests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
     
-    func testIncompleteGame() {
+    func testIncompleteGame() throws {
+        var board = GameBoard()
+        
+        /*
+         x x o
+         o x x
+         - - o
+        */
+        
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (0, 1))
+        try board.place(mark: .x, on: (1, 0))
+        try board.place(mark: .o, on: (2, 0))
+        try board.place(mark: .x, on: (1, 1))
+        try board.place(mark: .o, on: (2, 2))
+        try board.place(mark: .x, on: (2, 1))
+        //assert
+        XCTAssertNil(game(board: board, isWonBy: .o))
+        XCTAssertNil(game(board: board, isWonBy: .x))
+        
         
     }
     
-    func testCatsGame() {
+    func testCatsGame() throws {
+        var board = GameBoard()
         
+        /*
+         x o x
+         x o o
+         o x x
+        */
+        
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (1, 0))
+        try board.place(mark: .x, on: (2, 0))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (0, 1))
+        try board.place(mark: .o, on: (2, 1))
+        try board.place(mark: .x, on: (1, 2))
+        try board.place(mark: .o, on: (0, 2))
+        try board.place(mark: .x, on: (2, 2))
+        
+        XCTAssertNil(game(board: board, isWonBy: .o))
+        XCTAssertNil(game(board: board, isWonBy: .x))
+
+
     }
+   
 }
