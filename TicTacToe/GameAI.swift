@@ -43,35 +43,31 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
             return true
         }
     }
-    //testing diagnols
-    //backwards slash: (0, 0), (1, 1), (2, 2)
-    for x in 0..<3 {
-        var numMarks = 0
-        
-        for y in 0..<3 {
-            if board[(x, y)] == player {
-                numMarks += 1
-            }
+    // Check diagonals
+    // left to right
+    let ltr: [Coordinate] = [(0,0), (1, 1), (2,2)]
+    var numMatches = 0
+    for coord in ltr {
+        if board[coord] == player {
+            numMatches += 1
         }
-        if numMarks == ((0, 0), (1, 1), (2, 2)) {
-            return true
-        }
+    }
+    if numMatches == 3 {
+        return true
     }
     
-    //forward slash: (0, 2), (1, 1), (2, 0)
-    for x in 0..<3 {
-        var numMarks = 0
-        
-        for y in 0..<3 {
-            if board[(x, y)] == player {
-                numMarks += 1
-            }
+    // right to left
+    let rtl: [Coordinate] = [(2,0), (1, 1), (0,2)]
+    numMatches = 0
+    for coord in rtl {
+        if board[coord] == player {
+            numMatches += 1
         }
-        if numMarks == ((0, 0), (1, 1), (2, 0)) {
-            return true
-        }
-        
     }
+    if numMatches == 3 {
+        return true
+    }
+    
     //non winning cases
     for x in 0..<3 {
         var numMarks = 0
