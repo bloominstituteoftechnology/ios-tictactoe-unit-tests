@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum GameAIError: Error {
+	case gameOver
+}
+
 func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     // Check verticals
     for x in 0..<3 {

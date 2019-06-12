@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,12 +31,19 @@
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
                                 <rect key="frame" x="20" y="35" width="335" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
+                                        <rect key="frame" x="0.0" y="0.0" width="232" height="30"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxt-MV-CWK">
+                                        <rect key="frame" x="240" y="0.0" width="37" height="30"/>
+                                        <state key="normal" title="Undo"/>
+                                        <connections>
+                                            <action selector="undoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bkf-0Q-ghv"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
                                         <rect key="frame" x="285" y="0.0" width="50" height="30"/>
                                         <state key="normal" title="Restart"/>
@@ -69,6 +74,7 @@
                     </view>
                     <connections>
                         <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
+                        <outlet property="undoButton" destination="Dxt-MV-CWK" id="pvf-sN-3ft"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -239,6 +245,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="od9-Qq-Zv1"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
