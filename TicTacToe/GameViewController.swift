@@ -27,6 +27,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 	}
 
 	@IBOutlet weak var statusLabel: UILabel!
+	@IBOutlet var undoButton: UIButton!
 
 	private var gameState = GameState.active(.x) {
 		didSet {
@@ -45,6 +46,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 		game.restart()
 	}
 
+	@IBAction func undoButtonPressed(_ sender: UIButton) {
+		game.undo()
+	}
+	
 	// MARK: - BoardViewControllerDelegate
 
 	func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
@@ -55,7 +60,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 
 		do {
 			try game.makeMark(at: coordinate)
-
 		} catch {
 			NSLog("Illegal move")
 		}
@@ -89,6 +93,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 		case let .won(player):
 			statusLabel.text = "Player \(player.stringValue) won!"
 		}
+
+		undoButton.isEnabled = game.previousState != nil ? true : false
+
 	}
 
 	// MARK: - Navigation
@@ -97,5 +104,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 		if segue.identifier == "EmbedBoard" {
 			boardViewController = (segue.destination as! BoardViewController)
 		}
+	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		updateViews()
 	}
 }

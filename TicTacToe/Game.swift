@@ -10,14 +10,25 @@ import Foundation
 
 struct Game {
 
+	typealias GameState = (board: GameBoard, gameIsOver: Bool, activePlayer: GameBoard.Mark, winningPlayer: GameBoard.Mark?)
+
 	internal var activePlayer: GameBoard.Mark? = nil
 	internal var gameIsOver: Bool = false
 	internal var winningPlayer: GameBoard.Mark? = nil
 
+	private(set) var previousState: GameState?
 	private(set) var board = GameBoard()
-
 	init() {
 		restart()
+	}
+
+	mutating internal func undo() {
+		guard let previous = previousState else { return }
+		board = previous.board
+		gameIsOver = previous.gameIsOver
+		activePlayer = previous.activePlayer
+		winningPlayer = previous.winningPlayer
+		previousState = nil
 	}
 
 	mutating internal func restart() {
@@ -25,12 +36,17 @@ struct Game {
 		activePlayer = .x
 		gameIsOver = false
 		winningPlayer = nil
+		previousState = nil
 	}
 
 	mutating internal func makeMark(at coordinate: Coordinate) throws {
 		guard let activePlayer = activePlayer else { return }
 		guard gameIsOver == false else { throw GameAIError.gameOver }
+
+		// capture state in case the place throws
+		let tState = getCurrentState()
 		try board.place(mark: activePlayer, on: coordinate)
+		previousState = tState
 
 		if game(board: board, isWonBy: activePlayer) {
 			winningPlayer = activePlayer
@@ -50,5 +66,10 @@ struct Game {
 		case .x:
 			return .o
 		}
+	}
+
+	private func getCurrentState() -> GameState? {
+		guard let activePlayer = activePlayer else { return nil }
+		return (board, gameIsOver, activePlayer, winningPlayer)
 	}
 }
