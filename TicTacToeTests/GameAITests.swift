@@ -159,4 +159,22 @@ class GameAITests: XCTestCase {
 		XCTAssertFalse(game(board: board, isWonBy: .x))
 		XCTAssertTrue(board.isFull)
 	}
+
+	func testNilSubscript() {
+		let board = GameBoard()
+
+		for x in 0...2 {
+			for y in 0...2 {
+				XCTAssertNil(board[(x,y)])
+			}
+		}
+	}
+
+	func testMarkString() {
+		let markO = GameBoard.Mark.o
+		let polX = GameBoard.Mark.x
+
+		XCTAssert(markO.stringValue == "O")
+		XCTAssert(polX.stringValue == "X")
+	}
 }
