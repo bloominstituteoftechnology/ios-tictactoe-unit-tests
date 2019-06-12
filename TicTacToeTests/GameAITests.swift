@@ -165,4 +165,34 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
+    
+    func testGameReset() {
+        var board = GameBoard()
+        board = set(board: board)
+        
+        var game = Game(board: board, activePlayer: nil, gameIsOver: false, winningPlayer: nil)
+        
+        game.restart()
+        board = game.board
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        
+    }
+    
+    private func set(board: GameBoard) -> GameBoard {
+        var setBoard = board
+        try! setBoard.place(mark: .x, on: (0, 0))
+        try! setBoard.place(mark: .x, on: (2, 1))
+        try! setBoard.place(mark: .x, on: (0, 2))
+        try! setBoard.place(mark: .x, on: (1, 2))
+        try! setBoard.place(mark: .x, on: (2, 0))
+        try! setBoard.place(mark: .o, on: (1, 0))
+        try! setBoard.place(mark: .o, on: (0, 1))
+        try! setBoard.place(mark: .o, on: (1, 1))
+        try! setBoard.place(mark: .o, on: (2, 2))
+        
+        return setBoard
+    }
 }

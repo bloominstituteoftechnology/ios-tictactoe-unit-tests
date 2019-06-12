@@ -16,7 +16,14 @@ struct Game {
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
     
-    mutating internal func restart() {}
+    mutating internal func restart() {
+        activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
+        
+        board = GameBoard()
+        
+    }
     
-    mutating internal func makeMark(at coordinate: Coordinate)
+    mutating internal func makeMark(at coordinate: Coordinate) throws {}
 }
