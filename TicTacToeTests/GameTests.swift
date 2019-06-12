@@ -101,4 +101,16 @@ class GameTests: XCTestCase {
 		XCTAssertTrue(game.activePlayer == .x, "\(game)")
 
     }
+
+	func testUndo() {
+		var game = Game()
+		let tBoard = game.board
+		XCTAssertTrue(game.activePlayer == .x, "\(game)")
+		try! game.makeMark(at: (0,0))
+		XCTAssertTrue(game.activePlayer == .o, "\(game)")
+
+		game.undo()
+		XCTAssertTrue(game.activePlayer == .x, "\(game)")
+		XCTAssertTrue(tBoard == game.board)
+	}
 }

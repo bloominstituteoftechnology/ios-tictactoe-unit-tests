@@ -14,7 +14,7 @@ enum GameBoardError: Error, Equatable {
 
 typealias Coordinate = (x: Int, y: Int)
 
-struct GameBoard {
+struct GameBoard: Equatable {
     
     enum Mark: Equatable {
         case x
