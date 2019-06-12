@@ -179,4 +179,14 @@ class GameAITests: XCTestCase {
         
     }
     
+    func testSingleMark() {
+        
+        var game = Game()
+        
+        XCTAssertNoThrow(try game.makeMark(at: (0, 0)))
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        
+    }
+
+    
 }
