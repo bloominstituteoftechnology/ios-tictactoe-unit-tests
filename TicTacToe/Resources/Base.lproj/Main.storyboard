@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,7 +41,7 @@
                                         <rect key="frame" x="285" y="0.0" width="50" height="30"/>
                                         <state key="normal" title="Restart"/>
                                         <connections>
-                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c3U-0D-f14"/>
+                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vf8-ay-RnE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -239,6 +237,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Qie-fs-c0k"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
