@@ -46,12 +46,20 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingHorizontal1() {
-        var board = GameBoard()
         /*
          - o -
          x x x
          o - -
          */
+		var board = GameBoard()
+		
+		try! board.place(mark: .o, on: (1, 0))
+		
+		
+		board.printArrToConsole()
+		
+		
+		
     }
     
     func testWinCheckingHorizontal2() {

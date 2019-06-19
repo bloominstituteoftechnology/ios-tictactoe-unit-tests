@@ -64,3 +64,24 @@ struct GameBoard {
     
     private var squares = Array(repeating: Square.empty, count: 9)
 }
+
+extension GameBoard {
+	
+	func printArrToConsole() {
+		
+		for x in 0..<3 {
+			for y in 0..<3 {
+				if let value = self[(x,y)] {
+					print(" \(value) ", terminator: "")
+				} else {
+					print(" - " , terminator: "")
+				}
+				//print("(\(x), \(y))", terminator: "")
+			}
+			print("")
+		}
+		
+	}
+	
+	
+}
