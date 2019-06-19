@@ -160,4 +160,76 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .o))
         
     }
+    
+    func testRestart() {
+        var game = Game.init(board: GameBoard(), activePlayer: .o, gameIsOver: true, winningPlayer: .o)
+        game.restart()
+        XCTAssertTrue(game.activePlayer == .x)
+    }
+    
+    func testPlayerHasWon() {
+        /*
+         x x x
+         o o -
+         - - -
+         */
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        try! game.makeMark(at: (0, 0))
+        game.activePlayer = .o
+        try! game.makeMark(at: (1,0))
+        game.activePlayer = .x
+        try! game.makeMark(at: (0,1))
+        game.activePlayer = .o
+        try! game.makeMark(at: (1,1))
+        game.activePlayer = .x
+        try! game.makeMark(at: (0,2))
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertTrue(game.winningPlayer == .x)
+    }
+    
+//    func testMarking() {
+//        let gameboard = GameBoard()
+//        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+//        try! game.makeMark(at: (0, 0))
+//        
+//        XCTAssertTrue(gameboard[(0, 0)] == )
+//        
+//    }
+    
+    func testBoardIsFull() {
+        /*
+         x o x
+         o x x
+         o x o
+         */
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        try! game.makeMark(at: (0, 0))
+        game.activePlayer = .o
+        try! game.makeMark(at: (0, 1))
+        game.activePlayer = .x
+        try! game.makeMark(at: (0, 2))
+        game.activePlayer = .o
+        try! game.makeMark(at: (1, 0))
+        game.activePlayer = .x
+        try! game.makeMark(at: (1, 1))
+        game.activePlayer = .x
+        try! game.makeMark(at: (1, 2))
+        game.activePlayer = .o
+        try! game.makeMark(at: (2, 0))
+        game.activePlayer = .x
+        try! game.makeMark(at: (2, 1))
+        game.activePlayer = .o
+        try! game.makeMark(at: (2, 2))
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertTrue(game.winningPlayer == nil)
+    }
+
+
+
+
 }
+
+    
+    
+    
+
