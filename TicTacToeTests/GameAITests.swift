@@ -165,6 +165,20 @@ class GameAITests: XCTestCase {
         XCTAssert(count == 0)
         XCTAssertFalse(game(board: board, isWonBy: .x))
         XCTAssertFalse(game(board: board, isWonBy: .o))
+    }
+    
+    func testRestart() {
+        var game = Game()
+        game.restart()
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
         
+    }
+    
+    func testMakeMark() {
+        var game = Game()
+        XCTAssertNoThrow(try game.makeMark(at: (0, 0)))
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
     }
 }
