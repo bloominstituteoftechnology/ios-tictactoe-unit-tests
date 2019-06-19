@@ -11,6 +11,44 @@ import XCTest
 
 class GameAITests: XCTestCase {
     
+    func testRestart() {
+        /*
+         - - -
+         - - -
+         - - -
+         */
+        var game = Game()
+        game.restart()
+        var count = 0
+        for x in 0..<3 {
+            for y in 0..<3 {
+                if game.board[(x,y)] == nil {
+                    count += 1
+                }
+            }
+        }
+        XCTAssert(count == 0)
+    }
+    
+    func testMakeMark() {
+        /*
+         - - -
+         - x -
+         - - -
+         */
+        var game = Game()
+        XCTAssertNoThrow(try game.makeMark(at: (1, 1)))
+        var count = 0
+        for x in 0..<3 {
+            for y in 0..<3 {
+                if game.board[(x,y)] != nil {
+                    count += 1
+                }
+            }
+        }
+        XCTAssert(count == 1)
+    }
+    
     func testWinCheckingVertical1() {
         var board = GameBoard()
         /*
@@ -165,43 +203,5 @@ class GameAITests: XCTestCase {
         XCTAssert(count == 0)
         XCTAssertFalse(game(board: board, isWonBy: .x))
         XCTAssertFalse(game(board: board, isWonBy: .o))
-    }
-    
-    func testRestart() {
-        /*
-         - - -
-         - - -
-         - - -
-         */
-        var game = Game()
-        game.restart()
-        var count = 0
-        for x in 0..<3 {
-            for y in 0..<3 {
-                if game.board[(x,y)] == nil {
-                    count += 1
-                }
-            }
-        }
-        XCTAssert(count == 0)
-    }
-    
-    func testMakeMark() {
-        /*
-         - - -
-         - x -
-         - - -
-         */
-        var game = Game()
-        XCTAssertNoThrow(try game.makeMark(at: (1, 1)))
-        var count = 0
-        for x in 0..<3 {
-            for y in 0..<3 {
-                if game.board[(x,y)] != nil {
-                    count += 1
-                }
-            }
-        }
-        XCTAssert(count == 1)
     }
 }
