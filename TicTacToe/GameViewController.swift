@@ -13,7 +13,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     // Actions
     
     override func viewWillAppear(_ animated: Bool) {
-        statusLabel.textColor = .clear
+        statusLabel.text = "Player X's turn"
     }
     
     @IBAction func restartGame(_ sender: Any) {
