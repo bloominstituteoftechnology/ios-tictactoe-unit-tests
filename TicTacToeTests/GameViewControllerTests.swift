@@ -15,6 +15,9 @@ class GameViewControllerTests: XCTestCase {
     func testCreationOfNewGameBoard() {
         
         var board = GameBoard()
+        
+        try! board.place(mark: .x, on: (0, 0))
+        try! board.place(mark: .x, on: (0, 2))
 
         // Test for a new instance of a clear game board
         for x in 0 ..< 3 {
@@ -31,13 +34,22 @@ class GameViewControllerTests: XCTestCase {
     }
     
     // TODO: - Insure all squares filled in cat's game
-    func testCatsGame() {
-        
+    func testCanPlaceMarks() {
         var board = GameBoard()
         
-        // Fill the game board
+        // Place a mark at (1, 1)
+        XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
         
+        // Check that the mark is now an X at that coordinate
+        let mark = board[(1, 1)]
+        
+        XCTAssertEqual(mark, .x)
+        
+        // "" at (2, 2)
+        XCTAssertNoThrow(try board.place(mark: .o, on: (2, 2)))
+        
+        // "" is now an O
+        XCTAssertEqual(board[(2, 2)], .o)
     }
     
-
 }
