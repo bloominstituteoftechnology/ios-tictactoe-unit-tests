@@ -25,8 +25,10 @@ class GameAITests: XCTestCase {
 		
         XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
         XCTAssertNoThrow(try board.place(mark: .o, on: (1, 0)))
-        XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
+		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
         XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
+	
 		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 2)))
 		
 //		board.printArrToConsole()
@@ -43,11 +45,13 @@ class GameAITests: XCTestCase {
          - o -
          */
 		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
         XCTAssertNoThrow(try board.place(mark: .o, on: (1, 0)))
-        XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
-        XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
-        XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
-        XCTAssertNoThrow(try board.place(mark: .o, on: (1, 2)))
+		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
+		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
+		
+		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 2)))
 		
 //		board.printArrToConsole()
 		
@@ -63,11 +67,12 @@ class GameAITests: XCTestCase {
          */
 		var board = GameBoard()
 		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 0)))
+
+		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
 		
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 1)))
 		
 		board.printArrToConsole()
@@ -85,12 +90,14 @@ class GameAITests: XCTestCase {
 		
 		var board = GameBoard()
 		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
+		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 2)))
+		
 		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 2)))
 		
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		
 		board.printArrToConsole()
 		
@@ -107,11 +114,12 @@ class GameAITests: XCTestCase {
 		
 		var board = GameBoard()
 		
-		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
-		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 1)))
-		
 		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
+		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
+		
 		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
+		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 2)))
+		
 		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 2)))
 		
 		board.printArrToConsole()
@@ -129,17 +137,19 @@ class GameAITests: XCTestCase {
 		
 		var board = GameBoard()
 		
-		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
+		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 0)))
+		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 2)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
+		
 		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
 		
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 2)))
 		
 		board.printArrToConsole()
 		
-		XCTAssertTrue(game(board: board, isWonBy: .x))
-		XCTAssertFalse(game(board: board, isWonBy: .o))
+		XCTAssertFalse(game(board: board, isWonBy: .x))
+		XCTAssertTrue(game(board: board, isWonBy: .o))
     }
     
     func testIncompleteGame() {
@@ -151,15 +161,18 @@ class GameAITests: XCTestCase {
 		
 		var board = GameBoard()
 		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 0)))
+	
+		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 0)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 1)))
+	
+		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
+
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 2)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 2)))
 		
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 1)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 2)))
 		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 2)))
 		
 		board.printArrToConsole()
@@ -178,15 +191,18 @@ class GameAITests: XCTestCase {
 		
 		var board = GameBoard()
 		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 0)))
+		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 0)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 1)))
+
+		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (0, 2)))
+
+		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (2, 2)))
 		
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 0)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
-		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 1)))
 		XCTAssertNoThrow(try board.place(mark: .x, on: (1, 2)))
 		
 		board.printArrToConsole()
