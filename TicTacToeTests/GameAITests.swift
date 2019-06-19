@@ -168,17 +168,40 @@ class GameAITests: XCTestCase {
     }
     
     func testRestart() {
+        /*
+         - - -
+         - - -
+         - - -
+         */
         var game = Game()
         game.restart()
-        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
-        XCTAssertFalse(game.gameIsOver)
-        XCTAssertNil(game.winningPlayer)
-        
+        var count = 0
+        for x in 0..<3 {
+            for y in 0..<3 {
+                if game.board[(x,y)] == nil {
+                    count += 1
+                }
+            }
+        }
+        XCTAssert(count == 0)
     }
     
     func testMakeMark() {
+        /*
+         - - -
+         - x -
+         - - -
+         */
         var game = Game()
-        XCTAssertNoThrow(try game.makeMark(at: (0, 0)))
-        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        XCTAssertNoThrow(try game.makeMark(at: (1, 1)))
+        var count = 0
+        for x in 0..<3 {
+            for y in 0..<3 {
+                if game.board[(x,y)] != nil {
+                    count += 1
+                }
+            }
+        }
+        XCTAssert(count == 1)
     }
 }

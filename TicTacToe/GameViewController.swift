@@ -10,6 +10,11 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // Actions
+    
+    override func viewWillAppear(_ animated: Bool) {
+        statusLabel.textColor = .clear
+    }
     
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
@@ -29,7 +34,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     private func updateViews() {
         guard isViewLoaded else { return }
-        
+        statusLabel.textColor = .black
         switch game.gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
