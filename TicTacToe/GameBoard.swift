@@ -69,9 +69,9 @@ extension GameBoard {
 	
 	func printArrToConsole() {
 		
-		for x in 0..<3 {
-			for y in 0..<3 {
-				if let value = self[(x,y)] {
+		for y in 0..<3 {
+			for x in 0..<3 {
+				if let value = self[(x, y)] {
 					print(" \(value) ", terminator: "")
 				} else {
 					print(" - " , terminator: "")
@@ -80,8 +80,5 @@ extension GameBoard {
 			}
 			print("")
 		}
-		
 	}
-	
-	
 }
