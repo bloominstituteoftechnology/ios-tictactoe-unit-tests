@@ -24,7 +24,6 @@ struct Game {
 	}
 	
 	mutating  func makeMark(at coordinate: Coordinate) throws {
-		guard let activePlayer = activePlayer, gameIsOver == false else { return }
 		
 		try board.place(mark: activePlayer, on: coordinate)
 		
@@ -35,21 +34,23 @@ struct Game {
 		} else {
 			let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
 			gameState = .active(newPlayer)
+			activePlayer = newPlayer
 		}
 	}
 	
-	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil) {
+	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil, gameState: GameState = GameState.active(.x)) {
 		self.board = board
 		self.activePlayer = activePlayer
 		self.gameIsOver = gameIsOver
 		self.winningPlayer = winningPlayer
+		self.gameState = gameState
 	}
 	
 	private(set) var board: GameBoard
-	internal var activePlayer: GameBoard.Mark?
+	internal var activePlayer: GameBoard.Mark
 	internal var gameIsOver: Bool
 	internal var winningPlayer: GameBoard.Mark?
-	private (set) var gameState: GameState?
+	private (set) var gameState: GameState
 
 }
 
@@ -57,8 +58,7 @@ struct Game {
 // Helpers
 
 extension Game {
-	 func getGameState() -> GameState? {
-		guard let gameState = gameState else { return nil}
+	var getGameState: GameState{
 		switch gameState {
 		case let .active(player):
 			print("Player \(player.stringValue)'s turn")
