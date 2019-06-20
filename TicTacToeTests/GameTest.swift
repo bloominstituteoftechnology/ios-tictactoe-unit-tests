@@ -12,8 +12,14 @@ import XCTest
 class GameTest: XCTestCase {
 	
 	
-	func test1() {
+	func testrestart() {
+		var game = Game(board: GameBoard())
+		game.restart()
 		
+		XCTAssertTrue(game.activePlayer == .x)
+		XCTAssertFalse(game.gameIsOver)
+		XCTAssertTrue(game.winningPlayer == nil)
+		game.printArrToConsole()
 	}
 
 }

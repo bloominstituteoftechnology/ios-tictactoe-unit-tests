@@ -207,7 +207,7 @@ class GameAITests: XCTestCase {
 		
 		board.printArrToConsole()
 		
-		XCTAssertFalse(board.isFull)
+		XCTAssertTrue(board.isFull)
 		
 	}
 }

@@ -24,7 +24,7 @@ struct Game {
 	}
 	
 	mutating  func makeMark(at coordinate: Coordinate) throws {
-		guard let activePlayer = activePlayer else { return }
+		guard let activePlayer = activePlayer, gameIsOver == false else { return }
 		
 		try board.place(mark: activePlayer, on: coordinate)
 		
@@ -36,13 +36,34 @@ struct Game {
 			let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
 			gameState = .active(newPlayer)
 		}
-
+	}
+	
+	
+	func printArrToConsole() {
+		for y in 0..<3 {
+			for x in 0..<3 {
+				if let value = board[(x, y)] {
+					print(" \(value) ", terminator: "")
+				} else {
+					print(" - " , terminator: "")
+				}
+				//print("(\(x), \(y))", terminator: "")
+			}
+			print("")
+		}
+	}
+	
+	
+	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil) {
+		self.board = board
+		self.activePlayer = activePlayer
+		self.gameIsOver = gameIsOver
+		self.winningPlayer = winningPlayer
 	}
 	
 	private(set) var board: GameBoard
 	internal var activePlayer: GameBoard.Mark?
 	internal var gameIsOver: Bool
 	internal var winningPlayer: GameBoard.Mark?
-	
 	private var gameState: GameState?
 }
