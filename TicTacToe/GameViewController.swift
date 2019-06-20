@@ -10,34 +10,31 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-    }
-    
+//    private enum GameState {
+//        case active(GameBoard.Mark) // Active player
+//        case cat
+//        case won(GameBoard.Mark) // Winning player
+//    }
+	
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+       game.restart()
+		updateViews()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
+            try game.makeMark(at: coordinate)
+			
+			
+            if game.game(board: game.board, isWonBy: game.activePlayer) {
+                game.gameState = .won(game.activePlayer)
+            } else if game.board.isFull {
+                game.gameState = .cat
             } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+                let newPlayer = game.activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+                game.gameState = .active(newPlayer)
             }
         } catch {
             NSLog("Illegal move")
@@ -49,7 +46,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
+        switch game.gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
@@ -72,22 +69,16 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
     
     @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
+	
+	var game  = Game(board: GameBoard()) { didSet {
+            boardViewController.board = self.game.board
+			updateViews()
         }
     }
 }

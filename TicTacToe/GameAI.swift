@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// return true if player won 
 func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     // Check verticals
     for x in 0..<3 {
