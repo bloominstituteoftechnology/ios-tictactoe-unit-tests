@@ -10,6 +10,13 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    private var game = Game() {
+        didSet {
+            boardViewController.board = game.board
+            updateViews()
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -17,27 +24,27 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
+        if game.gameIsOver {
             NSLog("Game is over")
+            game.restart()
+            gameState = .active(game.activePlayer!)
             return
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
+            try game.makeMark(at: coordinate)
+            if game.gameIsOver && game.winningPlayer != nil {
+                gameState = .won(game.winningPlayer!)
+            } else if game.gameIsOver && game.winningPlayer == nil {
                 gameState = .cat
             } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+                gameState = .active(game.activePlayer!)
             }
         } catch {
             NSLog("Illegal move")
@@ -87,7 +94,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     private var board = GameBoard() {
         didSet {
-            boardViewController.board = board
+            boardViewController.board = game.board
         }
     }
 }
