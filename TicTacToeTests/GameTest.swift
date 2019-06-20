@@ -138,4 +138,25 @@ class GameTest: XCTestCase {
 
 		game.board.printArrToConsole()
 	}
+	
+	func testWinCheckingDiagonal2_Simulater() {
+		/*
+		x - o
+		- o -
+		o x x
+		*/
+		
+		var game = Game(board: GameBoard())
+		//GameAITests().testWinCheckingDiagonal2()
+		
+		XCTAssertNoThrow(try game.makeMark(at: (0,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (2,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (2,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
+		XCTAssertTrue(game.gameState == .won(.o))
+		
+		game.board.printArrToConsole()
+	}
 }
