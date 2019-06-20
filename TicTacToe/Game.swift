@@ -38,10 +38,6 @@ struct Game {
 		}
 	}
 	
-	
-
-	
-	
 	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil) {
 		self.board = board
 		self.activePlayer = activePlayer
@@ -61,20 +57,6 @@ struct Game {
 // Helpers
 
 extension Game {
-	func printArrToConsole() {
-		for y in 0..<3 {
-			for x in 0..<3 {
-				if let value = board[(x, y)] {
-					print(" \(value) ", terminator: "")
-				} else {
-					print(" - " , terminator: "")
-				}
-				//print("(\(x), \(y))", terminator: "")
-			}
-			print("")
-		}
-	}
-	
 	 func getGameState() -> GameState? {
 		guard let gameState = gameState else { return nil}
 		switch gameState {
