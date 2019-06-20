@@ -103,7 +103,7 @@ class GameTest: XCTestCase {
 		/*
 		x - -
 		- x -
-		o o x
+		o o o
 		*/
 		
 		var game = Game(board: GameBoard())
@@ -119,6 +119,23 @@ class GameTest: XCTestCase {
 		game.board.printArrToConsole()
 	}
 	
+	func testWinCheckingDiagonal1_Simulater() {
+		/*
+		x - -
+		- x -
+		o o x
+		*/
 		
+		var game = Game(board: GameBoard())
+		//GameAITests().testWinCheckingDiagonal1()
 
+		XCTAssertNoThrow(try game.makeMark(at: (0,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (2,2)))
+		XCTAssertTrue(game.gameState == .won(.x))
+
+		game.board.printArrToConsole()
+	}
 }
