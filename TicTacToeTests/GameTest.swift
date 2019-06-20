@@ -15,11 +15,10 @@ class GameTest: XCTestCase {
 	func testrestart() {
 		var game = Game(board: GameBoard())
 		game.restart()
-		
 		XCTAssertTrue(game.activePlayer == .x)
 		XCTAssertFalse(game.gameIsOver)
 		XCTAssertTrue(game.winningPlayer == nil)
-		game.printArrToConsole()
+		XCTAssertTrue(game.getGameState()! == Game.GameState.active(.x))
 	}
 
 }

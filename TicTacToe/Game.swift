@@ -17,7 +17,7 @@ struct Game {
 		gameState = GameState.active(.x)
 	}
 	
-	private enum GameState {
+	enum GameState: Equatable {
 		case active(GameBoard.Mark) // Active player
 		case cat
 		case won(GameBoard.Mark) // Winning player
@@ -39,6 +39,28 @@ struct Game {
 	}
 	
 	
+
+	
+	
+	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil) {
+		self.board = board
+		self.activePlayer = activePlayer
+		self.gameIsOver = gameIsOver
+		self.winningPlayer = winningPlayer
+	}
+	
+	private(set) var board: GameBoard
+	internal var activePlayer: GameBoard.Mark?
+	internal var gameIsOver: Bool
+	internal var winningPlayer: GameBoard.Mark?
+	private (set) var gameState: GameState?
+
+}
+
+
+// Helpers
+
+extension Game {
 	func printArrToConsole() {
 		for y in 0..<3 {
 			for x in 0..<3 {
@@ -53,17 +75,19 @@ struct Game {
 		}
 	}
 	
-	
-	init(board: GameBoard, activePlayer: GameBoard.Mark = .x, gameIsOver: Bool = false, winningPlayer: GameBoard.Mark? = nil) {
-		self.board = board
-		self.activePlayer = activePlayer
-		self.gameIsOver = gameIsOver
-		self.winningPlayer = winningPlayer
+	 func getGameState() -> GameState? {
+		guard let gameState = gameState else { return nil}
+		switch gameState {
+		case let .active(player):
+			print("Player \(player.stringValue)'s turn")
+		case .cat:
+			print("Cat's game!")
+		case let .won(player):
+			print("Player \(player.stringValue) won!")
+		}
+		return gameState
 	}
 	
-	private(set) var board: GameBoard
-	internal var activePlayer: GameBoard.Mark?
-	internal var gameIsOver: Bool
-	internal var winningPlayer: GameBoard.Mark?
-	private var gameState: GameState?
+	
+	
 }
