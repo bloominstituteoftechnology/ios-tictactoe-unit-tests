@@ -14,23 +14,35 @@ struct Game {
 		activePlayer = .x
 		gameIsOver = false
 		winningPlayer = nil
+		gameState = GameState.active(.x)
+	}
+	
+	private enum GameState {
+		case active(GameBoard.Mark) // Active player
+		case cat
+		case won(GameBoard.Mark) // Winning player
 	}
 	
 	mutating  func makeMark(at coordinate: Coordinate) throws {
-		/*(try board.place(mark: player, on: coordinate)
-		if game(board: board, isWonBy: player) {
-			gameState = .won(player)
+		guard let activePlayer = activePlayer else { return }
+		
+		try board.place(mark: activePlayer, on: coordinate)
+		
+		if game(board: board, isWonBy: activePlayer) {
+			gameState = .won(activePlayer)
 		} else if board.isFull {
 			gameState = .cat
 		} else {
-			let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+			let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
 			gameState = .active(newPlayer)
 		}
-		*/
+
 	}
 	
 	private(set) var board: GameBoard
 	internal var activePlayer: GameBoard.Mark?
 	internal var gameIsOver: Bool
 	internal var winningPlayer: GameBoard.Mark?
+	
+	private var gameState: GameState?
 }
