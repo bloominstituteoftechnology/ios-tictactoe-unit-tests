@@ -9,10 +9,6 @@
 import XCTest
 @testable import TicTacToe
 
-
-
-
-
 class GameAITests: XCTestCase {
 
     func testWinCheckingVertical1() {
