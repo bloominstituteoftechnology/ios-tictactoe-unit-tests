@@ -38,25 +38,22 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingVertical2() {
-        var board = GameBoard()
         /*
          x o -
          x o -
-         - o -
+         - o x
          */
 		
+		var board = GameBoard()
 		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 0)))
         XCTAssertNoThrow(try board.place(mark: .o, on: (1, 0)))
-		
 		XCTAssertNoThrow(try board.place(mark: .x, on: (0, 1)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 1)))
-		
+		XCTAssertNoThrow(try board.place(mark: .x, on: (2, 2)))
 		XCTAssertNoThrow(try board.place(mark: .o, on: (1, 2)))
-		
-//		board.printArrToConsole()
-		
         XCTAssertTrue(game(board: board, isWonBy: .o))
-        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+		board.printArrToConsole()
     }
     
     func testWinCheckingHorizontal1() {

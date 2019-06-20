@@ -37,11 +37,11 @@ class GameTest: XCTestCase {
 		game.board.printArrToConsole()
 	}
 	
-	func testWinCheckingVertical1Simulation() {
+	func testWinCheckingVertical1_Simulation() {
 		/*
 		x o -
 		x o -
-		x - -
+		- o x
 		*/
 		
 		var game = Game(board: GameBoard())
@@ -51,11 +51,18 @@ class GameTest: XCTestCase {
 		XCTAssertNoThrow(try game.makeMark(at: (1,0)))
 		XCTAssertNoThrow(try game.makeMark(at: (0,1)))
 		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
-		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
-		XCTAssertTrue(game.gameState == .won(.x))
+		XCTAssertNoThrow(try game.makeMark(at: (2,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,2)))
+		XCTAssertTrue(game.gameState == .won(.o))
 		
 		game.board.printArrToConsole()
 	}
+	
+	
+	
+	
+	
+	
 	
 	func testWinCheckingHorizontal2Simulation() {
 		/*
