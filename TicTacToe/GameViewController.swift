@@ -10,46 +10,32 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
+    // Actions
+    
+    override func viewWillAppear(_ animated: Bool) {
+        statusLabel.text = "Player X's turn"
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
         } catch {
             NSLog("Illegal move")
         }
     }
     
-    // MARK: - Private
+    // MARK: - Methods
     
     private func updateViews() {
         guard isViewLoaded else { return }
-        
-        switch gameState {
+        statusLabel.textColor = .black
+        switch game.gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
@@ -63,9 +49,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
+    
+    // MARK: - Properties & Outlets
     
     private var boardViewController: BoardViewController! {
         willSet {
@@ -79,8 +67,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    private var gameState = GameState.active(.x) {
+    private var game = Game() {
         didSet {
+            boardViewController.board = game.board
             updateViews()
         }
     }
@@ -90,4 +79,5 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController.board = board
         }
     }
+    
 }
