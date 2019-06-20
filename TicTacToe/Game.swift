@@ -29,8 +29,10 @@ struct Game {
 		
 		if game(board: board, isWonBy: activePlayer) {
 			gameState = .won(activePlayer)
+			
 		} else if board.isFull {
 			gameState = .cat
+			
 		} else {
 			let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
 			gameState = .active(newPlayer)

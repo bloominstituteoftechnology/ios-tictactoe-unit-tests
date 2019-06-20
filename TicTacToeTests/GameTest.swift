@@ -38,6 +38,7 @@ class GameTest: XCTestCase {
 	}
 	
 	func testWinCheckingVertical1Simulation() {
+		var game = Game(board: GameBoard())
 		GameAITests().testWinCheckingVertical1()
 		
 		/*
@@ -46,6 +47,22 @@ class GameTest: XCTestCase {
 		x - -
 		*/
 		
+		// setup board
+		XCTAssertNoThrow(try game.makeMark(at: (0,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,0)))
+		
+		XCTAssertNoThrow(try game.makeMark(at: (0,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+		
+		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
+		
+		game.board.printArrToConsole()
+
+		// Test Game won by x
+		XCTAssertTrue(game.gameState == .won(.x))
+		
+		
+		print("Game State: ", game.gameState)
 		
 	}
 	
