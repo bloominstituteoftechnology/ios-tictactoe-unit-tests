@@ -37,6 +37,7 @@ class GameTest: XCTestCase {
 		game.board.printArrToConsole()
 	}
 	
+	
 	func testWinCheckingVertical1_Simulation() {
 		/*
 		x o -
@@ -45,7 +46,27 @@ class GameTest: XCTestCase {
 		*/
 		
 		var game = Game(board: GameBoard())
-//		GameAITests().testWinCheckingVertical1()
+		//		GameAITests().testWinCheckingVertical1()
+		
+		XCTAssertNoThrow(try game.makeMark(at: (0,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
+		XCTAssertTrue(game.gameState == .won(.x))
+
+		game.board.printArrToConsole()
+	}
+	
+	func testWinCheckingVertical2_Simulation() {
+		/*
+		x o -
+		x o -
+		- o x
+		*/
+		
+		var game = Game(board: GameBoard())
+		//GameAITests().testWinCheckingVertical2()
 		
 		XCTAssertNoThrow(try game.makeMark(at: (0,0)))
 		XCTAssertNoThrow(try game.makeMark(at: (1,0)))
@@ -58,32 +79,25 @@ class GameTest: XCTestCase {
 		game.board.printArrToConsole()
 	}
 	
-	
-	
-	
-	
-	
-	
-	func testWinCheckingHorizontal2Simulation() {
+	func testWinCheckingHorizontal1_Simulater() {
 		/*
-		x - -
-		- x -
-		o o x
+		- o -
+		x x x
+		o - -
 		*/
 		
 		var game = Game(board: GameBoard())
-		//GameAITests().testWinCheckingDiagonal2()
+		//GameAITests().testWinCheckingHorizontal1()
 		
-		XCTAssertNoThrow(try game.makeMark(at: (0, 0)))
-		XCTAssertNoThrow(try game.makeMark(at: (0, 2)))
-		XCTAssertNoThrow(try game.makeMark(at: (1, 1)))
-		XCTAssertNoThrow(try game.makeMark(at: (1, 2)))
-		XCTAssertNoThrow(try game.makeMark(at: (2, 2)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,0)))
+		XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+		XCTAssertNoThrow(try game.makeMark(at: (0,2)))
+		XCTAssertNoThrow(try game.makeMark(at: (2,1)))
 		XCTAssertTrue(game.gameState == .won(.x))
 		
 		game.board.printArrToConsole()
-		
-		print("Game State: ", game.gameState)
 	}
+		
 
 }
