@@ -146,3 +146,4 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: .o) && board.isFull)
     }
 }
+
