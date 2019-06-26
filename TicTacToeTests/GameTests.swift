@@ -12,7 +12,7 @@ import XCTest
 class GameTests: XCTestCase {
 
     func testRestart() {
-        var board = GameBoard()
+        let board = GameBoard()
         //game board should be empty
         //game state should restart and be active
         XCTAssertTrue(board.isEmpty)
@@ -21,6 +21,12 @@ class GameTests: XCTestCase {
  
     
     func testMakeMark() {
+        var board = GameBoard()
+        let coordinate = Coordinate(0, 0)
+        
+        try! board.place(mark: .x, on: (coordinate))
+        XCTAssertFalse(board.isEmpty)
+        XCTAssertNotNil(coordinate)
         
     }
 
