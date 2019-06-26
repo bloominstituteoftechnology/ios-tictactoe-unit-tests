@@ -111,8 +111,28 @@ class GameAITests: XCTestCase {
     }
     
     func testIncompleteGame() {
+        var board = GameBoard()
+        /*
+         x - o
+         x - -
+         o - -
+        */
+        try! board.place(mark: .x, on: (0, 0))
+        try! board.place(mark: .o, on: (2, 0))
+        try! board.place(mark: .x, on: (0, 1))
+        try! board.place(mark: .o, on: (0, 2))
+        XCTAssertFalse(board.isFull)
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
     }
 
     func testCatsGame() {
+        /*
+         x x o
+         o o x
+         x o x
+        */
+        
+        
     }
 }
