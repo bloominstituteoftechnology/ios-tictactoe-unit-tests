@@ -17,14 +17,30 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.updateViews()
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
     
+    private func checkGameState() {
+        if game.gameIsOver && game.winningPlayer != nil {
+            gameState = .won(game.winningPlayer!)
+        } else if game.board.isFull {
+            gameState = .cat
+        } else {
+            gameState = .active(game.activePlayer!)
+        }
+    }
+    
     @IBAction func restartGame(_ sender: Any) {
         self.game.restart()
+        self.checkGameState()
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -37,13 +53,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         
         do {
             try game.makeMark(at: coordinate)
-            if game.gameIsOver && game.winningPlayer != nil {
-                gameState = .won(game.winningPlayer!)
-            } else if game.board.isFull {
-                gameState = .cat
-            } else {
-                gameState = .active(game.activePlayer!)
-            }
+            self.checkGameState()
         } catch {
             NSLog("Illegal move")
         }
