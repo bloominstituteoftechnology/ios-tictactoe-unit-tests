@@ -33,6 +33,7 @@ struct GameBoard {
         case empty
     }
     
+    //this makes sure if there is no coordinates then return nil
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
