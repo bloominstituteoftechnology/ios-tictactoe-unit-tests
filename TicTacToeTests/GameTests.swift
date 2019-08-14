@@ -14,8 +14,8 @@ class GameTests: XCTestCase {
         var game = Game()
         
         game.restart()
-        XCTAssertTrue(.x == game.activePlayer)
-        XCTAssertFalse(.o == game.activePlayer)
+        XCTAssertTrue(game.activePlayer == .x)
+        XCTAssertFalse(game.activePlayer == .o)
     }
     
     func testPlayerChange() {

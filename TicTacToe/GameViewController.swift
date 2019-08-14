@@ -10,6 +10,13 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    private var game = Game() {
+        didSet {
+            boardViewController.board = game.board
+            self.updateViews()
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -17,27 +24,25 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        self.game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
+        if game.gameIsOver {
             NSLog("Game is over")
             return
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
+            try game.makeMark(at: coordinate)
+            if game.gameIsOver && game.winningPlayer != nil {
+                gameState = .won(game.winningPlayer!)
+            } else if game.board.isFull {
                 gameState = .cat
             } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+                gameState = .active(game.activePlayer!)
             }
         } catch {
             NSLog("Illegal move")
@@ -47,8 +52,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     // MARK: - Private
     
     private func updateViews() {
-        guard isViewLoaded else { return }
-        
         switch gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
@@ -72,7 +75,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -82,12 +85,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private var gameState = GameState.active(.x) {
         didSet {
             updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
         }
     }
 }
