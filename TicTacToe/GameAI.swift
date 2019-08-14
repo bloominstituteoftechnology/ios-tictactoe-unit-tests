@@ -36,6 +36,7 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     }
     
     // Check diagonals
+    //left to right
     let ltr: [Coordinate] = [(0,0), (1, 1), (2,2)]
     var numMatches = 0
     for coord in ltr {
@@ -45,6 +46,7 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
     }
     if numMatches == 3 { return true }
     
+    //right to left
     let rtl: [Coordinate] = [(2,0), (1, 1), (0,2)]
     numMatches = 0
     for coord in rtl {
