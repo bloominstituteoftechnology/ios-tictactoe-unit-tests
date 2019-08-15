@@ -23,7 +23,7 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         }
     }
     
-    // TODO: Check the horizontal
+    // Check the horizontal
     for y in 0..<3 {
         var numMarks = 0
         for x in 0..<3 {
@@ -36,7 +36,7 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         }
     }
     
-    // TODO: Check the diagonals
+    // Check the diagonals
     let lCoordinates: [Coordinate] = [(0,0), (1, 1), (2,2)]
     var matches = 0
     for coord in lCoordinates {
@@ -44,7 +44,9 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
             matches += 1
         }
     }
-    if matches == 3 { return true }
+    if matches == 3 {
+        return true
+    }
     
     let rCoordinates: [Coordinate] = [(2,0), (1, 1), (0,2)]
     matches = 0
@@ -53,8 +55,9 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
             matches += 1
         }
     }
-    if matches == 3 { return true }
-    
+    if matches == 3 {
+        return true
+    }
 
     return false
 }
