@@ -20,6 +20,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         game.restart()
         statusLabel.text = "Player X's turn"
     }
+    @IBAction func undoTapped(_ sender: Any) {
+        
+    }
     
     // MARK: - BoardViewControllerDelegate
     

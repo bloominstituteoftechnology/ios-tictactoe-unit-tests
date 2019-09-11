@@ -10,6 +10,8 @@ import Foundation
 
 struct Game {
     
+    var moves: [Coordinate] = []
+    
     mutating func restart() {
         //Restarts the game to a fresh state with an empty board, and player X starting.
         board = GameBoard()
@@ -20,6 +22,7 @@ struct Game {
         guard let activePlayer = activePlayer else { return }
         do {
             try board.place(mark: activePlayer, on: coordinate)
+            moves.append(coordinate)
             
             if gameWon(board: board, isWonBy: .x) {
                 self.winningPlayer = .x
@@ -43,10 +46,10 @@ struct Game {
         }
     }
     
-    mutating func removeMark(at coordinate: Coordinate) {
-        guard let activePlayer = activePlayer else { return }
+    mutating func removeMark() {
+        guard let activePlayer = activePlayer, let move = moves.last else { return }
         do {
-            try board.remove(on: coordinate)
+            try board.remove(on: move)
             
             if activePlayer == .x {
                 self.activePlayer = .o
@@ -54,7 +57,7 @@ struct Game {
                 self.activePlayer = .x
             }
         } catch {
-            print("Error removing \(activePlayer) mark at \(coordinate): \(error)")
+            print("Error removing \(activePlayer): \(error)")
         }
     }
     

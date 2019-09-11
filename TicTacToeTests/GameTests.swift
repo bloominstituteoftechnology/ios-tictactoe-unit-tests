@@ -80,11 +80,18 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.activePlayer)
     }
     
+    func testMakeMarkSaveToMoves() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        
+        XCTAssertEqual(1, game.moves.count)
+    }
+    
     func testRemovingMarkMakeThatSquareNil() {
         var game = Game()
         game.makeMark(at: (0,0))
         game.makeMark(at: (1,0))
-        game.removeMark(at: (1,0))
+        game.removeMark()
         
         XCTAssertNil(game.board[(1,0)])
     }
@@ -93,8 +100,10 @@ class GameTests: XCTestCase {
         var game = Game()
         game.makeMark(at: (0,0))
         game.makeMark(at: (1,0))
-        game.removeMark(at: (1,0))
+        game.removeMark()
         
         XCTAssertEqual(.o, game.activePlayer)
     }
+    
+
 }
