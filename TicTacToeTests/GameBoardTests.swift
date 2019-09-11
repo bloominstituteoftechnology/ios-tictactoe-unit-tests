@@ -8,12 +8,29 @@
 
 import Foundation
 import XCTest
+@testable import TicTacToe
 
 class GameBoardTests:XCTestCase {
     
     //unit test always start with test
     func testGameBoard() {
-        XCTFail()
+        //XCTFail("Gameboard not function properly")
+        
+        let board = GameBoard()
     }
+    
+    func testNewBoardIsEmpty() {
+        let board = GameBoard()
+        
+        //board[0,0] //top left corner
+        //how do we know if it's empty
+        
+        for x in 0 ..< 3 {
+            for y in 0 ..< 3 {
+                XCTAssertNil(board[(x, y)])
+            }
+        }
+    }
+    
     
 }
