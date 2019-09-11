@@ -43,6 +43,21 @@ struct Game {
         }
     }
     
+    mutating func removeMark(at coordinate: Coordinate) {
+        guard let activePlayer = activePlayer else { return }
+        do {
+            try board.remove(on: coordinate)
+            
+            if activePlayer == .x {
+                self.activePlayer = .o
+            } else {
+                self.activePlayer = .x
+            }
+        } catch {
+            print("Error removing \(activePlayer) mark at \(coordinate): \(error)")
+        }
+    }
+    
     init() {
         self.board = GameBoard()
         activePlayer = .x

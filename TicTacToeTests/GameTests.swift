@@ -79,4 +79,22 @@ class GameTests: XCTestCase {
         XCTAssertTrue(game.gameIsOver)
         XCTAssertNil(game.activePlayer)
     }
+    
+    func testRemovingMarkMakeThatSquareNil() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        game.makeMark(at: (1,0))
+        game.removeMark(at: (1,0))
+        
+        XCTAssertNil(game.board[(1,0)])
+    }
+    
+    func testRemovingMarkRevertActivePlayer() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        game.makeMark(at: (1,0))
+        game.removeMark(at: (1,0))
+        
+        XCTAssertEqual(.o, game.activePlayer)
+    }
 }
