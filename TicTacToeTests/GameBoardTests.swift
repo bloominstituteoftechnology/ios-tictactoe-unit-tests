@@ -49,4 +49,17 @@ class GameBoardTests:XCTestCase {
         
     }
     
+    func testPlacingXThenRemovingit() throws {
+        var board = GameBoard()
+        try board.place(mark: .x, on: (0,0))
+        try board.remove(on: (0,0))
+        
+        XCTAssertNil(board[(0,0)])
+    }
+    
+    func testRemovingEmptyMarkThrowError() throws {
+        var board = GameBoard()
+        XCTAssertThrowsError(try board.remove(on: (0,0)))
+    }
+    
 }

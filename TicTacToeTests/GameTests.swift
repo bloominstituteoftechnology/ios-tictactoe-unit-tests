@@ -18,6 +18,7 @@ class GameTests: XCTestCase {
         game.restart()
         
         XCTAssertEqual(.x, game.activePlayer)
+        XCTAssertNil(game.board[(0, 0)])
         
         
     }
