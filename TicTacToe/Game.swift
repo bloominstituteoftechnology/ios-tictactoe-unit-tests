@@ -24,12 +24,15 @@ struct Game {
             if gameWon(board: board, isWonBy: .x) {
                 self.winningPlayer = .x
                 gameIsOver = true
+                self.activePlayer = nil
             } else if gameWon(board: board, isWonBy: .o) {
                 self.winningPlayer = .o
                 gameIsOver = true
+                self.activePlayer = nil
             } else if board.isFull {
                 gameIsOver = true
                 winningPlayer = nil
+                self.activePlayer = nil
             } else if activePlayer == .x {
                 self.activePlayer = .o
             } else {

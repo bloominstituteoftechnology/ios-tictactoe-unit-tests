@@ -62,6 +62,7 @@ class GameTests: XCTestCase {
         
         XCTAssertEqual(.x, game.winningPlayer)
         XCTAssertTrue(game.gameIsOver)
+        XCTAssertNil(game.activePlayer)
     }
     
     func testOVerticalWinGameOver() {
@@ -75,5 +76,6 @@ class GameTests: XCTestCase {
         
         XCTAssertEqual(.o, game.winningPlayer)
         XCTAssertTrue(game.gameIsOver)
+        XCTAssertNil(game.activePlayer)
     }
 }
