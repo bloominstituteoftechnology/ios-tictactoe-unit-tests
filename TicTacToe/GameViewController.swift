@@ -10,6 +10,9 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    @IBOutlet weak var undoButton: UIButton!
+    
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -19,9 +22,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
         statusLabel.text = "Player X's turn"
+        undoButton.isHidden = false
     }
     @IBAction func undoTapped(_ sender: Any) {
-        
+        game.removeLastMark()
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -49,8 +53,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
             statusLabel.text = "Cat's game!"
+            undoButton.isHidden = true
         case let .won(player):
             statusLabel.text = "Player \(player.stringValue) won!"
+            undoButton.isHidden = true
         }
     }
     

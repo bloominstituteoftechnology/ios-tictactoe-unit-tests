@@ -46,7 +46,7 @@ struct Game {
         }
     }
     
-    mutating func removeMark() {
+    mutating func removeLastMark() {
         guard let activePlayer = activePlayer, let move = moves.last else { return }
         do {
             try board.remove(on: move)

@@ -91,7 +91,7 @@ class GameTests: XCTestCase {
         var game = Game()
         game.makeMark(at: (0,0))
         game.makeMark(at: (1,0))
-        game.removeMark()
+        game.removeLastMark()
         
         XCTAssertNil(game.board[(1,0)])
     }
@@ -100,7 +100,7 @@ class GameTests: XCTestCase {
         var game = Game()
         game.makeMark(at: (0,0))
         game.makeMark(at: (1,0))
-        game.removeMark()
+        game.removeLastMark()
         
         XCTAssertEqual(.o, game.activePlayer)
     }
