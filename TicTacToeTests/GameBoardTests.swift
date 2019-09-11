@@ -32,5 +32,21 @@ class GameBoardTests:XCTestCase {
         }
     }
     
+    func testPlacingXMarkOnUpperLeftCorner() throws {
+        var board = GameBoard()
+        
+        try board.place(mark: .x, on: (0, 0))
+        
+        // AssertEqual(expected, actual)
+        XCTAssertEqual(.x, board[(0, 0)])
+    }
+    
+    func testPlacingDuplicateMarkThrowsError() throws {
+        var board = GameBoard()
+        try board.place(mark: .x, on: (0, 0))
+        
+        XCTAssertThrowsError(try board.place(mark: .o, on: (0,0)))
+        
+    }
     
 }
