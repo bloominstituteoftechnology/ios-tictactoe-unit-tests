@@ -17,32 +17,24 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
+        statusLabel.text = "Player X's turn"
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
+        game.makeMark(at: coordinate)
         
-        do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
-        } catch {
-            NSLog("Illegal move")
+        if let winningPlayer = game.winningPlayer {
+            gameState = .won(winningPlayer)
+        } else if game.gameIsOver {
+            gameState = .cat
+        } else if let activePlayer = game.activePlayer{
+            gameState = .active(activePlayer)
         }
     }
+
     
     // MARK: - Private
     
@@ -72,7 +64,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -85,9 +77,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
+    var game = Game() {
         didSet {
-            boardViewController.board = board
+            boardViewController.board = game.board
         }
     }
 }

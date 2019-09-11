@@ -8,7 +8,7 @@
 
 import Foundation
 
-func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
+func gameWon(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
      return verticalWinCondition(board: board, player: player) || horizontalWinCondition(board: board, player: player) || diagnalWinCondition(board: board, player: player)
 }
 
