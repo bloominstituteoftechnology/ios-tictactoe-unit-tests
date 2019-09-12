@@ -12,7 +12,7 @@ import XCTest
 class GameAITests: XCTestCase {
     
     func testWinCheckingVertical1() {
-        var board = GameBoard()
+        let board = GameBoard()
         /*
         x o -
         x o -
@@ -28,7 +28,7 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingVertical2() {
-        var board = GameBoard()
+        let board = GameBoard()
         /*
          x o -
          x o -
@@ -44,7 +44,7 @@ class GameAITests: XCTestCase {
     }
 	
 	func testWinCheckingVertical3() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		o - x
 		- o x
@@ -61,7 +61,7 @@ class GameAITests: XCTestCase {
 	}
     
     func testWinCheckingHorizontal1() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		o o o
 		- x -
@@ -79,7 +79,7 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingHorizontal2() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		- o -
 		x x x
@@ -97,7 +97,7 @@ class GameAITests: XCTestCase {
     }
 	
 	func testWinCheckingHorizontal3() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		x - -
 		- x -
@@ -115,7 +115,7 @@ class GameAITests: XCTestCase {
 	}
     
     func testWinCheckingDiagonal1() throws {
-        var board = GameBoard()
+        let board = GameBoard()
         /*
          x - -
          - x -
@@ -133,7 +133,7 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingDiagonal2() throws {
-        var board = GameBoard()
+        let board = GameBoard()
         /*
          x - o
          - o -
@@ -151,7 +151,7 @@ class GameAITests: XCTestCase {
     }
     
     func testIncompleteGame() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		x o o
 		- x -
@@ -170,7 +170,7 @@ class GameAITests: XCTestCase {
     }
 
     func testCatsGame() throws {
-		var board = GameBoard()
+		let board = GameBoard()
 		/*
 		x o o
 		o x x

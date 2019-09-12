@@ -27,11 +27,12 @@ class BoardViewController: UIViewController {
     
     @IBAction func mark(_ sender: UIButton) {
         delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
+		updateButtons()
     }
     
     // MARK: - Private
 
-    private func updateButtons() {
+    func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
         for x in 0..<3 {
