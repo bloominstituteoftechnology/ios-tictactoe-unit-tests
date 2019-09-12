@@ -105,5 +105,42 @@ class GameTests: XCTestCase {
         XCTAssertEqual(.o, game.activePlayer)
     }
     
+    func testResetGameWinningPlayerNil() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        game.makeMark(at: (1,0))
+        game.makeMark(at: (0,1))
+        game.makeMark(at: (1,1))
+        game.makeMark(at: (2,2))
+        game.makeMark(at: (1,2))
+        game.restart()
+        XCTAssertNil(game.winningPlayer)
+    }
+    
+    func testResetGameResetGameOver() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        game.makeMark(at: (1,0))
+        game.makeMark(at: (0,1))
+        game.makeMark(at: (1,1))
+        game.makeMark(at: (2,2))
+        game.makeMark(at: (1,2))
+        game.restart()
+        XCTAssertFalse(game.gameIsOver)
+    }
+    
+    func testUndoRemoveLastElementOfArray() {
+        var game = Game()
+        game.makeMark(at: (0,0))
+        game.makeMark(at: (1,0))
+        game.makeMark(at: (0,1))
+        game.makeMark(at: (1,1))
+        
+        game.removeLastMark()
+        game.removeLastMark()
+        
+        XCTAssertEqual(2, game.moves.count)
+    }
+    
 
 }

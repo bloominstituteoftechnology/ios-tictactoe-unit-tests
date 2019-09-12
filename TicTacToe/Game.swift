@@ -16,6 +16,9 @@ struct Game {
         //Restarts the game to a fresh state with an empty board, and player X starting.
         board = GameBoard()
         activePlayer = .x
+        moves = []
+        winningPlayer = nil
+        gameIsOver = false
     }
     
     mutating func makeMark(at coordinate: Coordinate) {
@@ -50,6 +53,7 @@ struct Game {
         guard let activePlayer = activePlayer, let move = moves.last else { return }
         do {
             try board.remove(on: move)
+            moves.removeLast()
             
             if activePlayer == .x {
                 self.activePlayer = .o
