@@ -22,7 +22,7 @@ class GameBoardTests: XCTestCase {
     }
     
     func testPlacingMarks() {
-        var board = GameBoard()
+        let board = GameBoard()
         XCTAssertNoThrow(try board.place(mark: .o, on: (0, 0)))
         XCTAssertEqual(board[(0, 0)], .o)
         XCTAssertNoThrow(try board.place(mark: .x, on: (2, 2)))
@@ -42,7 +42,7 @@ class GameBoardTests: XCTestCase {
     }
     
     func testIsFull() {
-        var board = GameBoard()
+		let board = GameBoard()
         
         try! board.place(mark: .x, on: (0, 0))
         try! board.place(mark: .o, on: (0, 1))

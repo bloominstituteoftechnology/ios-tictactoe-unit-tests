@@ -14,7 +14,7 @@ enum GameBoardError: Error, Equatable {
 
 typealias Coordinate = (x: Int, y: Int)
 
-struct GameBoard {
+class GameBoard {
     
     enum Mark: Equatable {
         case x
@@ -42,12 +42,19 @@ struct GameBoard {
         }
     }
     
-    mutating func place(mark: Mark, on square: Coordinate) throws {
+	func place(mark: Mark, on square: Coordinate) throws {
         if self[square] != nil {
             throw GameBoardError.invalidSquare
         }
         squares[arrayIndex(for: square)] = .filled(mark)
     }
+	
+	func removeMark(on square: Coordinate) throws {
+		if self[square] == nil {
+			throw GameBoardError.invalidSquare
+		}
+		squares[arrayIndex(for: square)] = .empty
+	}
     
     var isFull: Bool {
         for square in squares {
