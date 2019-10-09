@@ -13,6 +13,7 @@ struct Game {
     internal var activePlayer: GameBoard.Mark? = .x
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
+    internal var lastMove: Coordinate = (-1, -1)
 
     mutating internal func restart() {
         board = GameBoard()
@@ -69,5 +70,9 @@ struct Game {
     
     mutating func getCurrentPlayer() -> GameBoard.Mark? {
         return activePlayer
+    }
+    
+    mutating func getLastMove() -> Coordinate {
+        return lastMove
     }
 }

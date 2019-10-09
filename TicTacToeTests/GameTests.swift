@@ -91,4 +91,14 @@ class GameTests: XCTestCase {
         
         XCTAssertEqual(GameBoard.Mark.o, game.getCurrentPlayer())
     }
+    
+    func testUndoMove() {
+        var game = Game(board: GameBoard(), gameIsOver: false, winningPlayer: nil)
+        
+        
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        
+        XCTAssertEqual(.x, game.board[game.getLastMove()])
+    }
 }
