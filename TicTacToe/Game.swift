@@ -9,11 +9,12 @@
 import Foundation
 
 struct Game {
-    internal var board: GameBoard
+    private(set) var board: GameBoard
     internal var activePlayer: GameBoard.Mark? = .x
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
-    internal var lastMove: Coordinate = (-1, -1)
+    internal var lastMoves: [Coordinate] = []
+    internal var movesCount: Int = 0
 
     mutating internal func restart() {
         board = GameBoard()
@@ -27,7 +28,7 @@ struct Game {
         
         do {
             try board.place(mark: player, on: coordinate)
-            lastMove = coordinate
+            lastMoves.append(coordinate)
         } catch {
             throw error
         }
@@ -74,21 +75,28 @@ struct Game {
     }
     
     mutating func getLastMove() -> Coordinate {
-        return lastMove
+        return lastMoves[lastMoves.count-1]
+    }
+    
+    mutating func getLastMovesCount() -> Int {
+        return lastMoves.count
     }
     
     mutating func undoLastMove() {
-        if let player = activePlayer, player == .x {
-            activePlayer = .o
-        } else if let player = activePlayer, player == .o {
-            activePlayer = .x
-        } else if let winner = winningPlayer, winner == .x {
-            activePlayer = .o
-        } else if let winner = winningPlayer, winner == .o {
-            activePlayer = .x
-        } else {
-            activePlayer = .x
+        if lastMoves.count > 0 {
+            if let player = activePlayer, player == .x {
+                activePlayer = .o
+            } else if let player = activePlayer, player == .o {
+                activePlayer = .x
+            } else if let winner = winningPlayer, winner == .x {
+                activePlayer = .o
+            } else if let winner = winningPlayer, winner == .o {
+                activePlayer = .x
+            } else {
+                activePlayer = .x
+            }
+            board.remove(on: lastMoves[lastMoves.count-1])
+            lastMoves.remove(at: lastMoves.count-1)
         }
-        board.remove(on: lastMove)
     }
 }

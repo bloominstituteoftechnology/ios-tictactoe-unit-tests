@@ -27,6 +27,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         game.undoLastMove()
         boardViewController.board = game.board
         updateViews()
+        if game.getLastMovesCount() == 0 {
+            undoButton.isEnabled = false
+        }
+        if let player = game.getCurrentPlayer() {
+            statusLabel.text = "Player \(player.stringValue)'s turn"
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
