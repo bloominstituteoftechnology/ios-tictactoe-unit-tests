@@ -9,7 +9,7 @@
 import Foundation
 
 struct Game {
-    private(set) var board: GameBoard
+    internal var board: GameBoard
     internal var activePlayer: GameBoard.Mark? = .x
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
@@ -27,6 +27,7 @@ struct Game {
         
         do {
             try board.place(mark: player, on: coordinate)
+            lastMove = coordinate
         } catch {
             throw error
         }
@@ -74,5 +75,20 @@ struct Game {
     
     mutating func getLastMove() -> Coordinate {
         return lastMove
+    }
+    
+    mutating func undoLastMove() {
+        if let player = activePlayer, player == .x {
+            activePlayer = .o
+        } else if let player = activePlayer, player == .o {
+            activePlayer = .x
+        } else if let winner = winningPlayer, winner == .x {
+            activePlayer = .o
+        } else if let winner = winningPlayer, winner == .o {
+            activePlayer = .x
+        } else {
+            activePlayer = .x
+        }
+        board.remove(on: lastMove)
     }
 }

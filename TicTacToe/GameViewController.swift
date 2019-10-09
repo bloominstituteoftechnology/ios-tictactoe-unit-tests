@@ -9,6 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
+    @IBOutlet weak var undoButton: UIButton!
     
     private enum GameState {
         case active(GameBoard.Mark) // Active player
@@ -19,11 +20,19 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
         boardViewController.board = game.board
+        undoButton.isEnabled = false
+    }
+    
+    @IBAction func undoTapped(_ sender: UIButton) {
+        game.undoLastMove()
+        boardViewController.board = game.board
+        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         updateViews()
+        undoButton.isEnabled = false
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -36,6 +45,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             } else {
                 gameState = .cat
             }
+            undoButton.isEnabled = true
         } catch {
             NSLog("Illegal move")
         }

@@ -47,6 +47,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pY-u3-9ot">
                                 <rect key="frame" x="169" y="612" width="37" height="30"/>
                                 <state key="normal" title="Undo"/>
+                                <connections>
+                                    <action selector="undoTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C7X-YD-ye6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,6 +74,7 @@
                     </view>
                     <connections>
                         <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
+                        <outlet property="undoButton" destination="0pY-u3-9ot" id="mav-CS-Cj8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
