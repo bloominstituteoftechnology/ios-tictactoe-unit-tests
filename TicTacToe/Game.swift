@@ -10,7 +10,7 @@ import Foundation
 
 struct Game {
     private(set) var board: GameBoard
-    internal var activePlayer: GameBoard.Mark?
+    internal var activePlayer: GameBoard.Mark? = .x
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
 
