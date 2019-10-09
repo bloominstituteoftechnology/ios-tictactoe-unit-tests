@@ -50,9 +50,13 @@ struct Game {
     }
     
     mutating private func setWinningPlayer() {
-        if game(board: board, isWonBy: .x) { winningPlayer = .x }
-        else if game(board: board, isWonBy: .o) { winningPlayer = .o }
-        else { winningPlayer = nil }
+        if game(board: board, isWonBy: .x) {
+            winningPlayer = .x
+            gameIsOver = true
+        } else if game(board: board, isWonBy: .o) {
+            winningPlayer = .o
+            gameIsOver = true
+        } else { winningPlayer = nil }
     }
     
     mutating func getWinningPlayer() -> GameBoard.Mark? {

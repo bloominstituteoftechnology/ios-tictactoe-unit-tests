@@ -116,8 +116,8 @@
 			children = (
 				9DA41C622148AE68001A3F45 /* GameBoardTests.swift */,
 				9DA41C682148B9AC001A3F45 /* GameAITests.swift */,
-				9DA41C562148ABEE001A3F45 /* Info.plist */,
 				0EBF0AA7234E7B1000CD1AAB /* GameTests.swift */,
+				9DA41C562148ABEE001A3F45 /* Info.plist */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
