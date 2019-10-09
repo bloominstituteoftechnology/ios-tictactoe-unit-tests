@@ -15,9 +15,52 @@ struct Game {
     internal var winningPlayer: GameBoard.Mark?
 
     mutating internal func restart() {
-        
+        board = GameBoard()
     }
+    
     mutating internal func makeMark(at coordinate: Coordinate) throws {
+        guard let player = activePlayer else { throw NSError() }
         
+        do {
+            try board.place(mark: player, on: coordinate)
+        } catch {
+            throw error
+        }
+        
+        gameIsOver = true
+        for x in 0..<3 {
+            for y in 0..<3 {
+                if board[(x, y)] == nil {
+                    gameIsOver = false
+                }
+            }
+        }
+        setWinningPlayer()
+        
+        if gameIsOver {
+            activePlayer = nil
+        } else if (player == .x) {
+            activePlayer = .o
+        } else {
+            activePlayer = .x
+        }
+    }
+    
+    mutating private func setWinningPlayer() {
+        if game(board: board, isWonBy: .x) { winningPlayer = .x }
+        else if game(board: board, isWonBy: .o) { winningPlayer = .o }
+        else { winningPlayer = nil }
+    }
+    
+    mutating func getWinningPlayer() -> GameBoard.Mark? {
+        return winningPlayer
+    }
+    
+    mutating func isGameOver() -> Bool {
+        return gameIsOver
+    }
+    
+    mutating func getCurrentPlayer() -> GameBoard.Mark? {
+        return activePlayer
     }
 }
