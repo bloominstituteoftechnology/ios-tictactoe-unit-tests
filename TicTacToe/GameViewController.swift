@@ -9,6 +9,7 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
+    @IBOutlet weak var undoButton: UIButton!
     
     private enum GameState {
         case active(GameBoard.Mark) // Active player
@@ -17,28 +18,40 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
+        boardViewController.board = game.board
+        undoButton.isEnabled = false
+    }
+    
+    @IBAction func undoTapped(_ sender: UIButton) {
+        game.undoLastMove()
+        boardViewController.board = game.board
+        updateViews()
+        if game.getLastMovesCount() == 0 {
+            undoButton.isEnabled = false
+        }
+        if let player = game.getCurrentPlayer() {
+            statusLabel.text = "Player \(player.stringValue)'s turn"
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateViews()
+        undoButton.isEnabled = false
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
+            try game.makeMark(at: coordinate)
+            if let winner = game.getWinningPlayer() {
+                gameState = .won(winner)
             } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+                gameState = .cat
             }
+            undoButton.isEnabled = true
         } catch {
             NSLog("Illegal move")
         }
@@ -49,13 +62,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
-        case let .active(player):
+        if let winner = game.getWinningPlayer() {
+            statusLabel.text = "Player \(winner.stringValue) won!"
+        } else if !game.isGameOver(), let player = game.getCurrentPlayer() {
             statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
+        } else {
             statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
         }
     }
     
@@ -63,7 +75,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
@@ -72,7 +84,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -85,9 +97,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
+    private var game = Game(board: GameBoard(), gameIsOver: false) {
         didSet {
-            boardViewController.board = board
+            boardViewController.board = game.board
         }
     }
 }
