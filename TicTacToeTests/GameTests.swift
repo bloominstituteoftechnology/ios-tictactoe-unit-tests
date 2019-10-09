@@ -99,6 +99,6 @@ class GameTests: XCTestCase {
         try! game.makeMark(at: (0, 0))
         try! game.makeMark(at: (0, 1))
         
-        XCTAssertEqual(.x, game.board[game.getLastMove()])
+        XCTAssertTrue(game.getLastMove() == (0, 0))
     }
 }
