@@ -21,6 +21,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         boardViewController.board = game.board
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateViews()
+    }
+    
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {

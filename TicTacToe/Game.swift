@@ -16,6 +16,9 @@ struct Game {
 
     mutating internal func restart() {
         board = GameBoard()
+        gameIsOver = false
+        winningPlayer = nil
+        activePlayer = .x
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
