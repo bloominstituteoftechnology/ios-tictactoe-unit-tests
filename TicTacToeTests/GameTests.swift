@@ -56,5 +56,18 @@ class GameTests: XCTestCase {
         try! game.makeMark(at: (0, 2))
         XCTAssertEqual(game.winningPlayer, .x)
     }
+    
+    func testCatsGame() {
+        var game = Game()
+        
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (2, 0))
+        try! game.makeMark(at: (0, 2))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (2, 1))
+        try! game.makeMark(at: (1, 2))
+    }
 
 }

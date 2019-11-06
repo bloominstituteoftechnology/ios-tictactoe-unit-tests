@@ -23,6 +23,7 @@ struct Game {
         board = GameBoard()
         activePlayer = .x
         gameIsOver = false
+        winningPlayer = nil
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
@@ -112,6 +113,20 @@ struct Game {
                 return
             }
         }
+        
+        // Check for cat's game
+        
+        var over = true
+        loop: for y in 0..<3 {
+            for x in 0..<3 {
+                if board[(x, y)] == nil {
+                    over = false
+                    break loop
+                }
+            }
+        }
+        
+        if over { gameIsOver = over }
     }
     
     private(set) var board: GameBoard
