@@ -58,4 +58,38 @@ class GameBoardTests: XCTestCase {
         }
     }
     
+    func testIsFull() {
+        var board = GameBoard()
+        
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (0, 0))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (0, 1))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (1, 0))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (2, 0))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (0, 2))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (1, 1))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (2, 1))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (1, 2))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (2, 2))
+        XCTAssertTrue(board.isFull)
+        
+    }
+    
 }
