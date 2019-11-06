@@ -11,11 +11,6 @@ import XCTest
 
 class GameBoardTests: XCTestCase {
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
     func testCreatingEmptyBoard() {
         let board = GameBoard()
         
@@ -31,16 +26,17 @@ class GameBoardTests: XCTestCase {
         
         for x in 0..<3 {
             for y in 0..<3 {
-                XCTAssertNil(board[(x, y)], "The entry at (\(x), \(y) was \(board[(x, y)]!) instead of nil")
+                XCTAssertNil(board[(x, y)], "The entry at (\(x), \(y)) was \(board[(x, y)]!) instead of nil")
             }
         }
     }
-
+    
     func testPlacingMarks() {
         var board = GameBoard()
         
         XCTAssertNoThrow(try board.place(mark: .o, on: (0, 0)))
         XCTAssertEqual(board[(0, 0)], .o)
+        
         XCTAssertNoThrow(try board.place(mark: .x, on: (2, 2)))
         XCTAssertEqual(board[(2, 2)], .x)
         
@@ -49,7 +45,7 @@ class GameBoardTests: XCTestCase {
                 if x == 0 && y == 0 { continue }
                 if x == 2 && y == 2 { continue }
                 
-                XCTAssertNil(board[(x, y)], "The entry at (\(x), \(y)) was \(board[(x, y)]!) instead of nil)")
+                XCTAssertNil(board[(x, y)], "The entry at (\(x), \(y)) was \(board[(x, y)]!) instead of nil")
             }
         }
         
@@ -89,7 +85,6 @@ class GameBoardTests: XCTestCase {
         
         try! board.place(mark: .x, on: (2, 2))
         XCTAssertTrue(board.isFull)
-        
     }
-    
+
 }
