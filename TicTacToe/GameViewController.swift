@@ -75,13 +75,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     private var gameState = GameState.active(.x) {
         didSet {
+            updateViews()
         }
     }
     
-    private var game: Game {
+    private var game = Game() {
         didSet {
             boardViewController.board = game.board
-            updateViews()
         }
     }
 }
