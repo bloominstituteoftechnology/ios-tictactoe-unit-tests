@@ -10,6 +10,12 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    var game = Game() {
+        didSet {
+
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -17,28 +23,19 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
+        if game.gameIsOver == true {
             NSLog("Game is over")
             return
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
         } catch {
             NSLog("Illegal move")
         }
@@ -63,7 +60,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
