@@ -37,7 +37,8 @@ class GameBoardTests: XCTestCase {
         }
         
         // Make sure you can't change an already marked square
-        XCTAssertThrowsError(try board.place(mark: .x, on: (0,0))) { error in XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
+        XCTAssertThrowsError(try board.place(mark: .x, on: (0,0))) { error in
+            XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
         }
     }
 
