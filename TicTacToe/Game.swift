@@ -33,7 +33,7 @@ struct Game {
             if activePlayer == .x {
                 try! self.board.place(mark: .x, on: coordinate)
                 activePlayer = .o
-                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.k
+                // Doesnt cover situations where the board is full and it wasnt a cats game.
                 if gameIsOver == true && board.isFull {
                     winningPlayer = nil
                 } else if gameIsOver == true {
@@ -42,7 +42,7 @@ struct Game {
             } else if activePlayer == .o {
                 try! self.board.place(mark: .o, on: coordinate)
                 activePlayer = .x
-                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.
+                // Doesnt cover situations where the board is full and it wasnt a cats game.
                 if gameIsOver == true && board.isFull {
                     winningPlayer = nil
                 } else if gameIsOver == true {
