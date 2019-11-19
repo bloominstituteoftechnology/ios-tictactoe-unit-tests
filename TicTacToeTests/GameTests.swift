@@ -11,14 +11,14 @@ import XCTest
 
 class GameTests: XCTestCase {
     
-    func testRestartGame() {
+    func testRestartIncompleteGame() {
         // Set up scenarios where the game is in different states, then reset the game and make sure the board is empty, the active player is X, the winning player and gameIsOver should both be nil.
         
         var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         var activePlayer = game.activePlayer
-        var gameOver = game.gameIsOver
-        var winner = game.winningPlayer
+        let gameOver = game.gameIsOver
+        let winner = game.winningPlayer
         
         // Incomplete Game
         /*
@@ -28,11 +28,21 @@ class GameTests: XCTestCase {
          */
         
         try! board.place(mark: .x, on: (0,0))
+        activePlayer = .o
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
         XCTAssertTrue(gameOver == false)
         XCTAssertTrue(winner == nil)
+    }
+    
+    func testRestartDiagonalGame() {
+        
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        var activePlayer = game.activePlayer
+        var gameOver = game.gameIsOver
+        var winner = game.winningPlayer
         
         // Diagonal Winner
         /*
@@ -54,7 +64,16 @@ class GameTests: XCTestCase {
         XCTAssertTrue(activePlayer == .x)
         XCTAssertTrue(gameOver == false)
         XCTAssertTrue(winner == nil)
+    
+    }
+    
+    func testRestartVerticalGame() {
         
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        var activePlayer = game.activePlayer
+        var gameOver = game.gameIsOver
+        var winner = game.winningPlayer
         
         // Vertical Winner
         /*
@@ -75,7 +94,15 @@ class GameTests: XCTestCase {
         XCTAssertTrue(activePlayer == .x)
         XCTAssertTrue(gameOver == false)
         XCTAssertTrue(winner == nil)
+    }
+    
+    func testRestartHorizontalGame() {
         
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        var activePlayer = game.activePlayer
+        var gameOver = game.gameIsOver
+        var winner = game.winningPlayer
         
         // Horizontal Winner
         /*
@@ -96,7 +123,15 @@ class GameTests: XCTestCase {
         XCTAssertTrue(activePlayer == .x)
         XCTAssertTrue(gameOver == false)
         XCTAssertTrue(winner == nil)
+    }
+    
+    func testRestartCatsGame() {
         
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        var activePlayer = game.activePlayer
+        var gameOver = game.gameIsOver
+        var winner = game.winningPlayer
         
         // Cats Game
         /*
@@ -175,7 +210,7 @@ class GameTests: XCTestCase {
         XCTAssertTrue(activePlayer == .x)
     }
     
-    func testGameIsOver() {
+    func testDiagonalGameIsOver() {
         // Set up scenarios where the game came to a finish (Win or Cats Game), also when game is not finished (Unfinished) and make sure the appropriate boolean is evident.
         let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
@@ -194,6 +229,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .o, on: (2,0))
         try! board.place(mark: .o, on: (0,2))
         XCTAssertTrue(gameOver == true)
+    }
+    
+    func testVerticalGameIsOVer() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let gameOver = game.gameIsOver
         
         // Vartical Winner
         /*
@@ -207,6 +249,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .x, on: (0, 1))
         try! board.place(mark: .o, on: (1, 2))
         XCTAssertTrue(gameOver == true)
+    }
+    
+    func testHorizontalGameIsOver() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let gameOver = game.gameIsOver
         
         // Horizontal Winner
         /*
@@ -220,6 +269,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .x, on: (1, 1))
         try! board.place(mark: .x, on: (2, 1))
         XCTAssertTrue(gameOver == true)
+    }
+    
+    func testIncompleteGameIsOver() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let gameOver = game.gameIsOver
         
         // Incomplete Game
         /*
@@ -232,6 +288,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .o, on: (0, 2))
         try! board.place(mark: .x, on: (1, 2))
         XCTAssertTrue(gameOver == false)
+    }
+    
+    func testCatsGameIsOver() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let gameOver = game.gameIsOver
         
         // Cats Game
         /*
@@ -251,7 +314,7 @@ class GameTests: XCTestCase {
         XCTAssertTrue(gameOver == false)
     }
     
-    func testWinningPlayer() {
+    func testDiagonalWinningPlayer() {
         // Set up scenarios where a player wins (Horizontal, Vertical, Diagonal) and make sure the right player wins. Also make sure that there is no winning player when appropriate (Cats game, Unfinished game)
         let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
@@ -270,6 +333,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .o, on: (2,0))
         try! board.place(mark: .o, on: (0,2))
         XCTAssertTrue(winner == .x)
+    }
+    
+    func testVerticalWinningPlayer() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let winner = game.winningPlayer
         
         // Vartical Winner
         /*
@@ -283,6 +353,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .x, on: (0, 1))
         try! board.place(mark: .o, on: (1, 2))
         XCTAssertTrue(winner == .o)
+    }
+    
+    func testHorizontalWinningPlayer() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let winner = game.winningPlayer
         
         // Horizontal Winner
         /*
@@ -296,6 +373,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .x, on: (1, 1))
         try! board.place(mark: .x, on: (2, 1))
         XCTAssertTrue(winner == .x)
+    }
+    
+    func testIncompleteWinningPlayer() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let winner = game.winningPlayer
         
         // Incomplete Game
         /*
@@ -308,6 +392,13 @@ class GameTests: XCTestCase {
         try! board.place(mark: .o, on: (0, 2))
         try! board.place(mark: .x, on: (1, 2))
         XCTAssertTrue(winner == nil)
+    }
+    
+    func testCatsWinningPlayer() {
+        
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let winner = game.winningPlayer
         
         // Cats Game
         /*
