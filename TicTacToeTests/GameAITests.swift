@@ -7,27 +7,26 @@
 //
 
 import XCTest
+@testable import TicTacToe
 
 class GameAITests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func testWinCheckingVertical1() {
+        /*
+         x o -
+         x o -
+         x - -
+         */
+        var board = GameBoard()
+        
+        try! board.place(mark: .x, on: (0,0))
+        try! board.place(mark: .o, on: (1,0))
+        try! board.place(mark: .x, on: (0,1))
+        try! board.place(mark: .o, on: (1,1))
+        try! board.place(mark: .x, on: (0,2))
+        
+        XCTAssertTrue(game(board: board, isWonBy: .x))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+    
 }
