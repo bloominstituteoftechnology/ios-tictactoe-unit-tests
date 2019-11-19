@@ -10,7 +10,8 @@ import XCTest
 @testable import TicTacToe
 
 class GameTests: XCTestCase {
-    
+
+        
     func testRestartIncompleteGame() {
         // Set up scenarios where the game is in different states, then reset the game and make sure the board is empty, the active player is X, the winning player and gameIsOver should both be nil.
         
@@ -46,10 +47,10 @@ class GameTests: XCTestCase {
         
         // Diagonal Winner
         /*
-        x - o
-        - x -
-        o - x
-        */
+         x - o
+         - x -
+         o - x
+         */
         
         try! board.place(mark: .x, on: (0,0))
         try! board.place(mark: .x, on: (1,1))
@@ -64,7 +65,7 @@ class GameTests: XCTestCase {
         XCTAssertTrue(activePlayer == .x)
         XCTAssertTrue(gameOver == false)
         XCTAssertTrue(winner == nil)
-    
+        
     }
     
     func testRestartVerticalGame() {
@@ -77,10 +78,10 @@ class GameTests: XCTestCase {
         
         // Vertical Winner
         /*
-        x o -
-        x o -
-        x - -
-        */
+         x o -
+         x o -
+         x - -
+         */
         try! board.place(mark: .x, on: (0, 0))
         try! board.place(mark: .o, on: (1, 0))
         try! board.place(mark: .x, on: (0, 1))
@@ -106,10 +107,10 @@ class GameTests: XCTestCase {
         
         // Horizontal Winner
         /*
-        - o -
-        x x x
-        o - -
-        */
+         - o -
+         x x x
+         o - -
+         */
         try! board.place(mark: .o, on: (1, 0))
         try! board.place(mark: .x, on: (0, 1))
         try! board.place(mark: .o, on: (0, 2))
@@ -135,10 +136,10 @@ class GameTests: XCTestCase {
         
         // Cats Game
         /*
-        x o o
-        o x x
-        o x o
-        */
+         x o o
+         o x x
+         o x o
+         */
         try! board.place(mark: .x, on: (0,0))
         try! board.place(mark: .x, on: (1,1))
         try! board.place(mark: .x, on: (2,1))
@@ -202,10 +203,10 @@ class GameTests: XCTestCase {
         
         // X is the active player
         /*
-        x - -
-        - - -
-        - - o
-        */
+         x - -
+         - - -
+         - - o
+         */
         try! board.place(mark: .o, on: (2,2))
         XCTAssertTrue(activePlayer == .x)
     }
@@ -218,10 +219,10 @@ class GameTests: XCTestCase {
         
         // Diagonal Winner
         /*
-        x - o
-        - x -
-        o - x
-        */
+         x - o
+         - x -
+         o - x
+         */
         
         try! board.place(mark: .x, on: (0,0))
         try! board.place(mark: .x, on: (1,1))
@@ -322,10 +323,10 @@ class GameTests: XCTestCase {
         
         // Diagonal Winner
         /*
-        x - o
-        - x -
-        o - x
-        */
+         x - o
+         - x -
+         o - x
+         */
         
         try! board.place(mark: .x, on: (0,0))
         try! board.place(mark: .x, on: (1,1))
@@ -417,4 +418,5 @@ class GameTests: XCTestCase {
         try! board.place(mark: .o, on: (2, 2))
         XCTAssertTrue(winner == nil)
     }
+
 }
