@@ -123,7 +123,6 @@ class GameTests: XCTestCase {
         XCTAssertTrue(winner == nil)
     }
     
-    
     func testMakingMarks() {
         // Should be the same as the other method, except with using the Game file instead of GameViewController properties.
         let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
@@ -148,7 +147,32 @@ class GameTests: XCTestCase {
     }
     
     func testActivePlayer() {
-        // Set up scenarios where the active player is tested. If new game, active player should be X. If X just made a mark, O should be active player and visa versa. If game is over, active player is nil.
+        // Set up scenarios where the active player is tested. If new game, active player should be X. If X just made a mark, O should be active player and visa versa.
+        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var board = game.board
+        let player = game.activePlayer
+        
+        // New Game
+        XCTAssertTrue(player == .x)
+        
+        // O is the active player
+        /*
+         x - -
+         - - -
+         - - -
+         */
+        try! board.place(mark: .x, on: (0,0))
+        XCTAssertTrue(player == .o)
+        
+        
+        // X is the active player
+        /*
+        x - -
+        - - -
+        - - o
+        */
+        try! board.place(mark: .o, on: (2,2))
+        XCTAssertTrue(player == .x)
     }
     
     func testGameIsOver() {
