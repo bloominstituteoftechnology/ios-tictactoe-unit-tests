@@ -28,8 +28,7 @@ class GameTests: XCTestCase {
          - - -
          */
         
-        try! board.place(mark: .x, on: (0,0))
-        activePlayer = .o
+        try! game.makeMark(at: (0,0))
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
@@ -52,14 +51,11 @@ class GameTests: XCTestCase {
          o - x
          */
         
-        try! board.place(mark: .x, on: (0,0))
-        try! board.place(mark: .x, on: (1,1))
-        try! board.place(mark: .x, on: (2,2))
-        try! board.place(mark: .o, on: (2,0))
-        try! board.place(mark: .o, on: (0,2))
-        activePlayer = .o
-        gameOver = true
-        winner = .x
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,2))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (0,2))
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
@@ -82,14 +78,12 @@ class GameTests: XCTestCase {
          x o -
          x - -
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 2))
-        activePlayer = .o
-        gameOver = true
-        winner = .x
+        
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,2))
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
@@ -111,14 +105,11 @@ class GameTests: XCTestCase {
          x x x
          o - -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 1))
-        activePlayer = .o
-        gameOver = true
-        winner = .x
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,1))
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
@@ -140,18 +131,15 @@ class GameTests: XCTestCase {
          o x x
          o x o
          */
-        try! board.place(mark: .x, on: (0,0))
-        try! board.place(mark: .x, on: (1,1))
-        try! board.place(mark: .x, on: (2,1))
-        try! board.place(mark: .x, on: (1,2))
-        try! board.place(mark: .o, on: (1,0))
-        try! board.place(mark: .o, on: (2,0))
-        try! board.place(mark: .o, on: (0,1))
-        try! board.place(mark: .o, on: (0,2))
-        try! board.place(mark: .o, on: (2,2))
-        activePlayer = .x
-        gameOver = true
-        winner = nil
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,1))
+        try! game.makeMark(at: (1,2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (2,2))
         game.restart()
         XCTAssertTrue(board.isEmpty)
         XCTAssertTrue(activePlayer == .x)
@@ -184,7 +172,7 @@ class GameTests: XCTestCase {
     
     func testActivePlayer() {
         // Set up scenarios where the active player is tested. If new game, active player should be X. If X just made a mark, O should be active player and visa versa.
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let activePlayer = game.activePlayer
         
@@ -197,7 +185,7 @@ class GameTests: XCTestCase {
          - - -
          - - -
          */
-        try! board.place(mark: .x, on: (0,0))
+        try! game.makeMark(at: (0,0))
         XCTAssertTrue(activePlayer == .o)
         
         
@@ -207,13 +195,13 @@ class GameTests: XCTestCase {
          - - -
          - - o
          */
-        try! board.place(mark: .o, on: (2,2))
+        try! game.makeMark(at: (2,2))
         XCTAssertTrue(activePlayer == .x)
     }
     
     func testDiagonalGameIsOver() {
         // Set up scenarios where the game came to a finish (Win or Cats Game), also when game is not finished (Unfinished) and make sure the appropriate boolean is evident.
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let gameOver = game.gameIsOver
         
@@ -224,17 +212,17 @@ class GameTests: XCTestCase {
          o - x
          */
         
-        try! board.place(mark: .x, on: (0,0))
-        try! board.place(mark: .x, on: (1,1))
-        try! board.place(mark: .x, on: (2,2))
-        try! board.place(mark: .o, on: (2,0))
-        try! board.place(mark: .o, on: (0,2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,2))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (0,2))
         XCTAssertTrue(gameOver == true)
     }
     
     func testVerticalGameIsOVer() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let gameOver = game.gameIsOver
         
@@ -244,17 +232,17 @@ class GameTests: XCTestCase {
          x o -
          - o -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (1,2))
         XCTAssertTrue(gameOver == true)
     }
     
     func testHorizontalGameIsOver() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let gameOver = game.gameIsOver
         
@@ -264,17 +252,17 @@ class GameTests: XCTestCase {
          x x x
          o - -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 1))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,1))
         XCTAssertTrue(gameOver == true)
     }
     
     func testIncompleteGameIsOver() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let gameOver = game.gameIsOver
         
@@ -284,16 +272,16 @@ class GameTests: XCTestCase {
          - o -
          - x -
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,2))
         XCTAssertTrue(gameOver == false)
     }
     
     func testCatsGameIsOver() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let gameOver = game.gameIsOver
         
@@ -303,21 +291,21 @@ class GameTests: XCTestCase {
          o o x
          x x o
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .x, on: (2, 0))
-        try! board.place(mark: .x, on: (2, 1))
-        try! board.place(mark: .x, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 2))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .o, on: (0, 1))
-        try! board.place(mark: .o, on: (2, 2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (2,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,2))
         XCTAssertTrue(gameOver == false)
     }
     
     func testDiagonalWinningPlayer() {
         // Set up scenarios where a player wins (Horizontal, Vertical, Diagonal) and make sure the right player wins. Also make sure that there is no winning player when appropriate (Cats game, Unfinished game)
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let winner = game.winningPlayer
         
@@ -328,17 +316,17 @@ class GameTests: XCTestCase {
          o - x
          */
         
-        try! board.place(mark: .x, on: (0,0))
-        try! board.place(mark: .x, on: (1,1))
-        try! board.place(mark: .x, on: (2,2))
-        try! board.place(mark: .o, on: (2,0))
-        try! board.place(mark: .o, on: (0,2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,2))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (0,2))
         XCTAssertTrue(winner == .x)
     }
     
     func testVerticalWinningPlayer() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let winner = game.winningPlayer
         
@@ -348,17 +336,17 @@ class GameTests: XCTestCase {
          x o -
          - o -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (1,2))
         XCTAssertTrue(winner == .o)
     }
     
     func testHorizontalWinningPlayer() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let winner = game.winningPlayer
         
@@ -368,17 +356,17 @@ class GameTests: XCTestCase {
          x x x
          o - -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 1))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (2,1))
         XCTAssertTrue(winner == .x)
     }
     
     func testIncompleteWinningPlayer() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let winner = game.winningPlayer
         
@@ -388,16 +376,16 @@ class GameTests: XCTestCase {
          - o -
          - x -
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,2))
         XCTAssertTrue(winner == nil)
     }
     
     func testCatsWinningPlayer() {
         
-        let game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         let winner = game.winningPlayer
         
@@ -407,15 +395,15 @@ class GameTests: XCTestCase {
          o o x
          x x o
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .x, on: (2, 0))
-        try! board.place(mark: .x, on: (2, 1))
-        try! board.place(mark: .x, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 2))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .o, on: (0, 1))
-        try! board.place(mark: .o, on: (2, 2))
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (2,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (2,2))
         XCTAssertTrue(winner == nil)
     }
 
