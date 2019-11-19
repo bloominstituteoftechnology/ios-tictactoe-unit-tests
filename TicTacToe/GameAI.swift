@@ -50,5 +50,17 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         return true
     }
     
+    let rtl: [Coordinate] = [(2,0), (1,1), (0,2)]
+    numMatches = 0
+    for coordinate in rtl {
+        if board[coordinate] == player {
+            numMatches += 1
+        }
+    }
+    
+    if numMatches == 3 {
+        return true
+    }
+    
     return false
 }
