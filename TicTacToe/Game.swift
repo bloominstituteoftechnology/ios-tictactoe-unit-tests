@@ -23,14 +23,21 @@ struct Game {
         /*
          Should make a mark at a specific spot with a label for the active player and hold that until the game is restarted.
          Should update the state of the game and the active player.
-         */
+         
+         If X made the last mark, active player is O. If O made the last mark, active player is X.
+        */
+        
         if gameIsOver == true {
             // Add alert to tell the user that a move cannot be made.
         } else {
             if activePlayer == .x {
-                try! self.board.place(mark: .o, on: coordinate)
-            } else if activePlayer == .o {
                 try! self.board.place(mark: .x, on: coordinate)
+                activePlayer = .o
+                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.
+            } else if activePlayer == .o {
+                try! self.board.place(mark: .o, on: coordinate)
+                activePlayer = .x
+                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.
             }
         }
     }
@@ -41,9 +48,7 @@ struct Game {
         */
 
     internal var activePlayer: GameBoard.Mark?
-        /*
-        If new game, active player is X. If X made the last mark, active player is O. If O made the last mark, active player is X.
-        */
+
     
     internal var gameIsOver: Bool
         /*
