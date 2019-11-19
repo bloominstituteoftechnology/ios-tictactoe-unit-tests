@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Game {
 
@@ -23,7 +24,15 @@ struct Game {
          Should make a mark at a specific spot with a label for the active player and hold that until the game is restarted.
          Should update the state of the game and the active player.
          */
-        
+        if gameIsOver == true {
+            // Add alert to tell the user that a move cannot be made.
+        } else {
+            if activePlayer == .x {
+                try! self.board.place(mark: .o, on: coordinate)
+            } else if activePlayer == .o {
+                try! self.board.place(mark: .x, on: coordinate)
+            }
+        }
     }
 
     private(set) var board: GameBoard
