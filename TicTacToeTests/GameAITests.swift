@@ -111,7 +111,7 @@ class GameAITests: XCTestCase {
     }
     
     func testIncompleteGame() {
-        var board = GameBoard()
+        let board = GameBoard()
         
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
