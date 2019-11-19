@@ -92,9 +92,5 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var game1 = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil) {
-        didSet {
-            
-        }
-    }
+    
 }
