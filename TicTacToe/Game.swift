@@ -17,6 +17,7 @@ struct Game {
         self.board = GameBoard()
         activePlayer = .x
     }
+    
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         /*
          Should make a mark at a specific spot with a label for the active player and hold that until the game is restarted.
