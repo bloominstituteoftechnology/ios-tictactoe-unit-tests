@@ -28,7 +28,7 @@ As you work, run your tests frequently. As you know, tests can fail for two reas
 
 ## Part 2 - Refactor Game Logic
 
-Currently, the logic for managing game state, checking for completion, whether a win or a cat's game, is in GameViewController.swift. View controllers can be difficult to test, due to their dependence on user-facing UI, and it's good practice to factor as much logic out of them into discrete, small, easily testable units as possible. To that end, you'll factor as much of the game logic as possible into a new `Game` type, which the `GameViewController` will use to implement much of its logic. You'll also add additional tests to verify that `Game`'s functionality is correct. (Side note: You'll learn how to automate testing user interfaces in a future lesson.)
+Currently, the logic for managing game state // Mark() //, checking for completion , whether a win or a cat's game // gameIsOver //, is in GameViewController.swift. View controllers can be difficult to test, due to their dependence on user-facing UI, and it's good practice to factor as much logic out of them into discrete, small, easily testable units as possible. To that end, you'll factor as much of the game logic as possible into a new `Game` type, which the `GameViewController` will use to implement much of its logic. You'll also add additional tests to verify that `Game`'s functionality is correct. (Side note: You'll learn how to automate testing user interfaces in a future lesson.)
 
 1. Create a new file, "Game.swift".
 2. Define a struct called `Game`.

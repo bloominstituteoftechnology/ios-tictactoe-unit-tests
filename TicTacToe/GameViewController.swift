@@ -17,6 +17,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
+        //Need to change to reset in Game file
         board = GameBoard()
         gameState = .active(.x)
     }
