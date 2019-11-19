@@ -33,11 +33,21 @@ struct Game {
             if activePlayer == .x {
                 try! self.board.place(mark: .x, on: coordinate)
                 activePlayer = .o
-                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.
+                // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.k
+                if gameIsOver == true && board.isFull {
+                    winningPlayer = nil
+                } else if gameIsOver == true {
+                    winningPlayer = .x
+                }
             } else if activePlayer == .o {
                 try! self.board.place(mark: .o, on: coordinate)
                 activePlayer = .x
                 // Need to see if the game was ended on this move, if so, update gameIsOver and winningPlayer.
+                if gameIsOver == true && board.isFull {
+                    winningPlayer = nil
+                } else if gameIsOver == true {
+                    winningPlayer = .o
+                }
             }
         }
     }
@@ -50,10 +60,37 @@ struct Game {
     internal var activePlayer: GameBoard.Mark?
 
     
-    internal var gameIsOver: Bool
+    internal var gameIsOver: Bool {
+        
         /*
         if game is won, or is a cats game, this is True. If game is still running, this is False.
         */
+        
+        for x in 0..<3 {
+            var numMarks = 0
+            for y in 0..<3 {
+                if board[(x, y)] == activePlayer {
+                    numMarks += 1
+                }
+            }
+            if numMarks == 3 {
+                return true
+            }
+        }
+        for y in 0..<3 {
+            var numMarks = 0
+            for x in 0..<3 {
+                if board[(x, y)] == activePlayer {
+                    numMarks += 1
+                }
+            }
+            if numMarks == 3 {
+                return true
+            }
+        }
+        return false
+    }
+
     
     internal var winningPlayer: GameBoard.Mark?
         /*
