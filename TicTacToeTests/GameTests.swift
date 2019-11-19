@@ -12,12 +12,15 @@ import XCTest
 class GameTests: XCTestCase {
     
     func testRestartGame() {
+        // Set up scenarios where the game is in different states, then reset the game and make sure the board is empty, the active player is X, the winning player and gameIsOver should both be nil.
+        
         var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
         var board = game.board
         var player = game.activePlayer
-        var status = game.gameIsOver
+        var gameOver = game.gameIsOver
         var winner = game.winningPlayer
         
+        // Incomplete Game
         /*
          x - -
          - - -
@@ -26,10 +29,100 @@ class GameTests: XCTestCase {
         
         try! board.place(mark: .x, on: (0,0))
         game.restart()
-        XCTAssertTrue( board  ,player == .x, status == false, winner == false)
+        XCTAssertTrue(board.isEmpty)
+        XCTAssertTrue(player == .x)
+        XCTAssertTrue(gameOver == false)
+        XCTAssertTrue(winner == nil)
         
-        // Set up scenarios where the game is in different states, then reset the game and make sure the board is empty, the active player is X, the winning player and gameIsOver should both be nil.
+        // Diagonal Winner
+        /*
+        x - o
+        - x -
+        o - x
+        */
+        
+        try! board.place(mark: .x, on: (0,0))
+        try! board.place(mark: .x, on: (1,1))
+        try! board.place(mark: .x, on: (2,2))
+        try! board.place(mark: .o, on: (2,0))
+        try! board.place(mark: .o, on: (0,2))
+        player = .o
+        gameOver = true
+        winner = .x
+        game.restart()
+        XCTAssertTrue(board.isEmpty)
+        XCTAssertTrue(player == .x)
+        XCTAssertTrue(gameOver == false)
+        XCTAssertTrue(winner == nil)
+        
+        
+        // Vertical Winner
+        /*
+        x o -
+        x o -
+        x - -
+        */
+        try! board.place(mark: .x, on: (0, 0))
+        try! board.place(mark: .o, on: (1, 0))
+        try! board.place(mark: .x, on: (0, 1))
+        try! board.place(mark: .o, on: (1, 1))
+        try! board.place(mark: .x, on: (0, 2))
+        player = .o
+        gameOver = true
+        winner = .x
+        game.restart()
+        XCTAssertTrue(board.isEmpty)
+        XCTAssertTrue(player == .x)
+        XCTAssertTrue(gameOver == false)
+        XCTAssertTrue(winner == nil)
+        
+        
+        // Horizontal Winner
+        /*
+        - o -
+        x x x
+        o - -
+        */
+        try! board.place(mark: .o, on: (1, 0))
+        try! board.place(mark: .x, on: (0, 1))
+        try! board.place(mark: .o, on: (0, 2))
+        try! board.place(mark: .x, on: (1, 1))
+        try! board.place(mark: .x, on: (2, 1))
+        player = .o
+        gameOver = true
+        winner = .x
+        game.restart()
+        XCTAssertTrue(board.isEmpty)
+        XCTAssertTrue(player == .x)
+        XCTAssertTrue(gameOver == false)
+        XCTAssertTrue(winner == nil)
+        
+        
+        // Cats Game
+        /*
+        x o o
+        o x x
+        o x o
+        */
+        try! board.place(mark: .x, on: (0,0))
+        try! board.place(mark: .x, on: (1,1))
+        try! board.place(mark: .x, on: (2,1))
+        try! board.place(mark: .x, on: (1,2))
+        try! board.place(mark: .o, on: (1,0))
+        try! board.place(mark: .o, on: (2,0))
+        try! board.place(mark: .o, on: (0,1))
+        try! board.place(mark: .o, on: (0,2))
+        try! board.place(mark: .o, on: (2,2))
+        player = .x
+        gameOver = true
+        winner = nil
+        game.restart()
+        XCTAssertTrue(board.isEmpty)
+        XCTAssertTrue(player == .x)
+        XCTAssertTrue(gameOver == false)
+        XCTAssertTrue(winner == nil)
     }
+    
     
     func testMakingMarks() {
         // Should be the same as the other method, except with using the Game file instead of GameViewController properties.
