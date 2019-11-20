@@ -24,4 +24,17 @@ class GameTests: XCTestCase {
         let mark = game.board[(1, 0)]
         XCTAssertEqual(mark, .x)
     }
+    
+    func testWinningPlayer() {
+        let game = Game(gameState: .won(.o))
+        XCTAssertEqual(game.winningPlayer, .o)
+    }
+    
+    func testGameIsOver() {
+        let cases = [Game.GameState.won(.x), .cat]
+        for gameState in cases {
+            let game = Game(gameState: gameState)
+            XCTAssertEqual(game.gameIsOver, true)
+        }
+    }
 }

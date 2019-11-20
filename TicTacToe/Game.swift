@@ -9,13 +9,13 @@
 import Foundation
 
 struct Game {
-    private enum GameState {
+    internal enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
     
-    private var gameState = GameState.active(.x)
+    private var gameState: GameState
     private(set) var board: GameBoard
     
     internal var activePlayer: GameBoard.Mark? {
@@ -44,8 +44,9 @@ struct Game {
         }
     }
     
-    init() {
+    init(gameState: GameState = .active(.x)) {
         self.board = GameBoard()
+        self.gameState = gameState
     }
     
     mutating internal func restart() {
