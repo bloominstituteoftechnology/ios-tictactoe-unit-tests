@@ -72,12 +72,6 @@ class GameTests: XCTestCase {
             XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
         }
     }
-    
-    /*
-     XCTAssertThrowsError(try board.place(mark: .x, on: (0,0))) { error in
-         XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
-     }
-     */
 
     func testCurrentPlayer() {
         var game = Game()
