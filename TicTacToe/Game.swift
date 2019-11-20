@@ -52,6 +52,7 @@ struct Game {
             }
         } catch {
             NSLog("Illegal move")
+            throw GameBoardError.invalidSquare
         }
     }
 }
