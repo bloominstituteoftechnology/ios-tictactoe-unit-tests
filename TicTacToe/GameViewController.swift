@@ -17,28 +17,19 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
+        guard !game.gameIsOver else {
             NSLog("Game is over")
             return
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
         } catch {
             NSLog("Illegal move")
         }
@@ -57,6 +48,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case let .won(player):
             statusLabel.text = "Player \(player.stringValue) won!"
         }
+        
+        if game.gameIsOver, let player = game.winningPlayer {
+            statusLabel.text = "Player \(player.stringValue) won!"
+        }
     }
     
     // MARK: - Navigation
@@ -72,7 +67,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -85,9 +80,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
+    private var game = Game() {
         didSet {
-            boardViewController.board = board
+            boardViewController.board = game.board
         }
     }
 }
