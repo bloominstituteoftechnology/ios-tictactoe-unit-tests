@@ -32,10 +32,11 @@ class TicTacToeUITests: XCTestCase {
         let statusLabel = app.staticTexts["status"]
         
         // Tap "X" on the top left.
-        let topLeftButton = app.buttons["topLeft"]
-        topLeftButton.tap()
-        XCTAssertEqual(topLeftButton.label, "X")
-//        XCTAssertEqual(statusLabel.label, "Player O's turn")
+        self.assertMovePlayed(app: app,
+                              statusLabel: statusLabel,
+                              buttonIdentifier: .topLeft,
+                              buttonLabelAssertionString: "X",
+                              statusLabelAssertionString: "Player O's turn")
         
         // Tap "O" on the top right
         let topRightButton = app.buttons["topRight"]
@@ -63,12 +64,23 @@ class TicTacToeUITests: XCTestCase {
         
     }
     
+    func assertMovePlayed(app: XCUIApplication,
+                          statusLabel: XCUIElement,
+                          buttonIdentifier: PositionIdentifier,
+                          buttonLabelAssertionString: String,
+                          statusLabelAssertionString: String) {
+        let button = app.buttons[buttonIdentifier.rawValue]
+        button.tap()
+        XCTAssertEqual(button.label, buttonLabelAssertionString)
+//        XCTAssertEqual(statusLabel.label, statusLabelAssertionString)
+    }
+    
     func testDiagonal() {
         let app = XCUIApplication()
         app.launch()
         
         // x starts the game.
-        let statusLabel = app.staticTexts["status"]
+//        let statusLabel = app.staticTexts["status"]
         
         // Tap "X" on the top left.
         let topLeftButton = app.buttons["topLeft"]
@@ -94,6 +106,18 @@ class TicTacToeUITests: XCTestCase {
         let bottomRightButton = app.buttons["bottomRight"]
         bottomRightButton.tap()
         XCTAssertEqual(bottomRightButton.label, "X")
+    }
+    
+    enum PositionIdentifier: String {
+        case topLeft
+        case topRight
+        case topCenter
+        case middleLeft
+        case middleRight
+        case middleCenter
+        case bottomLeft
+        case bottomRight
+        case bottomCenter
     }
     
 }
