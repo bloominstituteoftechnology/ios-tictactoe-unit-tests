@@ -11,38 +11,19 @@ import XCTest
 
 class TicTacToeUITests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testLeftVertical() {
         let app = XCUIApplication()
         app.launch()
         
-        // x starts the game.
-        let statusLabel = app.staticTexts["status"]
-        
         // Tap "X" on the top left.
-        self.assertMovePlayed(app: app,
-                              statusLabel: statusLabel,
-                              buttonIdentifier: .topLeft,
-                              buttonLabelAssertionString: "X",
-                              statusLabelAssertionString: "Player O's turn")
+        app.assertMovePlayed(.topLeft,
+                             buttonLabelAssertion: .X,
+                             statusLabelAssertionString: "Player O's turn")
         
         // Tap "O" on the top right
-        let topRightButton = app.buttons["topRight"]
-        topRightButton.tap()
-        XCTAssertEqual(topRightButton.label, "O")
-//        XCTAssertEqual(statusLabel.label, "Player X's turn")
+        app.assertMovePlayed(.topRight,
+                             buttonLabelAssertion: .O,
+                             statusLabelAssertionString: "Player X's turn")
         
         // Tap "X" on the middle left.
         let middleLeftButton = app.buttons["middleLeft"]
@@ -62,17 +43,6 @@ class TicTacToeUITests: XCTestCase {
         XCTAssertEqual(bottomLeftButton.label, "X")
 //        XCTAssertEqual(statusLabel.label, "Player X won!")
         
-    }
-    
-    func assertMovePlayed(app: XCUIApplication,
-                          statusLabel: XCUIElement,
-                          buttonIdentifier: PositionIdentifier,
-                          buttonLabelAssertionString: String,
-                          statusLabelAssertionString: String) {
-        let button = app.buttons[buttonIdentifier.rawValue]
-        button.tap()
-        XCTAssertEqual(button.label, buttonLabelAssertionString)
-//        XCTAssertEqual(statusLabel.label, statusLabelAssertionString)
     }
     
     func testDiagonal() {
@@ -108,6 +78,23 @@ class TicTacToeUITests: XCTestCase {
         XCTAssertEqual(bottomRightButton.label, "X")
     }
     
+}
+
+extension XCUIApplication {
+    
+    func assertMovePlayed(_ buttonIdentifier: PositionIdentifier,
+                          buttonLabelAssertion: ButtonLabel,
+                          statusLabelAssertionString: String) {
+        let button = buttons[buttonIdentifier.rawValue]
+        button.tap()
+        XCTAssertEqual(button.label, buttonLabelAssertion.rawValue)
+//        XCTAssertEqual(statusElement.label, statusLabelAssertionString)
+    }
+    
+    var statusElement: XCUIElement {
+        return staticTexts["status"]
+    }
+    
     enum PositionIdentifier: String {
         case topLeft
         case topRight
@@ -118,6 +105,11 @@ class TicTacToeUITests: XCTestCase {
         case bottomLeft
         case bottomRight
         case bottomCenter
+    }
+    
+    enum ButtonLabel: String {
+        case X
+        case O
     }
     
 }
