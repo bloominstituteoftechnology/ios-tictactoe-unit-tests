@@ -17,6 +17,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
+        //Need to change to reset in Game file
         board = GameBoard()
         gameState = .active(.x)
     }
@@ -63,7 +64,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
@@ -90,4 +91,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController.board = board
         }
     }
+    
+    
 }
