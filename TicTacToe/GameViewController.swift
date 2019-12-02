@@ -17,7 +17,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
+        game.restart()
         gameState = .active(.x)
     }
     
@@ -30,11 +30,18 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
+//            try board.place(mark: player, on: coordinate)
+            try game.makeMark(at: coordinate)
+//            if game(board: board, isWonBy: player) {
+//                gameState = .won(player)
+//            } else if board.isFull {
+//                gameState = .cat
+            if game.gameIsOver {
+                if let winningPlayer = game.winningPlayer {
+                    gameState = .won(winningPlayer)
+                } else {
+                    gameState = .cat
+                }
             } else {
                 let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
                 gameState = .active(newPlayer)
@@ -72,7 +79,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
@@ -85,9 +92,9 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
+    private var game = Game() {
         didSet {
-            boardViewController.board = board
+            boardViewController.board = game.board
         }
     }
 }
