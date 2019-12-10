@@ -10,11 +10,38 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    // MARK: - Properties
+    
+    private var boardViewController: BoardViewController! {
+        willSet {
+            boardViewController?.delegate = nil
+        }
+        didSet {
+            boardViewController?.board = board
+            boardViewController?.delegate = self
+        }
+    }
+    private var gameState = GameState.active(.x) {
+        didSet {
+            updateViews()
+        }
+    }
+    private var board = GameBoard() {
+        didSet {
+            boardViewController.board = board
+        }
+    }
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
+    
+    // MARK: - Actions
     
     @IBAction func restartGame(_ sender: Any) {
         board = GameBoard()
@@ -64,30 +91,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
-        }
-    }
-    
-    private var boardViewController: BoardViewController! {
-        willSet {
-            boardViewController?.delegate = nil
-        }
-        didSet {
-            boardViewController?.board = board
-            boardViewController?.delegate = self
-        }
-    }
-    
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
         }
     }
 }
