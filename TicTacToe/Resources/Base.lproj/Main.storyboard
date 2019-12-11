@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,11 +14,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="GameViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdp-7J-yOK">
-                                <rect key="frame" x="40" y="186" width="295" height="295"/>
+                                <rect key="frame" x="40" y="258.66666666666669" width="295" height="295.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Bdp-7J-yOK" secondAttribute="height" multiplier="1:1" id="td7-Mg-IAA"/>
                                 </constraints>
@@ -31,12 +27,12 @@
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
-                                <rect key="frame" x="20" y="35" width="335" height="30"/>
+                                <rect key="frame" x="20" y="59" width="335" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
                                         <rect key="frame" x="0.0" y="0.0" width="277" height="30"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
@@ -68,7 +64,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
+                        <outlet property="statusLabel" destination="e0R-RM-Whk" id="0VJ-Cf-mnI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -84,7 +80,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" tag="101" contentMode="scaleToFill" axis="vertical" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="YtZ-pk-cwJ">
-                                <rect key="frame" x="19.5" y="19.5" width="256" height="256"/>
+                                <rect key="frame" x="19.666666666666657" y="44" width="255.99999999999997" height="251"/>
                                 <subviews>
                                     <stackView opaque="NO" tag="102" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="kNo-MW-d3c">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="60"/>
@@ -181,10 +177,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" tag="104" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="0AP-m3-KFb">
-                                        <rect key="frame" x="0.0" y="196" width="256" height="60"/>
+                                        <rect key="frame" x="0.0" y="196" width="256" height="55"/>
                                         <subviews>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rO-xK-UIC">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="maj-GA-OuI"/>
                                                     <constraint firstAttribute="height" constant="60" id="zMM-JR-Vtg"/>
@@ -198,7 +194,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eh4-Eu-l1c">
-                                                <rect key="frame" x="98" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="98" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="FWx-ZI-hik"/>
                                                     <constraint firstAttribute="height" constant="60" id="USN-aC-4Mk"/>
@@ -212,7 +208,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyf-AT-eyq">
-                                                <rect key="frame" x="196" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="196" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="LGQ-ai-enD"/>
                                                     <constraint firstAttribute="height" constant="60" id="UQP-Gk-S7N"/>
@@ -239,6 +235,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="myq-W4-a4w"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
