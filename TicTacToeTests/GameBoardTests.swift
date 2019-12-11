@@ -57,5 +57,16 @@ class GameBoardTests: XCTestCase {
         try! board.place(mark: .x, on: (2, 2))
         XCTAssertTrue(board.isFull)
     }
+    
+    func testUndo() {
+        var board = GameBoard()
+        
+        try! board.place(mark: .x, on: (0, 0))
+        try! board.place(mark: .o, on: (0, 1))
+        try! board.place(mark: .x, on: (1, 0))
+        
+        board.undo(on: (1, 0))
+        XCTAssertNotEqual(board[(1, 0)], .x)
+    }
 
 }
