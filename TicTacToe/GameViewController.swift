@@ -16,29 +16,33 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case won(GameBoard.Mark) // Winning player
     }
     
+    private func checkGameState() {
+        if game.gameIsOver && game.winningPlayer != nil {
+            gameState = .won(game.winningPlayer!)
+        } else if game.board.isFull {
+            gameState = .cat
+        } else {
+            gameState = .active(game.activePlayer!)
+        }
+    }
+    
     @IBAction func restartGame(_ sender: Any) {
+        statusLabel.text = "Player X's turn"
         board = GameBoard()
         gameState = .active(.x)
     }
     
     // MARK: - BoardViewControllerDelegate
     
-    func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
+       func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
+        if game.gameIsOver {
             NSLog("Game is over")
             return
         }
         
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
+            self.checkGameState()
         } catch {
             NSLog("Illegal move")
         }
@@ -63,7 +67,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+            boardViewController = segue.destination as? BoardViewController
         }
     }
     
@@ -88,6 +92,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private var board = GameBoard() {
         didSet {
             boardViewController.board = board
+        }
+    }
+    var game = Game() {
+        didSet {
+            boardViewController.board = game.board
+            self.updateViews()
         }
     }
 }
