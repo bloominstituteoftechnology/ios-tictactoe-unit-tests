@@ -66,8 +66,7 @@ struct Game {
     }
     
     private mutating func updateGameState() {
-        guard case var State.active(player) = gameState else {
-            NSLog("Game is over")
+        guard case let State.active(player) = gameState else {
             return
         }
         
@@ -76,8 +75,7 @@ struct Game {
         } else if board.isFull {
             gameState = .cat
         } else {
-            player.toggle()
-            gameState = .active(player)
+            gameState = .active(player.other)
         }
     }
 }
