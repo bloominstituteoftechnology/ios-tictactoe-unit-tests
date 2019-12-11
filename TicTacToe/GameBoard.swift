@@ -30,6 +30,10 @@ struct GameBoard {
         var other: Mark {
             return self == .x ? .o : .x
         }
+        
+        mutating func toggle() {
+            self = self.other
+        }
     }
     
     private enum Square: Equatable {
