@@ -19,9 +19,33 @@ struct Game {
     
     // MARK: - Public Properties
     
-    internal var activePlayer: GameBoard.Mark?
-    internal var gameIsOver: Bool
-    internal var winningPlayer: GameBoard.Mark?
+    internal var activePlayer: GameBoard.Mark? {
+        switch gameState {
+        case .active(let activePlayer):
+            return activePlayer
+        default:
+            return nil
+        }
+    }
+    internal var gameIsOver: Bool {
+        switch gameState {
+        case .active(_):
+            return false
+        default:
+            return true
+        }
+    }
+    internal var winningPlayer: GameBoard.Mark? {
+        switch gameState {
+        case .won(let winner):
+            return winner
+        default:
+            return nil
+        }
+    }
+    
+    // MARK: - Private Properties
+    private var gameState = State.active(.x)
     
     // MARK: - Public Methods
     
