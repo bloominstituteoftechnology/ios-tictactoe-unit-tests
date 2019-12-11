@@ -11,77 +11,102 @@ import XCTest
 
 class GameAITests: XCTestCase {
     
-    func testWinCheckingVertical1() {
-        var board = GameBoard()
+    typealias MarkPlacement = (coord: Coordinate, mark: GameBoard.Mark)
+    
+    var board: GameBoard!
+    
+    override func setUp() {
+        board = GameBoard()
+    }
+    
+    func testWinCheckingVerticals() {
         /*
         x o -
         x o -
-        x - -
+        x - -   ...etc
         */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 2))
-        XCTAssertTrue(game(board: board, isWonBy: .x))
-        XCTAssertFalse(game(board: board, isWonBy: .o))
+        for x in 0..<3 {
+            func makePlacementsAndCheckWin(for player: GameBoard.Mark) {
+                let placements: [MarkPlacement] = [
+                    (mark: player, coord: (x, 0)),
+                    (mark: player.other, coord: ((x + 1) % 3, 0)),
+                    (mark: player, coord: (x, 1)),
+                    (mark: player.other, coord: ((x + 1) % 3, 1)),
+                    (mark: player, coord: (x, 2))
+                ]
+                placeMarks(placements)
+                
+                let failureMessage = "Failed for x = \(x), player = \(player.stringValue)"
+                XCTAssertTrue(game(board: board, isWonBy: player), failureMessage)
+                XCTAssertFalse(game(board: board, isWonBy: player.other), failureMessage)
+                
+                board = GameBoard()
+            }
+            makePlacementsAndCheckWin(for: .x)
+            makePlacementsAndCheckWin(for: .o)
+        }
     }
     
-    func testWinCheckingVertical2() {
-        var board = GameBoard()
-        /*
-         x o -
-         x o -
-         - o -
-         */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 2))
-        XCTAssertTrue(game(board: board, isWonBy: .o))
-        XCTAssertFalse(game(board: board, isWonBy: .x))
-    }
-    
-    func testWinCheckingHorizontal1() {
-        var board = GameBoard()
+    func testWinCheckingHorizontals() {
         /*
          - o -
          x x x
          o - -
          */
+        for y in 0..<3 {
+            func makePlacementsAndCheckWin(for player: GameBoard.Mark) {
+                let placements: [MarkPlacement] = [
+                    (mark: player, coord: (0, y)),
+                    (mark: player.other, coord: (0, (y + 1) % 3)),
+                    (mark: player, coord: (1, y)),
+                    (mark: player.other, coord: (1, (y + 1) % 3)),
+                    (mark: player, coord: (2, y))
+                ]
+                placeMarks(placements)
+                
+                let failureMessage = "Failed for y = \(y), player = \(player.stringValue)"
+                XCTAssertTrue(game(board: board, isWonBy: player), failureMessage)
+                XCTAssertFalse(game(board: board, isWonBy: player.other), failureMessage)
+                
+                board = GameBoard()
+            }
+            makePlacementsAndCheckWin(for: .x)
+            makePlacementsAndCheckWin(for: .o)
+        }
     }
     
-    func testWinCheckingHorizontal2() {
-        var board = GameBoard()
-        /*
-         x - -
-         - x -
-         o o o
-         */
-    }
-    
-    func testWinCheckingDiagonal1() {
-        var board = GameBoard()
-        /*
-         x - -
-         - x -
-         o o x
-         */
-    }
-    
-    func testWinCheckingDiagonal2() {
-        var board = GameBoard()
-        /*
-         x - o
-         - o -
-         o x -
-         */
+    func testWinCheckingDiagonals() {
+        func makePlacementsAndCheckWin(for player: GameBoard.Mark, ltr: Bool) {
+            let placements: [MarkPlacement] = [
+                (mark: player, coord: ltr ? (0,0) : (2,0)),
+                (mark: player, coord: (1,1)),
+                (mark: player, coord: ltr ? (2,2) : (0,2)),
+                (mark: player.other, coord: (1,0)),
+                (mark: player.other, coord: (1,2))
+            ]
+            placeMarks(placements)
+            
+            let failureMessage = "Failed for \(ltr ? "ltr" : "rtl"), player = \(player.stringValue)"
+            XCTAssertTrue(game(board: board, isWonBy: player), failureMessage)
+            XCTAssertFalse(game(board: board, isWonBy: player.other), failureMessage)
+            
+            board = GameBoard()
+        }
+        makePlacementsAndCheckWin(for: .x, ltr: true)
+        makePlacementsAndCheckWin(for: .x, ltr: false)
+        makePlacementsAndCheckWin(for: .o, ltr: true)
+        makePlacementsAndCheckWin(for: .o, ltr: false)
     }
     
     func testIncompleteGame() {
     }
 
     func testCatsGame() {
+    }
+    
+    func placeMarks(_ placements: [MarkPlacement]) {
+        for placement in placements {
+            try! board.place(mark: placement.mark, on: placement.coord)
+        }
     }
 }
