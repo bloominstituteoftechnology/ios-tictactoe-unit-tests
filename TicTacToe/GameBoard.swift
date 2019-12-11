@@ -26,6 +26,10 @@ struct GameBoard {
             case .o: return "O"
             }
         }
+        
+        var other: Mark {
+            return self == .x ? .o : .x
+        }
     }
     
     private enum Square: Equatable {
