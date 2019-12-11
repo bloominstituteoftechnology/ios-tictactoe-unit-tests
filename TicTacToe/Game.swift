@@ -59,9 +59,10 @@ struct Game {
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         guard let mark = activePlayer else {
-            throw GameBoardError.noActivePlayer
+            throw GameBoardError.gameIsOver
         }
         try board.place(mark: mark, on: coordinate)
+        updateGameState()
     }
     
     private mutating func updateGameState() {
