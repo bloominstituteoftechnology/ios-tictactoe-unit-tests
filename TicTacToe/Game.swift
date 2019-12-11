@@ -58,6 +58,25 @@ struct Game {
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
+        guard let mark = activePlayer else {
+            throw GameBoardError.noActivePlayer
+        }
+        try board.place(mark: mark, on: coordinate)
+    }
+    
+    private mutating func updateGameState() {
+        guard case var State.active(player) = gameState else {
+            NSLog("Game is over")
+            return
+        }
         
+        if game(board: board, isWonBy: player) {
+            gameState = .won(player)
+        } else if board.isFull {
+            gameState = .cat
+        } else {
+            player.toggle()
+            gameState = .active(player)
+        }
     }
 }
