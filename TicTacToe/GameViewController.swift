@@ -26,7 +26,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBAction func undoMark(_ sender: Any) {
-        
+        game.undoMark()
     }
     
     // MARK: - BoardViewControllerDelegate

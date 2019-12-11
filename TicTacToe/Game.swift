@@ -15,6 +15,7 @@ struct Game {
         activePlayer = .x
         winningPlayer = nil
         gameIsOver = false
+        moves.removeAll()
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
@@ -22,7 +23,7 @@ struct Game {
             winningPlayer == nil else { throw GameBoardError.invalidSquare }
         
         try board.place(mark: activePlayer, on: coordinate)
-        
+        moves.append(coordinate)
         if game(board: board, isWonBy: activePlayer) {
             winningPlayer = activePlayer
             gameIsOver = true
@@ -32,11 +33,19 @@ struct Game {
             self.activePlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
         }
     }
+    
+    mutating internal func undoMark() {
+        if !moves.isEmpty && !gameIsOver {
+            board.undo(on: moves.popLast()!)
+            self.activePlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+        }
+    }
 
     private(set) var board: GameBoard
 
     internal var activePlayer: GameBoard.Mark?
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
+    internal var moves = [Coordinate]()
     
 }
