@@ -38,6 +38,9 @@ class GameAITests: XCTestCase {
                     (mark: player.other, coord: ((x + 1) % 3, 1)),
                     (mark: player, coord: (x, 2))
                 ]
+                XCTAssertFalse(game(board: board, isWonBy: .x))
+                XCTAssertFalse(game(board: board, isWonBy: .o))
+                XCTAssertFalse(board.isFull)
                 placeMarks(placements)
                 
                 let failureMessage = "Failed for x = \(x), player = \(player.stringValue)"
@@ -66,6 +69,9 @@ class GameAITests: XCTestCase {
                     (mark: player.other, coord: (1, (y + 1) % 3)),
                     (mark: player, coord: (2, y))
                 ]
+                XCTAssertFalse(game(board: board, isWonBy: .x))
+                XCTAssertFalse(game(board: board, isWonBy: .o))
+                XCTAssertFalse(board.isFull)
                 placeMarks(placements)
                 
                 let failureMessage = "Failed for y = \(y), player = \(player.stringValue)"
@@ -88,6 +94,9 @@ class GameAITests: XCTestCase {
                 (mark: player.other, coord: (1,0)),
                 (mark: player.other, coord: (1,2))
             ]
+            XCTAssertFalse(game(board: board, isWonBy: .x))
+            XCTAssertFalse(game(board: board, isWonBy: .o))
+            XCTAssertFalse(board.isFull)
             placeMarks(placements)
             
             let failureMessage = "Failed for \(ltr ? "ltr" : "rtl"), player = \(player.stringValue)"
