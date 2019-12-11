@@ -135,6 +135,28 @@ class GameAITests: XCTestCase {
     }
 
     func testCatsGame() {
+        /*
+         x o x
+         x o x
+         o x o
+         */
+        func checkCatsGame(for startingMark: GameBoard.Mark) {
+            var currentMark = startingMark
+            loopThroughBoard { (x, y) in
+                XCTAssertFalse(game(board: board, isWonBy: .x))
+                XCTAssertFalse(game(board: board, isWonBy: .o))
+                XCTAssertFalse(board.isFull)
+                try! board.place(mark: currentMark, on: (x, y))
+                if (x,y) != (0, 2) { currentMark.toggle() }
+            }
+            XCTAssertFalse(game(board: board, isWonBy: .x))
+            XCTAssertFalse(game(board: board, isWonBy: .o))
+            XCTAssertTrue(board.isFull)
+            board = GameBoard()
+        }
+        
+        checkCatsGame(for: .o)
+        checkCatsGame(for: .x)
     }
     
     // MARK: - Helper Methods
