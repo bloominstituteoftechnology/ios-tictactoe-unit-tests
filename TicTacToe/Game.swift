@@ -45,12 +45,16 @@ struct Game {
     }
     
     // MARK: - Private Properties
+    
+    private(set) var board: GameBoard = GameBoard()
+    
     private var gameState = State.active(.x)
     
     // MARK: - Public Methods
     
     mutating internal func restart() {
-        
+        board = GameBoard()
+        gameState = .active(.x)
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
