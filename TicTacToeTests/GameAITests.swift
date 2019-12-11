@@ -11,6 +11,8 @@ import XCTest
 
 class GameAITests: XCTestCase {
     
+    // MARK: - Setup
+    
     typealias MarkPlacement = (coord: Coordinate, mark: GameBoard.Mark)
     
     var board: GameBoard!
@@ -18,6 +20,8 @@ class GameAITests: XCTestCase {
     override func setUp() {
         board = GameBoard()
     }
+    
+    // MARK: - Tests
     
     func testWinCheckingVerticals() {
         /*
@@ -104,9 +108,19 @@ class GameAITests: XCTestCase {
     func testCatsGame() {
     }
     
+    // MARK: - Helper Methods
+    
     func placeMarks(_ placements: [MarkPlacement]) {
         for placement in placements {
             try! board.place(mark: placement.mark, on: placement.coord)
+        }
+    }
+    
+    func loopThroughBoard(completion: (Coordinate) -> Void) {
+        for x in 0..<3 {
+            for y in 0..<3 {
+                completion((x,y))
+            }
         }
     }
 }
