@@ -13,8 +13,6 @@ class GameAITests: XCTestCase {
     
     // MARK: - Setup
     
-    typealias MarkPlacement = (coord: Coordinate, mark: GameBoard.Mark)
-    
     var board: GameBoard!
     
     override func setUp() {
@@ -164,14 +162,6 @@ class GameAITests: XCTestCase {
     func placeMarks(_ placements: [MarkPlacement]) {
         for placement in placements {
             try! board.place(mark: placement.mark, on: placement.coord)
-        }
-    }
-    
-    func loopThroughBoard(completion: (Coordinate) -> Void) {
-        for x in 0..<3 {
-            for y in 0..<3 {
-                completion((x,y))
-            }
         }
     }
 }
