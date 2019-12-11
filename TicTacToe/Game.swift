@@ -13,10 +13,13 @@ struct Game {
     mutating internal func restart() {
         board = GameBoard()
         activePlayer = .x
+        winningPlayer = nil
+        gameIsOver = false
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
-        guard let activePlayer = activePlayer else { return }
+        guard let activePlayer = activePlayer,
+            winningPlayer == nil else { throw GameBoardError.invalidSquare }
         
         try board.place(mark: activePlayer, on: coordinate)
         

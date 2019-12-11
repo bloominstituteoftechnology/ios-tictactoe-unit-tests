@@ -113,4 +113,24 @@ class GameTests: XCTestCase {
         
         testGameRestart()
     }
+    
+    func testPuttingMarksAfterWinning() {
+        let board = GameBoard()
+        var game = Game(board: board, activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        
+        /*
+         x - -
+         o x -
+         - o x
+         */
+        
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (1, 2))
+        try! game.makeMark(at: (2, 2))
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertTrue(game.winningPlayer == GameBoard.Mark.x)
+        XCTAssertThrowsError(try game.makeMark(at: (2, 0)))
+    }
 }
