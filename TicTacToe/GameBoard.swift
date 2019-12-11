@@ -10,6 +10,7 @@ import Foundation
 
 enum GameBoardError: Error, Equatable {
     case invalidSquare
+    case noActivePlayer
 }
 
 typealias Coordinate = (x: Int, y: Int)
