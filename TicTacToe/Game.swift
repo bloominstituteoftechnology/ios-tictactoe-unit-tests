@@ -9,9 +9,15 @@
 import Foundation
 
 struct Game {
+    // MARK: - Game.State
     
-    // MARK: - Properties
-    private(set) var board: GameBoard
+    private enum State {
+        case active(GameBoard.Mark) // Active player
+        case cat
+        case won(GameBoard.Mark) // Winning player
+    }
+    
+    // MARK: - Public Properties
     
     internal var activePlayer: GameBoard.Mark?
     internal var gameIsOver: Bool
