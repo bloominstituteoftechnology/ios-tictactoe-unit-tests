@@ -41,6 +41,15 @@ class GameTests: XCTestCase {
         }
     }
     
+    func testSingleInvalidMark() {
+        let coord = (0, 0)
+        try! game.makeMark(at: coord)
+        
+        XCTAssertThrowsError(try game.makeMark(at: coord)) {
+            XCTAssertEqual($0 as! GameBoardError, .invalidSquare)
+        }
+    }
+    
     func testXWins1() {
         /*
          x o x
