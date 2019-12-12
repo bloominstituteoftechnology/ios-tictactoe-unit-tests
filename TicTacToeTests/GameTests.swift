@@ -33,7 +33,14 @@ class GameTests: XCTestCase {
     }
     
     func testOWins() {
-        
+        /*
+         o x -
+         o - x
+         o - x
+         */
+        makeMarks([(1,0), (0,0), (2,1), (0,1), (2,2), (0,2)])
+        XCTAssertEqual(game.winningPlayer!, .o)
+        XCTAssertTrue(game.gameIsOver)
     }
 
     func testSwitchingPlayers() {
