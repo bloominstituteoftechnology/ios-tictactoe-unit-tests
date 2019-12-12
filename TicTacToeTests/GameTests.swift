@@ -37,14 +37,21 @@ class GameTests: XCTestCase {
     }
 
     func testSwitchingPlayers() {
+        /*
+         x o x
+         o x -
+         x o -
+         */
         var currentPlayer = GameBoard.Mark.x
         loopThroughBoard { (x, y) in
             if x == 2 && y > 0 { return }
             
             XCTAssertEqual(currentPlayer, game.activePlayer)
             try! game.makeMark(at: (x, y))
-            currentPlayer.toggle()
+            currentPlayer.toggle() // toggles to other player after win
         }
+        XCTAssertNotEqual(game.winningPlayer!, currentPlayer)
+        XCTAssertTrue(game.gameIsOver)
     }
     
     func testCatsGame() {
