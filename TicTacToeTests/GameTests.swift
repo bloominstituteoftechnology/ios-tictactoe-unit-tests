@@ -178,6 +178,45 @@ class GameTests: XCTestCase {
         XCTAssertNil(game.winningPlayer)
     }
     
+    func testRestart1() {
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        XCTAssertEqual(game.activePlayer!, .x)
+        
+        loopThroughBoard { (x, y) in
+            if x == 2 && y > 0 { return }
+            try! game.makeMark(at: (x, y))
+        }
+        XCTAssertEqual(game.winningPlayer!, .x)
+        XCTAssertTrue(game.gameIsOver)
+        
+        game.restart()
+        
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        XCTAssertEqual(game.activePlayer!, .x)
+    }
+    
+    func testRestart2() {
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        XCTAssertEqual(game.activePlayer!, .x)
+        
+        game.restart()
+        
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        XCTAssertEqual(game.activePlayer!, .x)
+        
+        game.restart()
+        
+        XCTAssertFalse(game.gameIsOver)
+        XCTAssertNil(game.winningPlayer)
+        XCTAssertEqual(game.activePlayer!, .x)
+    }
+    
+    // MARK: - Helper Methods
+    
     func makeMarks(_ coords: [Coordinate]) {
         for coord in coords {
             try! game.makeMark(at: coord)
