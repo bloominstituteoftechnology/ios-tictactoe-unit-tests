@@ -10,25 +10,33 @@ import XCTest
 @testable import TicTacToe
 
 class GameTests: XCTestCase {
+    // MARK: - Setup
+    
     var game: Game!
 
     override func setUp() {
         game = Game()
     }
     
+    // MARK: - Tests
+    
     func testInvalidMarks() {
         loopThroughBoard { (x, y) in
             if x == 2 && y > 0 {
-                print("no play at (\(x), \(y))")
-                XCTAssertThrowsError(try? game.makeMark(at: (x, y))) {
+                XCTAssertThrowsError(try game.makeMark(at: (x, y))) {
                     XCTAssertEqual($0 as! GameBoardError, .gameIsOver)
                 }
                 return
             }
-            print("mark at (\(x), \(y)) by \(game.activePlayer!.stringValue)")
+            
             try! game.makeMark(at: (x, y))
-            XCTAssertThrowsError(try? game.makeMark(at: (x, y))) {
-                XCTAssertEqual($0 as! GameBoardError, .invalidSquare)
+            
+            XCTAssertThrowsError(try game.makeMark(at: (x, y))) {
+                if x != 2 {
+                    XCTAssertEqual($0 as! GameBoardError, .invalidSquare)
+                } else {
+                    XCTAssertEqual($0 as! GameBoardError, .gameIsOver)
+                }
             }
         }
     }
@@ -65,6 +73,7 @@ class GameTests: XCTestCase {
          x o -
          */
         var currentPlayer = GameBoard.Mark.x
+        
         loopThroughBoard { (x, y) in
             if x == 2 && y > 0 { return }
             
@@ -84,12 +93,11 @@ class GameTests: XCTestCase {
          */
         loopThroughBoard { (x, y) in
             XCTAssertFalse(game.gameIsOver)
-            let newX: Int
-            switch x {
-            case 0: newX = 1
-            case 1: newX = 0
-            default: newX = x
-            }
+            
+            var newX: Int = x
+            if x == 0 { newX = 1 }
+            else if x == 1 { newX = 0 }
+            
             try! game.makeMark(at: (newX, y))
         }
         XCTAssertTrue(game.gameIsOver)
