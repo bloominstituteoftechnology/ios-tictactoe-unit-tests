@@ -28,8 +28,18 @@ class GameTests: XCTestCase {
         
     }
     
-    func testXWins() {
-        
+    func testXWins1() {
+        /*
+         x o x
+         o x -
+         x o -
+         */
+        loopThroughBoard { (x, y) in
+            if x == 2 && y > 0 { return }
+            try! game.makeMark(at: (x, y))
+        }
+        XCTAssertEqual(game.winningPlayer!, .x)
+        XCTAssertTrue(game.gameIsOver)
     }
     
     func testOWins() {
