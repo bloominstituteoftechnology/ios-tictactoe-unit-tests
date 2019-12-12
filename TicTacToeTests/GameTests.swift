@@ -55,8 +55,13 @@ class GameTests: XCTestCase {
          */
         loopThroughBoard { (x, y) in
             XCTAssertFalse(game.gameIsOver)
-            let newX = (x == 0) ? 1 : 0
-            try! game.makeMark(at: ((x == 2 ? x : newX), y))
+            let newX: Int
+            switch x {
+            case 0: newX = 1
+            case 1: newX = 0
+            default: newX = x
+            }
+            try! game.makeMark(at: (newX, y))
         }
         XCTAssertTrue(game.gameIsOver)
         XCTAssertNil(game.winningPlayer)
