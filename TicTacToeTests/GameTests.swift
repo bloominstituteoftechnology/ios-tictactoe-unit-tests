@@ -64,7 +64,47 @@ class GameTests: XCTestCase {
         XCTAssertTrue(game.gameIsOver)
     }
     
-    func testOWins() {
+    func testXWins2() {
+        /*
+         x o -
+         x o -
+         x - -
+         */
+        for y in 0...2 {
+            for x in 0...1 {
+                if (x, y) == (1, 2) {
+                    continue
+                } else {
+                    XCTAssertFalse(game.gameIsOver)
+                    try! game.makeMark(at: (x, y))
+                }
+            }
+        }
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertEqual(game.winningPlayer!, .x)
+    }
+    
+    func testXWins3() {
+        /*
+         x x x
+         o o -
+         - - -
+         */
+        for x in 0...2 {
+            for y in 0...1 {
+                if (x, y) == (2, 1) {
+                    continue
+                } else {
+                    XCTAssertFalse(game.gameIsOver)
+                    try! game.makeMark(at: (x, y))
+                }
+            }
+        }
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertEqual(game.winningPlayer!, .x)
+    }
+    
+    func testOWins1() {
         /*
          o x -
          o - x
@@ -73,6 +113,31 @@ class GameTests: XCTestCase {
         makeMarks([(1,0), (0,0), (2,1), (0,1), (2,2), (0,2)])
         XCTAssertEqual(game.winningPlayer!, .o)
         XCTAssertTrue(game.gameIsOver)
+    }
+    
+    func testOWins2() {
+        /*
+         o x o
+         x o x
+         o x -
+         */
+        loopThroughBoard { (x, y) in
+            if (x, y) == (2, 2) {
+                XCTAssertTrue(game.gameIsOver)
+                return
+            }
+            
+            XCTAssertFalse(game.gameIsOver)
+            
+            var newX = x
+            if x == 0 { newX = 1}
+            else if x == 1 { newX = 0 }
+            
+            let newY = (x == 2) ? (y + 2) % 3 : y
+            
+            try! game.makeMark(at: (newX, newY))
+        }
+        XCTAssertEqual(game.winningPlayer!, .o)
     }
 
     func testSwitchingPlayers() {
