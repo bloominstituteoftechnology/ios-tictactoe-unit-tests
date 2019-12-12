@@ -11,10 +11,10 @@ import Foundation
 
 typealias MarkPlacement = (coord: Coordinate, mark: GameBoard.Mark)
 
-func loopThroughBoard(completion: (Coordinate) -> Void) {
+func loopThroughBoard(completion: (Coordinate) throws -> Void) {
     for x in 0..<3 {
         for y in 0..<3 {
-            completion((x,y))
+            try! completion((x,y))
         }
     }
 }
