@@ -15,17 +15,22 @@ class GameTests: XCTestCase {
     override func setUp() {
         game = Game()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
     
-    func testInvalidMark() {
-        
-    }
-    
-    func testGameOver() {
-        
+    func testInvalidMarks() {
+        loopThroughBoard { (x, y) in
+            if x == 2 && y > 0 {
+                print("no play at (\(x), \(y))")
+                XCTAssertThrowsError(try? game.makeMark(at: (x, y))) {
+                    XCTAssertEqual($0 as! GameBoardError, .gameIsOver)
+                }
+                return
+            }
+            print("mark at (\(x), \(y)) by \(game.activePlayer!.stringValue)")
+            try! game.makeMark(at: (x, y))
+            XCTAssertThrowsError(try? game.makeMark(at: (x, y))) {
+                XCTAssertEqual($0 as! GameBoardError, .invalidSquare)
+            }
+        }
     }
     
     func testXWins1() {
