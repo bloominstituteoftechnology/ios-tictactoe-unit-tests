@@ -33,6 +33,8 @@ struct GameBoard {
         case empty
     }
     
+    private var squares = Array(repeating: Square.empty, count: 9)
+    
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
@@ -62,5 +64,5 @@ struct GameBoard {
         return square.y * 3 + square.x
     }
     
-    private var squares = Array(repeating: Square.empty, count: 9)
+    
 }
