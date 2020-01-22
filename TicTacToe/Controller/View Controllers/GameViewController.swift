@@ -16,15 +16,10 @@ class GameViewController: UIViewController {
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Properties
-    private var gameState = GameState.active(.x) {
+    var game = Game() {
         didSet {
             updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
+            boardViewController.game = game
         }
     }
     
@@ -33,29 +28,27 @@ class GameViewController: UIViewController {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.game = game
             boardViewController?.delegate = self
         }
     }
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat // tie game
-        case won(GameBoard.Mark) // Winning player
+    override func viewDidLoad() {
+        statusLabel.text = "Start"
     }
     
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Actions
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+        game.restart()
     }
+    
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - Private
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
+        switch game.gameState {
             case let .active(player):
                 statusLabel.text = "Player \(player.stringValue)'s turn"
             case .cat:
@@ -78,23 +71,11 @@ extension GameViewController: BoardViewControllerDelegate {
     // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     // MARK: - BoardViewControllerDelegate
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try game.makeMark(at: coordinate)
+            updateViews()
         } catch {
-            NSLog("Illegal move")
+            NSLog("Error adding mark to the board: \(error.localizedDescription)")
         }
     }
 }
