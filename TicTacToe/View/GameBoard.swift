@@ -8,13 +8,28 @@
 
 import Foundation
 
+// MARK: - GameBoard Error Enum
 enum GameBoardError: Error, Equatable {
     case invalidSquare
 }
 
+// MARK: - Typealias for Coordinates
 typealias Coordinate = (x: Int, y: Int)
 
 struct GameBoard {
+    
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Properties
+    var isFull: Bool {
+        for square in squares {
+            if square == .empty {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private var squares = Array(repeating: Square.empty, count: 9)
     
     enum Mark: Equatable {
         case x
@@ -33,6 +48,8 @@ struct GameBoard {
         case empty
     }
     
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Subscript function
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
@@ -42,6 +59,8 @@ struct GameBoard {
         }
     }
     
+    // --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    // MARK: - Helper Methods
     mutating func place(mark: Mark, on square: Coordinate) throws {
         if self[square] != nil {
             throw GameBoardError.invalidSquare
@@ -49,18 +68,9 @@ struct GameBoard {
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
-    var isFull: Bool {
-        for square in squares {
-            if square == .empty {
-                return false
-            }
-        }
-        return true
-    }
+    
     
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
-    
-    private var squares = Array(repeating: Square.empty, count: 9)
 }
