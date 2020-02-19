@@ -20,7 +20,7 @@ If everything worked, you'll see the tests we wrote in `GameBoardTests.swift` an
 
 ## Part 1 - Finish AI Tests
 
-The project includes the two game AI tests we wrote during the guided project, along with empty stubs for additional test methods. Fill out each of the additional test methods. Some of these methods have small board diagrams in comments. These are only suggests for board layouts to test. Feel free to use your own, or add additional layouts to your tests.
+The project includes the two game AI tests we wrote during the guided project, along with empty stubs for additional test methods. Fill out each of the additional test methods. Some of these methods have small board diagrams in comments. These are only suggestions for board layouts to test. Feel free to use your own, or add additional layouts to your tests.
 
 You are also welcome to add additional tests that you feel would better cover possible scenarios that should be tested.
 
