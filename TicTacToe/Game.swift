@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum GameState {
+    case active(GameBoard.Mark) // Active player
+    case cat
+    case won(GameBoard.Mark) // Winning player
+}
+
+
 /// This struct should handle most of the game logic (logic currently in GameViewController)
 struct Game {
     
@@ -25,7 +32,7 @@ struct Game {
     
     /// Restarts the game to a fresh state with an empty board, and player X starting first
     mutating internal func restart() {
-        
+        let test = GameState.won
     }
     
     /// Adds a mark for the currently active player at the given coordinate. Updates game state
