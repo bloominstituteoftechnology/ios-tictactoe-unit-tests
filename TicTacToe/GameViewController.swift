@@ -10,6 +10,13 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // Add more later
+    var gameProp: Game? {
+        didSet {
+            print("game did set")
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
