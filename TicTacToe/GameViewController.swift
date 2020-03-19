@@ -44,19 +44,23 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
+   override func viewDidLoad() {
+        super.viewDidLoad()
+        updateViews()
+    }
+
     // MARK: - Private
     
     private func updateViews() {
         guard isViewLoaded else { return }
-        
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
-        }
+
+           if let winner = game.winningPlayer?.stringValue {
+               statusLabel.text = "Player \(winner) won!"
+           } else if let player = game.activePlayer?.stringValue {
+               statusLabel.text = "Player \(player)'s turn"
+           } else if game.gameIsOver {
+               statusLabel.text = "Cat's game!"
+           }
     }
     
     // MARK: - Navigation
