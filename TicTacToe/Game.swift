@@ -21,7 +21,10 @@ struct Game {
     mutating func restart() {
         
     }
+    
     mutating func makeMark(at coordinate: Coordinate) throws {
-        
+        guard let activePlayer = activePlayer else { return }
+        try board.place(mark: activePlayer, on: coordinate)
+        self.activePlayer = activePlayer == .x ? .o : .x
     }
 }
