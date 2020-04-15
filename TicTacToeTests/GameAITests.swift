@@ -120,6 +120,30 @@ class GameAITests: XCTestCase {
          - x -
          o o x
          */
+        try! board.place(mark: .x, on: (1, 1))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (1, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (0, 0))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (0, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (2, 2))
+        XCTAssertTrue(game(board: board, isWonBy: .x))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(board.isFull)
     }
     
     func testWinCheckingDiagonal2() {
