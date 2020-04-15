@@ -64,3 +64,4 @@ struct GameBoard {
     
     private var squares = Array(repeating: Square.empty, count: 9)
 }
+
