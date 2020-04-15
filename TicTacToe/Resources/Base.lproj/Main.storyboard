@@ -21,19 +21,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
-                                <rect key="frame" x="20" y="59" width="335" height="28"/>
+                                <rect key="frame" x="20" y="59" width="335" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
-                                        <rect key="frame" x="0.0" y="0.0" width="248" height="28"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
                                         <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
-                                        <rect key="frame" x="256" y="0.0" width="79" height="28"/>
+                                        <rect key="frame" x="230" y="0.0" width="105" height="30"/>
                                         <color key="backgroundColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="23"/>
-                                        <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="25"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="Restart">
                                             <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </state>
@@ -76,6 +76,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="restartButton" destination="g3q-lj-0mf" id="lL5-lQ-j1x"/>
                         <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
                     </connections>
                 </viewController>

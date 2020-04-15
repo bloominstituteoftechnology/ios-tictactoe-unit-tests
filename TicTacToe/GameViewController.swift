@@ -28,13 +28,16 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
+    @IBOutlet weak var restartButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        statusLabel.textColor = .black
+        
+        setupViews()
         updateViews()
     }
     
-    @IBAction func restartGame(_ sender: Any) {
+    @IBAction func restartGame(_ sender: UIButton) {
         game.restart()
     }
     
@@ -56,6 +59,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         boardViewController.board = game.board
         
         if game.gameIsOver {
+            //restartButton.pulsate()
+            pulsateButton()
             if let player = game.winningPlayer {
                 statusLabel.text = "Player \(player.stringValue) won!"
             } else {
@@ -64,6 +69,15 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         } else if let player = game.activePlayer {
             statusLabel.text = "Player \(player.stringValue)'s turn"
         }
+    }
+    
+    private func setupViews() {
+        statusLabel.textColor = .black
+        
+        let buttonHeight = restartButton.bounds.size.height
+        restartButton.layer.cornerRadius = buttonHeight / 2
+        restartButton.layer.shadowOffset = CGSize(width: 2,height: 4)
+        restartButton.layer.shadowOpacity = 0.9
     }
     
     // MARK: - Navigation
@@ -75,3 +89,44 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
 }
 
+extension UIButton {
+    func pulsate() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        
+        pulse.duration = 1.2
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 2
+        pulse.initialVelocity = 0.25
+        pulse.damping = 1.0
+        
+        layer.add(pulse, forKey: nil)
+    }
+}
+
+extension GameViewController {
+    func pulsateButton() {
+        UIView.animate(withDuration: 0.45,
+                       delay: 0,
+                       options: [.curveEaseOut, .allowUserInteraction],
+                       animations: {
+                        
+                        self.restartButton.transform = CGAffineTransform(scaleX: 1.07, y: 1.07)
+                        
+        }) { _ in
+            UIView.animate(withDuration: 0.45,
+                           delay: 0,
+                           options: [.curveEaseIn, .allowUserInteraction],
+                           animations: {
+                            
+                            self.restartButton.transform = .identity
+                            
+            }) { _ in
+                if self.game.gameIsOver {
+                self.pulsateButton()
+                }
+            }
+        }
+    }
+}
