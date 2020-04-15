@@ -202,7 +202,10 @@ class GameAITests: XCTestCase {
         // Did o not win?
         XCTAssertFalse(game(board: board, isWonBy: .o))
         // Is it not a cat game?
-        
+        /*
+         My logic is as follows:
+            If after filling all but one of the boxes game still doesn't consider any player to have won, and the board is also not considered full, then it's safe to say we can tell that the game isn't finished yet.
+         */
     }
 
     func testCatsGame() {
