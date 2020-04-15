@@ -7,14 +7,18 @@
 //
 
 import XCTest
+@testable import TicTacToe
 
 class GameTests: XCTestCase {
 
     func testRestart() {
         
     }
-
+    
     func testMakeMark() {
+        var game = Game()
+        let coordinate = (0,0)
         
+        XCTAssertNoThrow(try game.makeMark(at: coordinate))
     }
 }

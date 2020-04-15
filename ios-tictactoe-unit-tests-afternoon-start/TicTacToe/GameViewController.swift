@@ -9,11 +9,22 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
-//    var game = Game(board: board, gameState: gameState, gameIsOver: false) {
-//        didSet {
-//            updateViews()
-//        }
-//    }
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    private var gameState = GameState.active(.x) {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    private var board = GameBoard() {
+        didSet {
+            boardViewController.board = board
+        }
+    }
+    
+    var game = Game()
     
     @IBAction func restartGame(_ sender: Any) {
         
@@ -51,7 +62,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch game.GameState {
+        switch gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
@@ -76,20 +87,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         didSet {
             boardViewController?.board = board
             boardViewController?.delegate = self
-        }
-    }
-    
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
         }
     }
 }
