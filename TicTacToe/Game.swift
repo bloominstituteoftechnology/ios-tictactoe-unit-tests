@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum GameError: Error, Equatable {
+    case gameAlreadyOver
+}
+
 struct Game {
     // MARK: - Public Properties
     
@@ -26,7 +30,11 @@ struct Game {
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
-        guard let activePlayer = activePlayer else { return }
+        guard let activePlayer = activePlayer,
+        gameIsOver == false else {
+            throw GameError.gameAlreadyOver
+        }
+        
         try board.place(mark: activePlayer, on: coordinate)
         
         if game(board: board, isWonBy: activePlayer) {
