@@ -52,15 +52,37 @@ class GameTests: XCTestCase {
         }
     }
     
-    func testWinningPlayerX() {
-        
-    }
-    
-    func testWinningPlayerO() {
-        
-    }
-
     func testActivePlayer() {
+        var game = Game()
+
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        try! game.makeMark(at: (0, 0))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        try! game.makeMark(at: (0, 1))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        try! game.makeMark(at: (1,1))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        try! game.makeMark(at: (0,2))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        try! game.makeMark(at: (1,2))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        try! game.makeMark(at: (1,0))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        try! game.makeMark(at: (2,0))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.o)
+        try! game.makeMark(at: (2,2))
+        
+        XCTAssertEqual(game.activePlayer, GameBoard.Mark.x)
+        try! game.makeMark(at: (2,1))
+        
+        XCTAssertEqual(game.activePlayer, nil)
         
     }
     
@@ -68,5 +90,11 @@ class GameTests: XCTestCase {
         
     }
     
-
+    func testWinningPlayerX() {
+        
+    }
+    
+    func testWinningPlayerO() {
+        
+    }
 }

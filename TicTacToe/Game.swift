@@ -35,6 +35,10 @@ struct Game {
             
             if gameIsOver {
                 activePlayer = nil
+                winningPlayer = .x
+            } else if gameIsOver == false && board.isFull{
+                activePlayer = nil
+                winningPlayer = nil
             } else {
                 activePlayer = GameBoard.Mark.o
             }
@@ -43,8 +47,12 @@ struct Game {
             try! board.place(mark: .o, on: coordinate)
             gameIsOver = game(board: board, isWonBy: .x)
             
-            if gameIsOver {
+            if gameIsOver && board.isFull {
                 activePlayer = nil
+                winningPlayer = .o
+            } else if gameIsOver == false && board.isFull {
+                activePlayer = nil
+                winningPlayer = nil
             } else {
                 activePlayer = GameBoard.Mark.x
             }
