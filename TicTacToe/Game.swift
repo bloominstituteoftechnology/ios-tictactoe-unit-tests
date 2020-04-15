@@ -30,7 +30,11 @@ struct Game {
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         if activePlayer == GameBoard.Mark.x {
-            try! board.place(mark: .x, on: coordinate)
+            do {
+                try board.place(mark: .x, on: coordinate)
+            } catch {
+                throw GameBoardError.invalidSquare
+            }
             gameIsOver = game(board: board, isWonBy: .x)
             
             if gameIsOver {
@@ -44,7 +48,11 @@ struct Game {
             }
             
         } else if activePlayer == GameBoard.Mark.o {
-            try! board.place(mark: .o, on: coordinate)
+            do {
+                try board.place(mark: .o, on: coordinate)
+            } catch {
+                throw GameBoardError.invalidSquare
+            }
             gameIsOver = game(board: board, isWonBy: .x)
             
             if gameIsOver && board.isFull {

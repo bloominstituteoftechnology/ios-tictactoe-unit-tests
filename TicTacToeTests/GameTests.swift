@@ -97,4 +97,8 @@ class GameTests: XCTestCase {
     func testWinningPlayerO() {
         
     }
+    
+    func testInvalidMove() {
+        
+    }
 }
