@@ -46,6 +46,8 @@ struct GameBoard {
         if self[square] != nil {
             throw GameBoardError.invalidSquare
         }
+        
+        
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
