@@ -127,6 +127,7 @@ class GameAITests: XCTestCase {
         try! board.place(mark: .x, on: (1, 2))
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
     }
 
     func testCatsGame() {
@@ -145,6 +146,7 @@ class GameAITests: XCTestCase {
         try! board.place(mark: .x, on: (2, 0))
         try! board.place(mark: .o, on: (2, 2))
         try! board.place(mark: .x, on: (2, 1))
+        XCTAssertTrue(board.isFull)
         XCTAssertFalse(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
