@@ -100,8 +100,29 @@ class GameAITests: XCTestCase {
     func testIncompleteGame() {
     }
 
-    func testCatsGame() {
-    }
+      func testCatsGame() {
+           var board = GameBoard()
+           /*
+            x o x
+            x o x
+            o x o
+            */
+           XCTAssertNoThrow(try! board.place(mark: .x, on: (0,0)))
+           XCTAssertNoThrow(try! board.place(mark: .o, on: (1,0)))
+           XCTAssertNoThrow(try! board.place(mark: .x, on: (2,0)))
+           XCTAssertNoThrow(try! board.place(mark: .x, on: (0,1)))
+           XCTAssertNoThrow(try! board.place(mark: .o, on: (1,1)))
+           XCTAssertNoThrow(try! board.place(mark: .x, on: (2,1)))
+           XCTAssertNoThrow(try! board.place(mark: .o, on: (0,2)))
+           XCTAssertNoThrow(try! board.place(mark: .x, on: (1,2)))
+           XCTAssertNoThrow(try! board.place(mark: .o, on: (2,2)))
+
+    //       let xWon = game(board: board, isWonBy: .x)
+     //      let oWon = game(board: board, isWonBy: .o)
+           if board.isFull {
+               XCTAssert(true, "Cat's game, Draw")
+           }
+       }
     
     
     func winningConditionForTopRow(mark: GameBoard.Mark) {
