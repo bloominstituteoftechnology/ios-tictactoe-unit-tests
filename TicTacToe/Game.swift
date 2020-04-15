@@ -9,47 +9,38 @@
 import Foundation
 
 struct Game {
-    
-    enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-        // case lost(GameBoard.Mark) // Player loses, use if implementing AI opponent.
-    }
-    
-    // Board and gameState can only be created/changed in this file, but can be read from other files.
-    private(set) var board: GameBoard
-    private(set) var gameState = GameState.active(.x)
+// Board can only be created/changed in this file, but can be read from other files.
+    private(set) var board = GameBoard()
 
-    internal var activePlayer: GameBoard.Mark?
-    internal var gameIsOver: Bool
-    internal var winningPlayer: GameBoard.Mark?
+    internal var activePlayer: GameBoard.Mark? = .x
+    internal var gameIsOver: Bool = false
+    internal var winningPlayer: GameBoard.Mark? = nil
 
     mutating internal func restart() {
         board = GameBoard()
-        gameState = .active(.x)
+        activePlayer = .x
+        winningPlayer = nil
+        gameIsOver = false
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
+        guard let player = activePlayer else { return }
         do {
             try board.place(mark: player, on: coordinate)
             if game(board: board, isWonBy: player) {
-                gameState = .won(player)
+                winningPlayer = player
+                gameIsOver = true
+                activePlayer = nil
             } else if board.isFull {
-                gameState = .cat
+                winningPlayer = nil
+                gameIsOver = true
+                activePlayer = nil
             } else {
                 let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+                activePlayer = newPlayer
             }
         } catch {
             NSLog("Illegal move")
         }
     }
-    
-    
 }
