@@ -37,9 +37,9 @@ struct Game {
         gameState = .active(.x)
     }
     
-    mutating internal func makeMark(at coordinate: Coordinate) throws {
+    mutating internal func makeMark(mark: GameBoard.Mark, at coordinate: Coordinate) throws {
         
-        try board.place(mark: .x, on: (coordinate.x, coordinate.y))
+        try board.place(mark: mark, on: (coordinate.x, coordinate.y))
         
         /*
         guard case let GameState.active(player) = gameState else {
