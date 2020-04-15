@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum GameBoardError: Error, Equatable {
-    case invalidSquare
-}
-
-typealias Coordinate = (x: Int, y: Int)
-
 struct GameBoard {
     
     enum Mark: Equatable {
@@ -64,3 +58,9 @@ struct GameBoard {
     
     private var squares = Array(repeating: Square.empty, count: 9)
 }
+
+enum GameBoardError: Error, Equatable {
+    case invalidSquare
+}
+
+typealias Coordinate = (x: Int, y: Int)

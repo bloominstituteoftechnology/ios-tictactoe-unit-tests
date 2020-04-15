@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,11 +14,37 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="GameViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faded-scroll-background-image" translatesAutoresizingMaskIntoConstraints="NO" id="126-HX-oyV" userLabel="Background ImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
+                                <rect key="frame" x="20" y="59" width="335" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
+                                        <rect key="frame" x="0.0" y="0.0" width="222" height="30"/>
+                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
+                                        <rect key="frame" x="230" y="0.0" width="105" height="30"/>
+                                        <color key="backgroundColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="25"/>
+                                        <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                        <state key="normal" title="Restart">
+                                            <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c3U-0D-f14"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdp-7J-yOK">
-                                <rect key="frame" x="40" y="186" width="295" height="295"/>
+                                <rect key="frame" x="40" y="258.66666666666669" width="295" height="295.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Bdp-7J-yOK" secondAttribute="height" multiplier="1:1" id="td7-Mg-IAA"/>
                                 </constraints>
@@ -30,34 +52,20 @@
                                     <segue destination="XKr-BY-wPd" kind="embed" identifier="EmbedBoard" id="gt6-Ab-lN1"/>
                                 </connections>
                             </containerView>
-                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
-                                <rect key="frame" x="20" y="35" width="335" height="30"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
-                                        <rect key="frame" x="0.0" y="0.0" width="277" height="30"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
-                                        <rect key="frame" x="285" y="0.0" width="50" height="30"/>
-                                        <state key="normal" title="Restart"/>
-                                        <connections>
-                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c3U-0D-f14"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.85892136299999999" blue="0.74700984979999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JbU-62-13k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0Hi-5y-bID"/>
+                            <constraint firstItem="126-HX-oyV" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="1PG-gN-4x1"/>
+                            <constraint firstItem="126-HX-oyV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1sn-AJ-d4D"/>
+                            <constraint firstItem="126-HX-oyV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2OD-Qc-ZqH"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JbU-62-13k" secondAttribute="bottom" constant="40" id="4tN-3U-OKQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Bdp-7J-yOK" secondAttribute="bottom" constant="40" id="6CP-IW-UNP"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="999" constant="40" id="9uw-Kz-K13"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bdp-7J-yOK" secondAttribute="bottom" priority="999" constant="40" id="ANm-fk-9CH"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QeD-8D-U0w"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" secondItem="JbU-62-13k" secondAttribute="bottom" priority="999" constant="40" id="ShA-bE-mk0"/>
+                            <constraint firstItem="126-HX-oyV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Sid-SN-TLp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JbU-62-13k" secondAttribute="trailing" constant="20" id="d15-n8-8bs"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fjL-OP-WuV"/>
                             <constraint firstItem="JbU-62-13k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="gj2-ne-VUP"/>
@@ -68,12 +76,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="restartButton" destination="g3q-lj-0mf" id="lL5-lQ-j1x"/>
                         <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="132.68365817091455"/>
+            <point key="canvasLocation" x="140" y="132.26600985221674"/>
         </scene>
         <!--Board View Controller-->
         <scene sceneID="mhN-zc-N0l">
@@ -84,18 +93,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" tag="101" contentMode="scaleToFill" axis="vertical" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="YtZ-pk-cwJ">
-                                <rect key="frame" x="19.5" y="19.5" width="256" height="256"/>
+                                <rect key="frame" x="19.666666666666657" y="44" width="255.99999999999997" height="251"/>
                                 <subviews>
                                     <stackView opaque="NO" tag="102" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="kNo-MW-d3c">
-                                        <rect key="frame" x="0.0" y="0.0" width="256" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="256" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGT-Na-II2">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="5XS-uE-JnU"/>
                                                     <constraint firstAttribute="height" constant="60" id="BH7-8T-FXh"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -104,12 +113,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deb-DP-mPB">
-                                                <rect key="frame" x="98" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="98" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="VXn-eG-YWf"/>
                                                     <constraint firstAttribute="height" constant="60" id="z7c-2c-uT8"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -118,12 +127,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8g-kp-fOO">
-                                                <rect key="frame" x="196" y="0.0" width="60" height="60"/>
+                                                <rect key="frame" x="196" y="0.0" width="60" height="55"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="PYj-Md-geW"/>
                                                     <constraint firstAttribute="height" constant="60" id="lQB-Un-vZe"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -134,7 +143,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" tag="103" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="ior-V2-vsM">
-                                        <rect key="frame" x="0.0" y="98" width="256" height="60"/>
+                                        <rect key="frame" x="0.0" y="93" width="256" height="60"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTT-LL-Ual">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -142,7 +151,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="0rK-zk-y2M"/>
                                                     <constraint firstAttribute="height" constant="60" id="l5q-iF-k7G"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -156,7 +165,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="FZ2-zC-dyv"/>
                                                     <constraint firstAttribute="height" constant="60" id="euF-Zv-bEW"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -170,7 +179,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="OLZ-85-rYE"/>
                                                     <constraint firstAttribute="height" constant="60" id="fvk-W1-Hc6"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -181,7 +190,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" tag="104" contentMode="scaleToFill" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="0AP-m3-KFb">
-                                        <rect key="frame" x="0.0" y="196" width="256" height="60"/>
+                                        <rect key="frame" x="0.0" y="191" width="256" height="60"/>
                                         <subviews>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rO-xK-UIC">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -189,7 +198,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="maj-GA-OuI"/>
                                                     <constraint firstAttribute="height" constant="60" id="zMM-JR-Vtg"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -203,7 +212,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="FWx-ZI-hik"/>
                                                     <constraint firstAttribute="height" constant="60" id="USN-aC-4Mk"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -217,7 +226,7 @@
                                                     <constraint firstAttribute="width" constant="60" id="LGQ-ai-enD"/>
                                                     <constraint firstAttribute="height" constant="60" id="UQP-Gk-S7N"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="84"/>
                                                 <state key="normal" title="x">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -230,7 +239,6 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YtZ-pk-cwJ" firstAttribute="centerX" secondItem="9DQ-LX-wYN" secondAttribute="centerX" id="B05-Br-Bpn"/>
                             <constraint firstItem="YtZ-pk-cwJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9DQ-LX-wYN" secondAttribute="leadingMargin" id="Gvg-un-FgA"/>
@@ -239,6 +247,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="RRA-Mk-wUJ"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
@@ -257,4 +266,7 @@
             <point key="canvasLocation" x="841" y="132"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="faded-scroll-background-image" width="2005" height="3000"/>
+    </resources>
 </document>
