@@ -10,84 +10,73 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-    }
-    
-    @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
-    }
-    
-    // MARK: - BoardViewControllerDelegate
-    
-    func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
-        do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
+    // MARK: - Properties
+        private var boardViewController: BoardViewController! {
+            willSet {
+                boardViewController?.delegate = nil
             }
-        } catch {
-            NSLog("Illegal move")
+            didSet {
+                boardViewController?.board = game.board
+                boardViewController?.delegate = self
+            }
         }
-    }
-    
-    // MARK: - Private
-    
-    private func updateViews() {
-        guard isViewLoaded else { return }
         
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
+        private var game = Game() {
+            didSet {
+                updateViews()
+                boardViewController.board = game.board
+            }
         }
-    }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EmbedBoard" {
-            boardViewController = (segue.destination as! BoardViewController)
-        }
-    }
-    
-    private var boardViewController: BoardViewController! {
-        willSet {
-            boardViewController?.delegate = nil
-        }
-        didSet {
-            boardViewController?.board = board
-            boardViewController?.delegate = self
-        }
-    }
-    
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
+
+        // MARK: - Outlets
+        @IBOutlet weak var statusLabel: UILabel!
+        
+        // MARK: - View Controller Lifecycle
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
             updateViews()
         }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
+        
+        // MARK: - Actions
+        @IBAction func restartGame(_ sender: Any) {
+            game.restart()
+        }
+        
+        // MARK: - Methods
+        private func updateViews() {
+            guard isViewLoaded else { return }
+            
+            if game.gameIsOver {
+                if let winner = game.winningPlayer {
+                    statusLabel.text = "Player \(winner) won!"
+                } else {
+                    statusLabel.text = "Cat's game!"
+                }
+            } else {
+                guard let activePlayer = game.activePlayer else { return }
+                statusLabel.text = "Player \(activePlayer.stringValue)'s turn."
+            }
+        }
+        
+        // MARK: - Navigation
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "EmbedBoard" {
+                boardViewController = (segue.destination as! BoardViewController)
+            }
+        }
+
+        // MARK: - BoardViewControllerDelegate
+        func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
+            guard game.gameIsOver == false else {
+                NSLog("Game is over")
+                return
+            }
+            do {
+                try game.makeMark(at: coordinate)
+
+            } catch {
+                NSLog("Illegal move")
+            }
         }
     }
-}
