@@ -153,6 +153,30 @@ class GameAITests: XCTestCase {
          - o -
          o x -
          */
+        try! board.place(mark: .o, on: (1, 1))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (0, 0))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (0, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .x, on: (1, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
+        
+        try! board.place(mark: .o, on: (2, 0))
+        XCTAssertTrue(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        XCTAssertFalse(board.isFull)
     }
     
     func testIncompleteGame() {
