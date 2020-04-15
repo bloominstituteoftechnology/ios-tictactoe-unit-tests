@@ -116,6 +116,24 @@ class GameTests: XCTestCase {
     }
     
     func testCatGame() throws {
+        let game = try makeCatGame()
+        
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertNil(game.activePlayer)
+        XCTAssertNil(game.winningPlayer)
+    }
+    
+    func testMakeMarkAfterGameOver() throws {
+        var game = try makeCatGame()
+        
+        XCTAssertThrowsError(try game.makeMark(at: (0, 0))) { (error) in
+            XCTAssertEqual(error as? GameError, .gameAlreadyOver)
+        }
+    }
+    
+    // MARK: - Helper Functions
+    
+    func makeCatGame() throws -> Game {
         var game = Game()
         /*
         x x o
@@ -132,12 +150,6 @@ class GameTests: XCTestCase {
         try game.makeMark(at: (2, 2))
         try game.makeMark(at: (1, 2))
         
-        XCTAssertTrue(game.gameIsOver)
-        XCTAssertNil(game.activePlayer)
-        XCTAssertNil(game.winningPlayer)
-        
-        XCTAssertThrowsError(try game.makeMark(at: (0, 0))) { (error) in
-            XCTAssertEqual(error as? GameError, .gameAlreadyOver)
-        }
+        return game
     }
 }
