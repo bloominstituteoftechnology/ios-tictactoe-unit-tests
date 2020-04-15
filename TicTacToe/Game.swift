@@ -19,7 +19,10 @@ struct Game {
     // MARK: - Public Methods
     
     mutating func restart() {
-        
+        board = GameBoard()
+        activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
