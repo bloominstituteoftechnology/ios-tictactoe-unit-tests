@@ -17,7 +17,12 @@ struct Game {
     internal var winningPlayer: GameBoard.Mark?
     
     mutating internal func restart() {
-        
+        // Create brand new board (Got this from looking at GameVC)
+        board = GameBoard()
+        // Reset gameIsOver
+        gameIsOver = false
+        // Make x first move.
+        activePlayer = .x
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
