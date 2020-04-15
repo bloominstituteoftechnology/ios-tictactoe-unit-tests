@@ -11,8 +11,15 @@ import XCTest
 
 class GameTests: XCTestCase {
 
-    func testActivePlayer() {
+    func testActivePlayer() throws {
+        var game = Game()
+        XCTAssertEqual(game.activePlayer, .x)
         
+        try game.makeMark(at: (0,0))
+        XCTAssertEqual(game.activePlayer, .o)
+        
+        try game.makeMark(at: (1,1))
+        XCTAssertEqual(game.activePlayer, .x)
     }
     
     func testGameIsOver() {
