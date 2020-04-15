@@ -50,6 +50,14 @@ class GameAITests: XCTestCase {
          x x x
          o - -
          */
+        try! board.place(mark: .o, on: (1, 0))
+        try! board.place(mark: .x, on: (0, 0))
+        try! board.place(mark: .o, on: (1, 1))
+        try! board.place(mark: .x, on: (0, 1))
+        try! board.place(mark: .o, on: (1, 2))
+        XCTAssertTrue(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
     }
     
     func testWinCheckingHorizontal2() {
@@ -68,6 +76,7 @@ class GameAITests: XCTestCase {
          - x -
          o o x
          */
+        winningConditionForLtoRXDiagonal(mark: .x)
     }
     
     func testWinCheckingDiagonal2() {
@@ -77,11 +86,66 @@ class GameAITests: XCTestCase {
          - o -
          o x -
          */
+        winningConditionForRtoLODiagonal(mark: .o)
+    }
+    
+    func testWinningConditionForXTopRow() {
+        winningConditionForTopRow(mark: .x)
+    }
+    
+    func testWinningConditionForOTopRow() {
+        winningConditionForTopRow(mark: .o)
     }
     
     func testIncompleteGame() {
     }
 
     func testCatsGame() {
+    }
+    
+    
+    func winningConditionForTopRow(mark: GameBoard.Mark) {
+        var board = GameBoard()
+        
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,0)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,0)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,0)))
+        
+        let markPlayerDidWin = game(board: board, isWonBy: mark)
+        XCTAssert(markPlayerDidWin)
+        
+    }
+    
+    func winningConditionForMiddleRow(mark: GameBoard.Mark) {
+        var board = GameBoard()
+        
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,1)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,1)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,1)))
+        
+        let markPlayerDidWin = game(board: board, isWonBy: mark)
+        XCTAssert(markPlayerDidWin)
+    }
+    
+    func winningConditionForLtoRXDiagonal(mark: GameBoard.Mark) {
+        var board = GameBoard()
+        
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,0)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,1)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,2)))
+        
+        let markPlayerDidWin = game(board: board, isWonBy: mark)
+        XCTAssert(markPlayerDidWin)
+    }
+    
+    func winningConditionForRtoLODiagonal(mark: GameBoard.Mark) {
+        var board = GameBoard()
+        
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,0)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,1)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,2)))
+        
+        let markPlayerDidWin = game(board: board, isWonBy: mark)
+        XCTAssert(markPlayerDidWin)
     }
 }
