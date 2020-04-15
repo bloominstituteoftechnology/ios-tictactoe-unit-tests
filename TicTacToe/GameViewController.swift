@@ -10,15 +10,52 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    // MARK: - IBActions
+    
+    @IBAction func restartGame(_ sender: Any) {
+        board = GameBoard()
+        gameState = .active(.x)
+    }
+    
+    // MARK: - Private Properties
+     
+    private var boardViewController: BoardViewController! {
+        willSet {
+            boardViewController?.delegate = nil
+        }
+        didSet {
+            boardViewController?.board = board
+            boardViewController?.delegate = self
+        }
+    }
+    
+    private var gameState = GameState.active(.x) { didSet { updateViews() }}
+    
+    private var board = GameBoard() { didSet { boardViewController.board = board }}
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
     
-    @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+    // MARK: - Private Methods
+    
+    private func updateViews() {
+        guard isViewLoaded else { return }
+        
+        switch gameState {
+        case let .active(player):
+            statusLabel.text = "Player \(player.stringValue)'s turn"
+        case .cat:
+            statusLabel.text = "Cat's game!"
+        case let .won(player):
+            statusLabel.text = "Player \(player.stringValue) won!"
+        }
     }
     
     // MARK: - BoardViewControllerDelegate
@@ -44,50 +81,11 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    // MARK: - Private
-    
-    private func updateViews() {
-        guard isViewLoaded else { return }
-        
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
-        }
-    }
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
-        }
-    }
-    
-    private var boardViewController: BoardViewController! {
-        willSet {
-            boardViewController?.delegate = nil
-        }
-        didSet {
-            boardViewController?.board = board
-            boardViewController?.delegate = self
-        }
-    }
-    
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
         }
     }
 }
