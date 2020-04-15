@@ -22,8 +22,31 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.activePlayer, .x)
     }
     
-    func testGameIsOver() {
+    func testGameIsOver() throws {
+        var game = Game()
         
+        /*
+         o x x
+         o o -
+         x o x
+         */
+        try game.makeMark(at: (2,0))
+        try game.makeMark(at: (0,0))
+        try game.makeMark(at: (1,0))
+        try game.makeMark(at: (0,2))
+        try game.makeMark(at: (0,2))
+        try game.makeMark(at: (1,1))
+        try game.makeMark(at: (2,2))
+        try game.makeMark(at: (1,2))
+        XCTAssertFalse(game.gameIsOver)
+        
+        /*
+        o x x
+        o o x
+        x o x
+        */
+        try game.makeMark(at: (2, 1))
+        XCTAssertTrue(game.gameIsOver)
     }
     
     func testWinningPlayer() {
