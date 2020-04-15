@@ -10,6 +10,18 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    private var gameState = GameState.active(.x) {
+        didSet {
+            updateViews()
+        }
+    }
+    
+    private var board = GameBoard() {
+        didSet {
+            boardViewController.board = board
+        }
+    }
+    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -79,15 +91,5 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
+
 }
