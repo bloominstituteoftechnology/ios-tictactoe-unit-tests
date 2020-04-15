@@ -27,6 +27,25 @@ struct Game {
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         
+        guard let player = activePlayer else {
+            NSLog("Where is player?")
+            return
+        }
+        
+        do {
+            try board.place(mark: player, on: coordinate)
+            if game(board: board, isWonBy: player) {
+                gameIsOver = true
+                activePlayer = nil
+                winningPlayer = player
+            } else if board.isFull {
+                gameIsOver = true
+                activePlayer = nil
+                winningPlayer = nil
+            }
+        } catch {
+            
+        }
     }
     
 }
