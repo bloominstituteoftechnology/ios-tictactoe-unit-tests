@@ -29,7 +29,7 @@ struct Game {
         
         guard let player = activePlayer else {
             NSLog("Where is player?")
-            return
+            throw NSError(domain: "Error unwrapping activePlayer", code: 0, userInfo: nil)
         }
         
         do {

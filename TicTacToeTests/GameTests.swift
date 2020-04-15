@@ -27,11 +27,14 @@ class GameTests: XCTestCase {
         let board = game.board
         
         // Should be X
-        try! game.makeMark(at: (0, 1))
+        
+        XCTAssertNoThrow(try game.makeMark(at: (0, 1)))
+        XCTAssertNotNil(board[(0, 1)])
         XCTAssertEqual(board[(0, 1)], GameBoard.Mark.x)
         
         // Should be Y
-        try! game.makeMark(at: (1,1))
+        XCTAssertNoThrow(try game.makeMark(at: (1,1)))
+        XCTAssertNotNil(board[(1, 1)])
         XCTAssertEqual(board[(1, 1)], GameBoard.Mark.o)
         
         // Check everything else remains
