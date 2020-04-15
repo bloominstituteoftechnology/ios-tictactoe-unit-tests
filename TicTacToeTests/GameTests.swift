@@ -10,7 +10,7 @@ import XCTest
 @testable import TicTacToe
 
 class GameTests: XCTestCase {
-
+    
     func testActivePlayer() throws {
         var game = Game()
         XCTAssertEqual(game.activePlayer, .x)
@@ -40,41 +40,19 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game.gameIsOver)
         
         /*
-        o x x
-        o o x
-        x o x
-        */
+         o x x
+         o o x
+         x o x
+         */
         try game.makeMark(at: (2, 1))
         XCTAssertTrue(game.gameIsOver)
     }
     
     func testWinningPlayer() throws {
-        var game = Game()
-        XCTAssertNil(game.winningPlayer)
-        /*
-        x x x
-        o o -
-        - - -
-        */
-        try game.makeMark(at: (0, 0))
-        try game.makeMark(at: (0, 1))
-        try game.makeMark(at: (1, 0))
-        try game.makeMark(at: (1, 1))
-        try game.makeMark(at: (2, 0))
+        var game = try makeXWinsGame()
         XCTAssertEqual(game.winningPlayer, .x)
         
-        game = Game()
-        /*
-        x x o
-        - o x
-        o - -
-        */
-        try game.makeMark(at: (0, 0))
-        try game.makeMark(at: (2, 0))
-        try game.makeMark(at: (1, 0))
-        try game.makeMark(at: (1, 1))
-        try game.makeMark(at: (0, 1))
-        try game.makeMark(at: (0, 2))
+        game = try makeOWinsGame()
         XCTAssertEqual(game.winningPlayer, .o)
     }
     
@@ -82,10 +60,10 @@ class GameTests: XCTestCase {
         var game = Game()
         XCTAssertNil(game.winningPlayer)
         /*
-        x x x
-        o o -
-        - - -
-        */
+         x x x
+         o o -
+         - - -
+         */
         try game.makeMark(at: (0, 0))
         try game.makeMark(at: (0, 1))
         try game.makeMark(at: (1, 0))
@@ -131,15 +109,66 @@ class GameTests: XCTestCase {
         }
     }
     
+    func testGameState() throws {
+        var game = Game()
+        XCTAssertEqual(game.state, Game.State.active(.x))
+        
+        try game.makeMark(at: (0, 0))
+        XCTAssertEqual(game.state, Game.State.active(.o))
+        
+        game = try makeXWinsGame()
+        XCTAssertEqual(game.state, Game.State.won(.x))
+        
+        game = try makeOWinsGame()
+        XCTAssertEqual(game.state, Game.State.won(.o))
+        
+        game = try makeCatGame()
+        XCTAssertEqual(game.state, Game.State.cat)
+    }
+    
     // MARK: - Helper Functions
+    
+    func makeXWinsGame() throws -> Game {
+        var game = Game()
+        XCTAssertNil(game.winningPlayer)
+        /*
+         x x x
+         o o -
+         - - -
+         */
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (0, 1))
+        try game.makeMark(at: (1, 0))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (2, 0))
+        
+        return game
+    }
+    
+    func makeOWinsGame() throws -> Game {
+        var game = Game()
+        /*
+         x x o
+         - o x
+         o - -
+         */
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (2, 0))
+        try game.makeMark(at: (1, 0))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (0, 1))
+        try game.makeMark(at: (0, 2))
+        
+        return game
+    }
     
     func makeCatGame() throws -> Game {
         var game = Game()
         /*
-        x x o
-        o o x
-        x x o
-        */
+         x x o
+         o o x
+         x x o
+         */
         try game.makeMark(at: (0, 0))
         try game.makeMark(at: (0, 1))
         try game.makeMark(at: (1, 0))
@@ -152,4 +181,6 @@ class GameTests: XCTestCase {
         
         return game
     }
+    
+    
 }

@@ -13,7 +13,7 @@ enum GameError: Error, Equatable {
 }
 
 struct Game {
-    enum State {
+    enum State: Equatable {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
@@ -31,9 +31,9 @@ struct Game {
             return .won(winningPlayer)
         } else if gameIsOver {
             return .cat
-        } else {
-            return .active(activePlayer!)
         }
+            
+        return .active(activePlayer!)
     }
     
     // MARK: - Public Methods
