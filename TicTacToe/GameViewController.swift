@@ -59,7 +59,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         boardViewController.board = game.board
         
         if game.gameIsOver {
-            //restartButton.pulsate()
             pulsateButton()
             if let player = game.winningPlayer {
                 statusLabel.text = "Player \(player.stringValue) won!"
@@ -89,21 +88,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
 }
 
-extension UIButton {
-    func pulsate() {
-        let pulse = CASpringAnimation(keyPath: "transform.scale")
-        
-        pulse.duration = 1.2
-        pulse.fromValue = 0.95
-        pulse.toValue = 1.0
-        pulse.autoreverses = true
-        pulse.repeatCount = 2
-        pulse.initialVelocity = 0.25
-        pulse.damping = 1.0
-        
-        layer.add(pulse, forKey: nil)
-    }
-}
+// MARK: - Restart Button Animation
 
 extension GameViewController {
     func pulsateButton() {
@@ -112,7 +97,7 @@ extension GameViewController {
                        options: [.curveEaseOut, .allowUserInteraction],
                        animations: {
                         
-                        self.restartButton.transform = CGAffineTransform(scaleX: 1.07, y: 1.07)
+                        self.restartButton.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
                         
         }) { _ in
             UIView.animate(withDuration: 0.45,
@@ -130,3 +115,21 @@ extension GameViewController {
         }
     }
 }
+
+/*
+extension UIButton {
+    func pulsate() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        
+        pulse.duration = 1.2
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 2
+        pulse.initialVelocity = 0.25
+        pulse.damping = 1.0
+        
+        layer.add(pulse, forKey: nil)
+    }
+}
+*/
