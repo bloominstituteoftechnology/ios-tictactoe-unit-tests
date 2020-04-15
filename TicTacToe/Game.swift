@@ -15,23 +15,43 @@ struct Game {
     internal var activePlayer: GameBoard.Mark?
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
+    internal var moves: [Coordinate]
 
     mutating internal func restart() {
         board = GameBoard()
         activePlayer = GameBoard.Mark.x
         gameIsOver = false
+        moves = []
+    }
+    
+    mutating internal func undo() {
+        guard let coordinate = moves.popLast() else { return }
+        do {
+            try board.place(mark: .o, on: coordinate, undo: true)
+            
+            if activePlayer == GameBoard.Mark.x {
+                activePlayer = GameBoard.Mark.o
+            } else {
+                activePlayer = GameBoard.Mark.x
+            }
+            
+        } catch {
+            NSLog("Error. Could not undo.")
+        }
     }
     
     init()  {
         self.board = GameBoard()
         self.gameIsOver = false
-        activePlayer = GameBoard.Mark.x
+        self.activePlayer = GameBoard.Mark.x
+        self.moves = []
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         if activePlayer == GameBoard.Mark.x {
             do {
                 try board.place(mark: .x, on: coordinate)
+                moves.append(coordinate)
             } catch {
                 throw GameBoardError.invalidSquare
             }
@@ -51,6 +71,7 @@ struct Game {
         } else if activePlayer == GameBoard.Mark.o {
             do {
                 try board.place(mark: .o, on: coordinate)
+                moves.append(coordinate)
             } catch {
                 throw GameBoardError.invalidSquare
             }

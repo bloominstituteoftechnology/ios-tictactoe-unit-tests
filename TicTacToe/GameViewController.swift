@@ -20,6 +20,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         game.restart()
     }
     
+    @IBAction func undoTapped(_ sender: Any) {
+        game.undo()
+        updateViews()
+    }
+    
+    
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
