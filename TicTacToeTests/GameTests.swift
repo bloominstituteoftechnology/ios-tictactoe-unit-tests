@@ -15,29 +15,28 @@ class GameTests: XCTestCase {
         var game = Game()
         XCTAssertEqual(game.activePlayer, .x)
         
-        try game.makeMark(at: (0,0))
+        try game.makeMark(at: (0, 0))
         XCTAssertEqual(game.activePlayer, .o)
         
-        try game.makeMark(at: (1,1))
+        try game.makeMark(at: (1, 1))
         XCTAssertEqual(game.activePlayer, .x)
     }
     
     func testGameIsOver() throws {
         var game = Game()
-        
         /*
          o x x
          o o -
          x o x
          */
-        try game.makeMark(at: (2,0))
-        try game.makeMark(at: (0,0))
-        try game.makeMark(at: (1,0))
-        try game.makeMark(at: (0,2))
-        try game.makeMark(at: (0,2))
-        try game.makeMark(at: (1,1))
-        try game.makeMark(at: (2,2))
-        try game.makeMark(at: (1,2))
+        try game.makeMark(at: (2, 0))
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (1, 0))
+        try game.makeMark(at: (0, 2))
+        try game.makeMark(at: (0, 2))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (2, 2))
+        try game.makeMark(at: (1, 2))
         XCTAssertFalse(game.gameIsOver)
         
         /*
@@ -49,8 +48,33 @@ class GameTests: XCTestCase {
         XCTAssertTrue(game.gameIsOver)
     }
     
-    func testWinningPlayer() {
+    func testWinningPlayer() throws {
+        var game = Game()
+        XCTAssertNil(game.winningPlayer)
+        /*
+        x x x
+        o o -
+        - - -
+        */
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (0, 1))
+        try game.makeMark(at: (1, 0))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (2, 0))
+        XCTAssertEqual(game.winningPlayer, .x)
         
+        game = Game()
+        /*
+        x x o
+        - o x
+        o - -
+        */
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (2, 0))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (0, 2))
+        XCTAssertEqual(game.winningPlayer, .o)
     }
     
     func testRestart() {
