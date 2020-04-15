@@ -61,16 +61,17 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingHorizontal2() {
-        var board = GameBoard()
+//        var board = GameBoard()
         /*
          x - -
          - x -
          o o o
          */
+        winningConditionForOBottomRow(mark: .o)
     }
     
     func testWinCheckingDiagonal1() {
-        var board = GameBoard()
+//        var board = GameBoard()
         /*
          x - -
          - x -
@@ -80,7 +81,7 @@ class GameAITests: XCTestCase {
     }
     
     func testWinCheckingDiagonal2() {
-        var board = GameBoard()
+//        var board = GameBoard()
         /*
          x - o
          - o -
@@ -116,12 +117,12 @@ class GameAITests: XCTestCase {
         
     }
     
-    func winningConditionForMiddleRow(mark: GameBoard.Mark) {
+    func winningConditionForOBottomRow(mark: GameBoard.Mark) {
         var board = GameBoard()
         
-        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,1)))
-        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,1)))
-        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,1)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (0,2)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (1,2)))
+        XCTAssertNoThrow(try! board.place(mark: mark, on: (2,2)))
         
         let markPlayerDidWin = game(board: board, isWonBy: mark)
         XCTAssert(markPlayerDidWin)
