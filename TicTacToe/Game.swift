@@ -9,21 +9,21 @@
 import Foundation
 
 struct Game {
-// Board can only be created/changed in this file, but can be read from other files.
-    private(set) var board = GameBoard()
+    // MARK: - Properties
+    private(set) var board = GameBoard() // Instantiate a game that is read only outside this struct
+    internal var activePlayer: GameBoard.Mark? = .x // Set default active player to .x
+    internal var gameIsOver: Bool = false // Set default to false so game can proceed.
+    internal var winningPlayer: GameBoard.Mark? = nil // Set default to nil. Will change if a player wins.
 
-    internal var activePlayer: GameBoard.Mark? = .x
-    internal var gameIsOver: Bool = false
-    internal var winningPlayer: GameBoard.Mark? = nil
-
-    mutating internal func restart() {
+    // MARK: - Methods
+    mutating internal func restart() { // restarts game after it has completed.
         board = GameBoard()
         activePlayer = .x
         winningPlayer = nil
         gameIsOver = false
     }
     
-    mutating internal func makeMark(at coordinate: Coordinate) throws {
+    mutating internal func makeMark(at coordinate: Coordinate) throws { // Adds a mark, if possible, or ends the game.
         guard let player = activePlayer else { return }
         do {
             try board.place(mark: player, on: coordinate)
