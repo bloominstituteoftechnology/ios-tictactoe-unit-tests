@@ -9,6 +9,13 @@
 import Foundation
 
 struct Game {
+    
+    init() {
+        self.board = GameBoard()
+        self.gameState = .active(.x)
+        self.gameIsOver = false
+    }
+    
     mutating internal func restart() {
             board = GameBoard()
             gameState = .active(.x)
