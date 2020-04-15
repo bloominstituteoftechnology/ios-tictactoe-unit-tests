@@ -55,6 +55,10 @@ struct GameBoard {
             throw GameBoardError.invalidSquare
         }
         squares[arrayIndex(for: square)] = .filled(mark)
+        
+//        var secondSquare = square
+//        secondSquare.x = 1
+//        squares[arrayIndex(for: secondSquare)] = .filled(mark)
     }
     
     var isFull: Bool {
