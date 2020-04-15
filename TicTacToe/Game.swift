@@ -13,12 +13,28 @@ enum GameError: Error, Equatable {
 }
 
 struct Game {
+    enum State {
+        case active(GameBoard.Mark) // Active player
+        case cat
+        case won(GameBoard.Mark) // Winning player
+    }
+    
     // MARK: - Public Properties
     
     private(set) var board: GameBoard = GameBoard()
     var activePlayer: GameBoard.Mark? = .x
     var gameIsOver: Bool = false
     var winningPlayer: GameBoard.Mark? = nil
+    
+    var state: State {
+        if let winningPlayer = winningPlayer {
+            return .won(winningPlayer)
+        } else if gameIsOver {
+            return .cat
+        } else {
+            return .active(activePlayer!)
+        }
+    }
     
     // MARK: - Public Methods
     
