@@ -32,16 +32,23 @@ struct Game {
         if activePlayer == GameBoard.Mark.x {
             try! board.place(mark: .x, on: coordinate)
             gameIsOver = game(board: board, isWonBy: .x)
+            
             if gameIsOver {
                 activePlayer = nil
+            } else {
+                activePlayer = GameBoard.Mark.o
             }
+            
         } else if activePlayer == GameBoard.Mark.o {
             try! board.place(mark: .o, on: coordinate)
-            #warning("will need to change to !")
             gameIsOver = game(board: board, isWonBy: .x)
+            
             if gameIsOver {
                 activePlayer = nil
+            } else {
+                activePlayer = GameBoard.Mark.x
             }
+            
         }
     }
 }
