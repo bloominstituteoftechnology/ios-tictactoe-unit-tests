@@ -60,7 +60,7 @@ class GameAITests: XCTestCase {
         
     }
     
-    func testWinCheckingHorizontal2() {
+    func testWinCheckingHorizontalO() {
         var board = GameBoard()
         /*
          x - -
