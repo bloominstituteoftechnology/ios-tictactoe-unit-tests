@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		92F8A77524476C1A005C5493 /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8A77424476C1A005C5493 /* TicTacToeTests.swift */; };
+		92F8A77D24476E06005C5493 /* GameBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F8A77C24476E06005C5493 /* GameBoardTests.swift */; };
 		9DA41C3C2148ABB5001A3F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA41C3B2148ABB5001A3F45 /* AppDelegate.swift */; };
 		9DA41C412148ABB5001A3F45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA41C3F2148ABB5001A3F45 /* Main.storyboard */; };
 		9DA41C432148ABB5001A3F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA41C422148ABB5001A3F45 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		92F8A77224476C1A005C5493 /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92F8A77424476C1A005C5493 /* TicTacToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeTests.swift; sourceTree = "<group>"; };
 		92F8A77624476C1A005C5493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92F8A77C24476E06005C5493 /* GameBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardTests.swift; sourceTree = "<group>"; };
 		9DA41C382148ABB4001A3F45 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA41C3B2148ABB5001A3F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DA41C402148ABB5001A3F45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,8 +67,9 @@
 		92F8A77324476C1A005C5493 /* TicTacToeTests */ = {
 			isa = PBXGroup;
 			children = (
-				92F8A77424476C1A005C5493 /* TicTacToeTests.swift */,
+				92F8A77C24476E06005C5493 /* GameBoardTests.swift */,
 				92F8A77624476C1A005C5493 /* Info.plist */,
+				92F8A77424476C1A005C5493 /* TicTacToeTests.swift */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92F8A77D24476E06005C5493 /* GameBoardTests.swift in Sources */,
 				92F8A77524476C1A005C5493 /* TicTacToeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
