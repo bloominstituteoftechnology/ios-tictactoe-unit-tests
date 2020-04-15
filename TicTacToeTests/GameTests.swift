@@ -115,35 +115,66 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game.gameIsOver)
         
         try! game.makeMark(at: (0, 0))
-        
         XCTAssertFalse(game.gameIsOver)
 
         try! game.makeMark(at: (0, 1))
-        
         XCTAssertFalse(game.gameIsOver)
 
         try! game.makeMark(at: (1, 0))
-        
         XCTAssertFalse(game.gameIsOver)
 
         try! game.makeMark(at: (0, 2))
-        
         XCTAssertFalse(game.gameIsOver)
 
         try! game.makeMark(at: (2, 0))
-
         XCTAssertTrue(game.gameIsOver)
     }
     
     func testWinningPlayerX() {
+        var game = Game()
+
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (0, 2))
+        try! game.makeMark(at: (2, 0))
         
+        XCTAssertNotEqual(game.winningPlayer, GameBoard.Mark.o)
+        XCTAssertEqual(game.winningPlayer, GameBoard.Mark.x)
     }
     
     func testWinningPlayerO() {
+        var game = Game()
+
+        try! game.makeMark(at: (2, 1))
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (2, 0))
+        try! game.makeMark(at: (2, 2))
         
+        XCTAssertEqual(game.winningPlayer, GameBoard.Mark.o)
+        XCTAssertNotEqual(game.winningPlayer, GameBoard.Mark.x)
     }
     
-    func testInvalidMove() {
+    func testInvalidMove() throws {
+        var game = Game()
+        
+        try! game.makeMark(at: (2, 1))
+        
+        do {
+            try game.makeMark(at: (2, 1))
+        } catch {
+            XCTAssertEqual(error as! GameBoardError, GameBoardError.invalidSquare)
+        }
+        
+        try game.makeMark(at: (1, 1))
+        
+        do {
+            try game.makeMark(at: (1, 1))
+        } catch {
+            XCTAssertEqual(error as! GameBoardError, GameBoardError.invalidSquare)
+        }
         
     }
     

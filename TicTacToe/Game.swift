@@ -54,15 +54,18 @@ struct Game {
             } catch {
                 throw GameBoardError.invalidSquare
             }
-            gameIsOver = game(board: board, isWonBy: .x)
+            gameIsOver = game(board: board, isWonBy: .o)
             
-            if gameIsOver && board.isFull {
+            if gameIsOver {
                 activePlayer = nil
                 winningPlayer = .o
             } else if gameIsOver == false && board.isFull {
                 activePlayer = nil
                 winningPlayer = nil
                 gameIsOver = true
+                // Isn't tested becuase it cannot happen.
+                // X is always last to move in Cat's game
+                // But I am keeping it just in case I am wrong :-)
             } else {
                 activePlayer = GameBoard.Mark.x
             }
