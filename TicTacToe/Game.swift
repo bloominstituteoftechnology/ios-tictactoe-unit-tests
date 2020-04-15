@@ -27,11 +27,39 @@ struct Game {
             
         }
     }
+    
+    init() {
+        board = GameBoard()
+    }
 
     mutating internal func restart() {
-        
+        board = GameBoard()
+        gameState = .active(.x)
     }
+    
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         
+        try board.place(mark: .x, on: (coordinate.x, coordinate.y))
+        
+        /*
+        guard case let GameState.active(player) = gameState else {
+             NSLog("Game is over")
+             return
+         }
+         
+         do {
+             try board.place(mark: player, on: coordinate)
+             if game(board: board, isWonBy: player) {
+                 gameState = .won(player)
+             } else if board.isFull {
+                 gameState = .cat
+             } else {
+                 let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+                 gameState = .active(newPlayer)
+             }
+         } catch {
+             NSLog("Illegal move")
+         }
+ */
     }
 }
