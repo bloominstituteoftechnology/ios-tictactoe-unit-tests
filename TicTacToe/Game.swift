@@ -10,10 +10,10 @@ import Foundation
 
 struct Game {
 
-    private(set) var board: GameBoard
+    private(set) var board = GameBoard()
     
     internal var activePlayer: GameBoard.Mark?
-    internal var gameIsOver: Bool
+    internal var gameIsOver: Bool = false
     internal var winningPlayer: GameBoard.Mark?
     
     mutating internal func restart() {
@@ -44,7 +44,7 @@ struct Game {
                 winningPlayer = nil
             }
         } catch {
-            
+            NSLog("Illegal move")
         }
     }
     
