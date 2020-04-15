@@ -33,15 +33,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         statusLabel.textColor = .black
         updateViews()
     }
-//    private enum GameState {
-//        case active(GameBoard.Mark) // Active player
-//        case cat
-//        case won(GameBoard.Mark) // Winning player
-//    }
     
     @IBAction func restartGame(_ sender: Any) {
-//        board = GameBoard()
-//        gameState = .active(.x)
         game.restart()
     }
     
@@ -53,24 +46,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         } catch {
             NSLog("Illegal move")
         }
-//        guard case let GameState.active(player) = gameState else {
-//            NSLog("Game is over")
-//            return
-//        }
-//
-//        do {
-//            try board.place(mark: player, on: coordinate)
-//            if game(board: board, isWonBy: player) {
-//                gameState = .won(player)
-//            } else if board.isFull {
-//                gameState = .cat
-//            } else {
-//                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-//                gameState = .active(newPlayer)
-//            }
-//        } catch {
-//            NSLog("Illegal move")
-//        }
     }
     
     // MARK: - Private
@@ -89,15 +64,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         } else if let player = game.activePlayer {
             statusLabel.text = "Player \(player.stringValue)'s turn"
         }
-        
-//        switch gameState {
-//        case let .active(player):
-//            statusLabel.text = "Player \(player.stringValue)'s turn"
-//        case .cat:
-//            statusLabel.text = "Cat's game!"
-//        case let .won(player):
-//            statusLabel.text = "Player \(player.stringValue) won!"
-//        }
     }
     
     // MARK: - Navigation
@@ -107,16 +73,5 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController = segue.destination as? BoardViewController
         }
     }
-    
-//    private var gameState = GameState.active(.x) {
-//        didSet {
-//            updateViews()
-//        }
-//    }
-//
-//    private var board = GameBoard() {
-//        didSet {
-//            boardViewController.board = board
-//        }
-//    }
 }
+
