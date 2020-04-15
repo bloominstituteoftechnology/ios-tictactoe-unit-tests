@@ -11,6 +11,12 @@ import XCTest
 
 class GameTests: XCTestCase {
 
+    /*
+     (0,0) (1,0) (2,0)
+     (0,1) (1,1) (2,1)
+     (0,2) (1,2) (2,2)
+    */
+
     func testCreatingEmptyBoard() {
         let game = Game()
 
@@ -83,11 +89,50 @@ class GameTests: XCTestCase {
         try! game.makeMark(at: (2,1))
         
         XCTAssertEqual(game.activePlayer, nil)
-        
     }
     
-    func testGameIsOver() {
+    func testGameIsOverCatsGame() {
+        var game = Game()
+
+        XCTAssertFalse(game.gameIsOver)
         
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (0, 2))
+        try! game.makeMark(at: (1, 2))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (2, 0))
+        try! game.makeMark(at: (2, 2))
+        try! game.makeMark(at: (2, 1))
+                
+        XCTAssertTrue(game.gameIsOver)
+    }
+    
+    func testGameIsOverWin() {
+        var game = Game()
+
+        XCTAssertFalse(game.gameIsOver)
+        
+        try! game.makeMark(at: (0, 0))
+        
+        XCTAssertFalse(game.gameIsOver)
+
+        try! game.makeMark(at: (0, 1))
+        
+        XCTAssertFalse(game.gameIsOver)
+
+        try! game.makeMark(at: (1, 0))
+        
+        XCTAssertFalse(game.gameIsOver)
+
+        try! game.makeMark(at: (0, 2))
+        
+        XCTAssertFalse(game.gameIsOver)
+
+        try! game.makeMark(at: (2, 0))
+
+        XCTAssertTrue(game.gameIsOver)
     }
     
     func testWinningPlayerX() {
@@ -101,4 +146,11 @@ class GameTests: XCTestCase {
     func testInvalidMove() {
         
     }
+    
+    /*
+     (0,0) (1,0) (2,0)
+     (0,1) (1,1) (2,1)
+     (0,2) (1,2) (2,2)
+    */
+    
 }

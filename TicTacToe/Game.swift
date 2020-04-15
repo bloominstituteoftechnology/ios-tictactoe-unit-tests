@@ -40,9 +40,10 @@ struct Game {
             if gameIsOver {
                 activePlayer = nil
                 winningPlayer = .x
-            } else if gameIsOver == false && board.isFull{
+            } else if gameIsOver == false && board.isFull {
                 activePlayer = nil
                 winningPlayer = nil
+                gameIsOver = true
             } else {
                 activePlayer = GameBoard.Mark.o
             }
@@ -61,6 +62,7 @@ struct Game {
             } else if gameIsOver == false && board.isFull {
                 activePlayer = nil
                 winningPlayer = nil
+                gameIsOver = true
             } else {
                 activePlayer = GameBoard.Mark.x
             }
