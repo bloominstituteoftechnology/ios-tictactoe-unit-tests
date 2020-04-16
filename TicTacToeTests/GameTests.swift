@@ -70,30 +70,30 @@ class GameTests: XCTestCase {
     }
     
     func testWinCheckingVertical1() {
-        var gameSession = Game(board: GameBoard())
+        var game = Game(board: GameBoard())
            /*
            x o -
            x o -
            x - -
            */
 //           try! game.board.place(mark: .x, on: (0, 0))
-        try! gameSession.makeMark(at: (0,0))
+        try! game.makeMark(at: (0,0))
 //           try! game.board.place(mark: .o, on: (1, 0))
-        try! gameSession.makeMark(at: (1,0))
+        try! game.makeMark(at: (1,0))
 //           try! game.board.place(mark: .x, on: (0, 1))
-        try! gameSession.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,1))
 //           try! game.board.place(mark: .o, on: (1, 1))
-        try! gameSession.makeMark(at: (1,1))
+        try! game.makeMark(at: (1,1))
 //           try! game.board.place(mark: .x, on: (0, 2))
-        try! gameSession.makeMark(at: (0,2))
+        try! game.makeMark(at: (0,2))
         
-        XCTAssertTrue(gameSession.gameIsOver)
-           XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertTrue(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
        }
        
     func testWinCheckingHorizontal1() {
-        var gameSession = Game(board: GameBoard())
+        var game = Game(board: GameBoard())
            /*
             - o -
             x x x
@@ -101,93 +101,101 @@ class GameTests: XCTestCase {
             */
            
            
-        try! gameSession.makeMark(at: (1,1))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-           XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (1,1))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
            
-        try! gameSession.makeMark(at: (1,0))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-           XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (1,0))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
            
-        try! gameSession.makeMark(at: (0,1))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-           XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (0,1))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
            
-        try! gameSession.makeMark(at: (0,2))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-           XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (0,2))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
            
-        try! gameSession.makeMark(at: (2,1))
-        XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertTrue(gameSession.gameIsOver)
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (2,1))
+        XCTAssertTrue(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertFalse(game.board.isFull)
        }
        
     func testWinCheckingDiagonal1() {
-        var gameSession = Game(board: GameBoard())
+        var game = Game(board: GameBoard())
         /*
         x - -
         - x -
         o o x
         */
         
-        try! gameSession.makeMark(at: (1, 1))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (1, 1))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
         
-        try! gameSession.makeMark(at: (1, 2))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (1, 2))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
         
-        try! gameSession.makeMark(at: (0, 0))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (0, 0))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
         
-        try! gameSession.makeMark(at: (0, 2))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (0, 2))
+        XCTAssertFalse(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
+        XCTAssertFalse(game.gameIsOver)
         
-        try! gameSession.makeMark(at: (2, 2))
-        XCTAssertTrue(gameSession.gameIsOver)
-        XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        XCTAssertFalse(gameSession.board.isFull)
+        try! game.makeMark(at: (2, 2))
+        XCTAssertTrue(game.gameIsOver)
+        XCTAssertTrue(game.winningPlayer == .x)
+        XCTAssertFalse(game.winningPlayer == .o)
+        XCTAssertFalse(game.board.isFull)
     }
        
     func testIncompleteGame() {
-        var gameSession = Game(board: GameBoard())
+        var game = Game(board: GameBoard())
         /*
         o o -
         x x o
         o x x
         */
         
-        try! gameSession.makeMark(at: (0, 1)) // x
-        try! gameSession.makeMark(at: (0, 0)) // o
-        try! gameSession.makeMark(at: (1, 1)) // x
-        try! gameSession.makeMark(at: (1, 0)) // o
-        try! gameSession.makeMark(at: (1, 2)) // x
-        try! gameSession.makeMark(at: (2, 1)) // o
-        try! gameSession.makeMark(at: (2, 2)) // x
-        try! gameSession.makeMark(at: (0, 2)) // o
+        try! game.makeMark(at: (0, 1)) // x
+        try! game.makeMark(at: (0, 0)) // o
+        try! game.makeMark(at: (1, 1)) // x
+        try! game.makeMark(at: (1, 0)) // o
+        try! game.makeMark(at: (1, 2)) // x
+        try! game.makeMark(at: (2, 1)) // o
+        try! game.makeMark(at: (2, 2)) // x
+        try! game.makeMark(at: (0, 2)) // o
         
         // Is the game not full?
-        XCTAssertFalse(gameSession.board.isFull)
+        XCTAssertFalse(game.board.isFull)
         // Did x not win?
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(game.winningPlayer == .x)
         // Did o not win?
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game.winningPlayer == .o)
         // Is game not over?
-        XCTAssertFalse(gameSession.gameIsOver)
+        XCTAssertFalse(game.gameIsOver)
         /*
         My logic is as follows:
             If after filling all but one of the boxes game still doesn't consider any player to have won, and the board is also not considered full, then it's safe to say we can tell that the game isn't finished yet.
@@ -195,7 +203,7 @@ class GameTests: XCTestCase {
     }
 
     func testCatsGame() {
-        var gameSession = Game(board: GameBoard())
+        var game = Game(board: GameBoard())
         
         /*
         o o x
@@ -203,23 +211,23 @@ class GameTests: XCTestCase {
         o x x
         */
         
-        try! gameSession.makeMark(at: (1, 1))
-        try! gameSession.makeMark(at: (1, 2))
-        try! gameSession.makeMark(at: (2, 1))
-        try! gameSession.makeMark(at: (0, 1))
-        try! gameSession.makeMark(at: (0, 2))
-        try! gameSession.makeMark(at: (2, 0))
-        try! gameSession.makeMark(at: (0, 0))
-        try! gameSession.makeMark(at: (2, 2))
-        try! gameSession.makeMark(at: (1, 0))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (1, 2))
+        try! game.makeMark(at: (2, 1))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (0, 2))
+        try! game.makeMark(at: (2, 0))
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (2, 2))
+        try! game.makeMark(at: (1, 0))
         
         // Is the game full?
-        XCTAssertTrue(gameSession.board.isFull)
-        XCTAssertTrue(gameSession.gameIsOver)
+        XCTAssertTrue(game.board.isFull)
+        XCTAssertTrue(game.gameIsOver)
         // Did x not win?
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(game.winningPlayer == .x)
         // Did o not win?
-        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game.winningPlayer == .o)
         
         /*
         My logic is as follows:
