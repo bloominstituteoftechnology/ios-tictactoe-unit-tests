@@ -43,24 +43,24 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
-        do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
-        } catch {
-            NSLog("Illegal move")
-        }
+//        guard case let GameState.active(player) = gameState else {
+//            NSLog("Game is over")
+//            return
+//        }
+//
+//        do {
+//            try board.place(mark: player, on: coordinate)
+//            if gameai(board: board, isWonBy: player) {
+//                gameState = .won(player)
+//            } else if board.isFull {
+//                gameState = .cat
+//            } else {
+//                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+//                gameState = .active(newPlayer)
+//            }
+//        } catch {
+//            NSLog("Illegal move")
+//        }
     }
     
     // MARK: - Private
