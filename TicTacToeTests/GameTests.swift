@@ -70,19 +70,25 @@ class GameTests: XCTestCase {
     }
     
     func testWinCheckingVertical1() {
-        var game = Game(board: GameBoard())
+        var gameSession = Game(board: GameBoard())
            /*
            x o -
            x o -
            x - -
            */
 //           try! game.board.place(mark: .x, on: (0, 0))
+        try! gameSession.makeMark(at: (0,0))
 //           try! game.board.place(mark: .o, on: (1, 0))
+        try! gameSession.makeMark(at: (1,0))
 //           try! game.board.place(mark: .x, on: (0, 1))
+        try! gameSession.makeMark(at: (0,1))
 //           try! game.board.place(mark: .o, on: (1, 1))
+        try! gameSession.makeMark(at: (1,1))
 //           try! game.board.place(mark: .x, on: (0, 2))
-//           XCTAssertTrue(game(board: game.board, isWonBy: .x))
-//           XCTAssertFalse(game(board: game.board, isWonBy: .o))
+        try! gameSession.makeMark(at: (0,2))
+        
+           XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
        }
        
        func testWinCheckingVertical2() {
