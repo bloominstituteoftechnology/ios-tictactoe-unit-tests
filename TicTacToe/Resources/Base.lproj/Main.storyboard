@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -31,19 +27,21 @@
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JbU-62-13k">
-                                <rect key="frame" x="20" y="35" width="335" height="30"/>
+                                <rect key="frame" x="20" y="15" width="335" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0R-RM-Whk">
                                         <rect key="frame" x="0.0" y="0.0" width="277" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="status"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3q-lj-0mf">
                                         <rect key="frame" x="285" y="0.0" width="50" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="restart"/>
                                         <state key="normal" title="Restart"/>
                                         <connections>
-                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c3U-0D-f14"/>
+                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="46q-Tt-Rng"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -68,7 +66,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="statusLabel" destination="e0R-RM-Whk" id="cCf-tm-Hju"/>
+                        <outlet property="statusLabel" destination="e0R-RM-Whk" id="6Jz-Db-40I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -91,6 +89,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGT-Na-II2">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="topLeft"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="5XS-uE-JnU"/>
                                                     <constraint firstAttribute="height" constant="60" id="BH7-8T-FXh"/>
@@ -105,6 +104,7 @@
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Deb-DP-mPB">
                                                 <rect key="frame" x="98" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="topCenter"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="VXn-eG-YWf"/>
                                                     <constraint firstAttribute="height" constant="60" id="z7c-2c-uT8"/>
@@ -119,6 +119,7 @@
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8g-kp-fOO">
                                                 <rect key="frame" x="196" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="topRight"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="PYj-Md-geW"/>
                                                     <constraint firstAttribute="height" constant="60" id="lQB-Un-vZe"/>
@@ -138,6 +139,7 @@
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTT-LL-Ual">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="middleLeft"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="0rK-zk-y2M"/>
                                                     <constraint firstAttribute="height" constant="60" id="l5q-iF-k7G"/>
@@ -152,6 +154,7 @@
                                             </button>
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylJ-qq-3kA">
                                                 <rect key="frame" x="98" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="middleCenter"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="FZ2-zC-dyv"/>
                                                     <constraint firstAttribute="height" constant="60" id="euF-Zv-bEW"/>
@@ -166,6 +169,7 @@
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2h-Tg-H3c">
                                                 <rect key="frame" x="196" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="middleRight"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="OLZ-85-rYE"/>
                                                     <constraint firstAttribute="height" constant="60" id="fvk-W1-Hc6"/>
@@ -185,6 +189,7 @@
                                         <subviews>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rO-xK-UIC">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="bottomLeft"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="maj-GA-OuI"/>
                                                     <constraint firstAttribute="height" constant="60" id="zMM-JR-Vtg"/>
@@ -199,6 +204,7 @@
                                             </button>
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eh4-Eu-l1c">
                                                 <rect key="frame" x="98" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="bottomCenter"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="FWx-ZI-hik"/>
                                                     <constraint firstAttribute="height" constant="60" id="USN-aC-4Mk"/>
@@ -213,6 +219,7 @@
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyf-AT-eyq">
                                                 <rect key="frame" x="196" y="0.0" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="bottomRight"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="LGQ-ai-enD"/>
                                                     <constraint firstAttribute="height" constant="60" id="UQP-Gk-S7N"/>
@@ -239,6 +246,7 @@
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="bottom" id="ajj-se-oqM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YtZ-pk-cwJ" secondAttribute="trailing" id="fm2-MO-pWO"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="gtT-Fx-D46"/>
                     </view>
                     <connections>
                         <outletCollection property="buttons" destination="Deb-DP-mPB" collectionClass="NSMutableArray" id="dsf-ej-llG"/>
