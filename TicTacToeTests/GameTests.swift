@@ -127,71 +127,39 @@ class GameTests: XCTestCase {
            XCTAssertFalse(gameSession.board.isFull)
        }
        
-       func testWinCheckingHorizontal2() {
-           var board = Game(board: GameBoard()).board
-           /*
-            x - -
-            - x -
-            o o o
-            */
-           try! board.place(mark: .o, on: (0, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (1, 1))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (1, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (0, 0))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (2, 2))
-           XCTAssertTrue(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-       }
-       
-       func testWinCheckingDiagonal1() {
-           var board = Game(board: GameBoard()).board
-           /*
-            x - -
-            - x -
-            o o x
-            */
-           try! board.place(mark: .x, on: (1, 1))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (1, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (0, 0))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (0, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (2, 2))
-           XCTAssertTrue(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
-       }
+    func testWinCheckingDiagonal1() {
+        var gameSession = Game(board: GameBoard())
+        /*
+        x - -
+        - x -
+        o o x
+        */
+        
+        try! gameSession.makeMark(at: (1, 1))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(gameSession.board.isFull)
+        
+        try! gameSession.makeMark(at: (1, 2))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(gameSession.board.isFull)
+        
+        try! gameSession.makeMark(at: (0, 0))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(gameSession.board.isFull)
+        
+        try! gameSession.makeMark(at: (0, 2))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(gameSession.board.isFull)
+        
+        try! gameSession.makeMark(at: (2, 2))
+        XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(gameSession.board.isFull)
+    }
        
        func testWinCheckingDiagonal2() {
            var board = Game(board: GameBoard()).board
