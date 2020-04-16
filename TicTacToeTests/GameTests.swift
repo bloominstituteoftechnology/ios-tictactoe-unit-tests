@@ -49,17 +49,23 @@ class GameTests: XCTestCase {
     func testIsFull() {
         var game = Game(board: GameBoard())
         
-        try! game.makeMark(at: (0,0))
-        try! game.makeMark(at: (0,1))
-        try! game.makeMark(at: (0,2))
-        try! game.makeMark(at: (1,0))
-        try! game.makeMark(at: (1,1))
-        try! game.makeMark(at: (1,2))
-        try! game.makeMark(at: (2,0))
-        try! game.makeMark(at: (2,1))
+        /*
+        o o x
+        x x o
+        o x x
+        */
+        
+        try! game.makeMark(at: (2,0)) // x
+        try! game.makeMark(at: (0,0)) // o
+        try! game.makeMark(at: (0,1)) // x
+        try! game.makeMark(at: (1,0)) // o
+        try! game.makeMark(at: (1,1)) // x
+        try! game.makeMark(at: (2,1)) // o
+        try! game.makeMark(at: (1,2)) // x
+        try! game.makeMark(at: (0,2)) // o
         XCTAssertFalse(game.board.isFull)
         
-        try! game.makeMark(at: (2,2))
+        try! game.makeMark(at: (2,2)) // x
         XCTAssertTrue(game.board.isFull)
     }
 
