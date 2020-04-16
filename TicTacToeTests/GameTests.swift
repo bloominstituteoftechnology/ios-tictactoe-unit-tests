@@ -87,6 +87,7 @@ class GameTests: XCTestCase {
 //           try! game.board.place(mark: .x, on: (0, 2))
         try! gameSession.makeMark(at: (0,2))
         
+        XCTAssertTrue(gameSession.gameIsOver)
            XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
            XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
        }
@@ -121,9 +122,10 @@ class GameTests: XCTestCase {
            XCTAssertFalse(gameSession.board.isFull)
            
         try! gameSession.makeMark(at: (2,1))
-           XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
-           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-           XCTAssertFalse(gameSession.board.isFull)
+        XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
+        XCTAssertTrue(gameSession.gameIsOver)
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        XCTAssertFalse(gameSession.board.isFull)
        }
        
     func testWinCheckingDiagonal1() {
@@ -155,6 +157,7 @@ class GameTests: XCTestCase {
         XCTAssertFalse(gameSession.board.isFull)
         
         try! gameSession.makeMark(at: (2, 2))
+        XCTAssertTrue(gameSession.gameIsOver)
         XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
         XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
         XCTAssertFalse(gameSession.board.isFull)
@@ -183,7 +186,8 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
         // Did o not win?
         XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
-        // Is it not a cat game?
+        // Is game not over?
+        XCTAssertFalse(gameSession.gameIsOver)
         /*
         My logic is as follows:
             If after filling all but one of the boxes game still doesn't consider any player to have won, and the board is also not considered full, then it's safe to say we can tell that the game isn't finished yet.
