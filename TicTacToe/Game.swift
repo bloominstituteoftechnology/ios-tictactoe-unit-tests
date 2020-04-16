@@ -43,7 +43,6 @@ struct Game {
             throw NSError(domain: "Error unwrapping activePlayer", code: 0, userInfo: nil)
         }
         
-        
         do {
             try board.place(mark: player, on: coordinate)
             if game(board: board, isWonBy: player) {

@@ -11,16 +11,15 @@ import XCTest
 
 class GameTests: XCTestCase {
 
-//    func testCreatingGame() {
-//        let game = Game(board: GameBoard())
-//        let board = game.board
-//
-//        for x in 0..<3 {
-//            for y in 0..<3 {
-//                XCTAssertNil(board[(x, y)])
-//            }
-//        }
-//    }
+    func testCreatingGame() {
+        let game = Game(board: GameBoard())
+
+        for x in 0..<3 {
+            for y in 0..<3 {
+                XCTAssertNil(game.board[(x, y)])
+            }
+        }
+    }
     
     func testPlacingMark() {
         var game = Game(board: GameBoard())
@@ -34,17 +33,34 @@ class GameTests: XCTestCase {
         XCTAssertEqual(game.board[(0, 1)], .x)
         
         // Should be Y
-        XCTAssertNoThrow(try game.makeMark(at: (1,1)))
-        XCTAssertNotNil(game.board[(1, 1)])
-        XCTAssertEqual(game.board[(1, 1)], .o)
+        XCTAssertNoThrow(try game.makeMark(at: (2,1)))
+        XCTAssertNotNil(game.board[(2, 1)])
+        XCTAssertEqual(game.board[(2, 1)], .o)
         
         // Check everything else remains
         for x in 0..<3 {
             for y in 0..<3 {
-                if (x == 0 && y == 1) || (x == 1 && y == 1) { continue }
+                if (x == 0 && y == 1) || (x == 2 && y == 1) { continue }
                 XCTAssertNil(game.board[(x, y)])
             }
         }
+    }
+    
+    func testIsFull() {
+        var game = Game(board: GameBoard())
+        
+        try! game.makeMark(at: (0,0))
+        try! game.makeMark(at: (0,1))
+        try! game.makeMark(at: (0,2))
+        try! game.makeMark(at: (1,0))
+        try! game.makeMark(at: (1,1))
+        try! game.makeMark(at: (1,2))
+        try! game.makeMark(at: (2,0))
+        try! game.makeMark(at: (2,1))
+        XCTAssertFalse(game.board.isFull)
+        
+        try! game.makeMark(at: (2,2))
+        XCTAssertTrue(game.board.isFull)
     }
 
 }
