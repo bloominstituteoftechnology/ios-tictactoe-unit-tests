@@ -91,7 +91,6 @@ class GameTests: XCTestCase {
            XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
        }
        
-       
     func testWinCheckingHorizontal1() {
         var gameSession = Game(board: GameBoard())
            /*
@@ -161,67 +160,35 @@ class GameTests: XCTestCase {
         XCTAssertFalse(gameSession.board.isFull)
     }
        
-       func testWinCheckingDiagonal2() {
-           var board = Game(board: GameBoard()).board
-           /*
-            x - o
-            - o -
-            o x -
-            */
-           try! board.place(mark: .o, on: (1, 1))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (0, 0))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (0, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .x, on: (1, 2))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-           
-           try! board.place(mark: .o, on: (2, 0))
-           XCTAssertTrue(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(board.isFull)
-       }
-       
-       func testIncompleteGame() {
-           var board = Game(board: GameBoard()).board
-           /*
-           o o -
-           x o o
-           o x x
-           */
-           
-           try! board.place(mark: .o, on: (1, 1))
-           try! board.place(mark: .x, on: (1, 2))
-           try! board.place(mark: .o, on: (2, 1))
-           try! board.place(mark: .x, on: (0, 1))
-           try! board.place(mark: .o, on: (0, 0))
-           try! board.place(mark: .x, on: (2, 2))
-           try! board.place(mark: .o, on: (1, 0))
-           
-           // Is the game not full?
-           XCTAssertFalse(board.isFull)
-           // Did x not win?
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           // Did o not win?
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           // Is it not a cat game?
-           /*
-            My logic is as follows:
-               If after filling all but one of the boxes game still doesn't consider any player to have won, and the board is also not considered full, then it's safe to say we can tell that the game isn't finished yet.
-            */
-       }
+    func testIncompleteGame() {
+        var gameSession = Game(board: GameBoard())
+        /*
+        o o -
+        x x o
+        o x x
+        */
+        
+        try! gameSession.makeMark(at: (0, 1)) // x
+        try! gameSession.makeMark(at: (0, 0)) // o
+        try! gameSession.makeMark(at: (1, 1)) // x
+        try! gameSession.makeMark(at: (1, 0)) // o
+        try! gameSession.makeMark(at: (1, 2)) // x
+        try! gameSession.makeMark(at: (2, 1)) // o
+        try! gameSession.makeMark(at: (2, 2)) // x
+        try! gameSession.makeMark(at: (0, 2)) // o
+        
+        // Is the game not full?
+        XCTAssertFalse(gameSession.board.isFull)
+        // Did x not win?
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        // Did o not win?
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        // Is it not a cat game?
+        /*
+        My logic is as follows:
+            If after filling all but one of the boxes game still doesn't consider any player to have won, and the board is also not considered full, then it's safe to say we can tell that the game isn't finished yet.
+        */
+    }
 
        func testCatsGame() {
            var board = Game(board: GameBoard()).board
