@@ -109,23 +109,6 @@ class GameTests: XCTestCase {
         }
     }
     
-    func testGameState() throws {
-        var game = Game()
-        XCTAssertEqual(game.state, Game.State.active(.x))
-        
-        try game.makeMark(at: (0, 0))
-        XCTAssertEqual(game.state, Game.State.active(.o))
-        
-        game = try makeXWinsGame()
-        XCTAssertEqual(game.state, Game.State.won(.x))
-        
-        game = try makeOWinsGame()
-        XCTAssertEqual(game.state, Game.State.won(.o))
-        
-        game = try makeCatGame()
-        XCTAssertEqual(game.state, Game.State.cat)
-    }
-    
     // MARK: - Helper Functions
     
     func makeXWinsGame() throws -> Game {
