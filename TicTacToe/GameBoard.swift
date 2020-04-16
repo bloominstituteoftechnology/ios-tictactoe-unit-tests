@@ -37,9 +37,9 @@ struct GameBoard {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
             return mark
-        } else {
-            return nil
         }
+        
+        return nil
     }
     
     mutating func place(mark: Mark, on square: Coordinate) throws {
