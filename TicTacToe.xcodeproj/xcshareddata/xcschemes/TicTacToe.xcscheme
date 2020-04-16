@@ -43,6 +43,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9DA41C512148ABED001A3F45"
+               BuildableName = "TicTacToeTests.xctest"
+               BlueprintName = "TicTacToeTests"
+               ReferencedContainer = "container:TicTacToe.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

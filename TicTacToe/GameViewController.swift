@@ -38,8 +38,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-
-    
     // MARK: - Private Methods
     
     private func updateViews() {
