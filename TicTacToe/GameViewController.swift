@@ -12,7 +12,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel! { didSet { updateStatusLabel() }}
     
     // MARK: - IBActions
     
@@ -24,7 +24,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private var game = Game() {
         didSet {
             boardViewController.board = game.board
-            updateViews()
+            updateStatusLabel()
         }
     }
      
@@ -40,8 +40,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     // MARK: - Private Methods
     
-    private func updateViews() {
-        guard isViewLoaded else { return }
+    private func updateStatusLabel() {
+        guard statusLabel != nil else { return }
         
         if let winningPlayer = game.winningPlayer {
             statusLabel.text = "Player \(winningPlayer.stringValue) won!"
