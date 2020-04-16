@@ -91,57 +91,40 @@ class GameTests: XCTestCase {
            XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
        }
        
-       func testWinCheckingVertical2() {
-           var board = Game(board: GameBoard()).board
-           /*
-            x o -
-            x o -
-            - o -
-            */
-           try! board.place(mark: .o, on: (1, 0))
-           try! board.place(mark: .x, on: (0, 0))
-           try! board.place(mark: .o, on: (1, 1))
-           try! board.place(mark: .x, on: (0, 1))
-           try! board.place(mark: .o, on: (1, 2))
-           XCTAssertTrue(game(board: board, isWonBy: .o))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-       }
        
-       func testWinCheckingHorizontal1() {
-           var board = Game(board: GameBoard()).board
+    func testWinCheckingHorizontal1() {
+        var gameSession = Game(board: GameBoard())
            /*
             - o -
             x x x
             o - -
             */
            
-           // MARK: - Ask about this:
-           // How much slower does the test become if I make these checks so often? I like the idea of checking every move to see if something triggers early than it's supposed to
            
-           try! board.place(mark: .x, on: (1,1))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
+        try! gameSession.makeMark(at: (1,1))
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+           XCTAssertFalse(gameSession.board.isFull)
            
-           try! board.place(mark: .o, on: (1,0))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
+        try! gameSession.makeMark(at: (1,0))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+           XCTAssertFalse(gameSession.board.isFull)
            
-           try! board.place(mark: .x, on: (0,1))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
+        try! gameSession.makeMark(at: (0,1))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+           XCTAssertFalse(gameSession.board.isFull)
            
-           try! board.place(mark: .o, on: (0,2))
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
+        try! gameSession.makeMark(at: (0,2))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+           XCTAssertFalse(gameSession.board.isFull)
            
-           try! board.place(mark: .x, on: (2,1))
-           XCTAssertTrue(game(board: board, isWonBy: .x))
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           XCTAssertFalse(board.isFull)
+        try! gameSession.makeMark(at: (2,1))
+           XCTAssertTrue(game(board: gameSession.board, isWonBy: .x))
+           XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+           XCTAssertFalse(gameSession.board.isFull)
        }
        
        func testWinCheckingHorizontal2() {
