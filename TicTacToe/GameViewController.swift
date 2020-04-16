@@ -18,13 +18,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
+        updateViews()
     }
     
     @IBAction func undoTapped(_ sender: Any) {
         game.undo()
         updateViews()
     }
-    
     
     // MARK: - BoardViewControllerDelegate
     
@@ -61,6 +61,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
+        restartButton.layer.cornerRadius = 8
+        undoButton.layer.cornerRadius = 8
     }
     
     // MARK: - Navigation
@@ -82,6 +84,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var restartButton: UIButton!
+    @IBOutlet weak var undoButton: UIButton!
     
-
 }

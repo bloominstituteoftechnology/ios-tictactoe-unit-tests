@@ -17,10 +17,10 @@ class BoardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for button in buttons {
-            button.layer.borderWidth = 2.0
-            button.layer.borderColor = UIColor.black.cgColor
-        }
+//        for button in buttons {
+//            button.layer.borderWidth = 2.0
+//            button.layer.borderColor = UIColor.black.cgColor
+//        }
         
         updateButtons()
     }
