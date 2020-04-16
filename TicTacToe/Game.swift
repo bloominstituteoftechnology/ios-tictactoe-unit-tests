@@ -11,10 +11,16 @@ import Foundation
 struct Game {
     
     // Add game state as I feel like I'll need it at some point
-    private enum GameState {
+    enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
+    }
+    
+    private(set) var gameState: GameState = .active(.x)
+    
+    mutating internal func stateChange(to state: GameState) {
+        gameState = state
     }
     
 
@@ -34,6 +40,9 @@ struct Game {
         // No longer need to reset active player as the didSet will take care of that
         // Reset winning player
         winningPlayer = nil
+        
+        // Reset state
+        gameState = .active(activePlayer!)
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
@@ -56,10 +65,10 @@ struct Game {
             } else {
                 let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
                 activePlayer = newPlayer
+                gameState = .active(activePlayer!)
             }
         } catch {
             NSLog("Illegal move")
-            fatalError()
         }
     }
     
