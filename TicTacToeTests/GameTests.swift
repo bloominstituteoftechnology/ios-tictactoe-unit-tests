@@ -190,35 +190,37 @@ class GameTests: XCTestCase {
         */
     }
 
-       func testCatsGame() {
-           var board = Game(board: GameBoard()).board
-           /*
-           o o x
-           x o o
-           o x x
-           */
-           
-           try! board.place(mark: .o, on: (1, 1))
-           try! board.place(mark: .x, on: (1, 2))
-           try! board.place(mark: .o, on: (2, 1))
-           try! board.place(mark: .x, on: (0, 1))
-           try! board.place(mark: .o, on: (0, 2))
-           try! board.place(mark: .x, on: (2, 0))
-           try! board.place(mark: .o, on: (0, 0))
-           try! board.place(mark: .x, on: (2, 2))
-           try! board.place(mark: .o, on: (1, 0))
-           
-           // Is the game full?
-           XCTAssertTrue(board.isFull)
-           // Did x not win?
-           XCTAssertFalse(game(board: board, isWonBy: .x))
-           // Did o not win?
-           XCTAssertFalse(game(board: board, isWonBy: .o))
-           
-           /*
-            My logic is as follows:
-               If the board is full and no one won, we got a cat's game.
-            */
-       }
+    func testCatsGame() {
+        var gameSession = Game(board: GameBoard())
+        
+        /*
+        o o x
+        x o o
+        o x x
+        */
+        
+        try! gameSession.makeMark(at: (1, 1))
+        try! gameSession.makeMark(at: (1, 2))
+        try! gameSession.makeMark(at: (2, 1))
+        try! gameSession.makeMark(at: (0, 1))
+        try! gameSession.makeMark(at: (0, 2))
+        try! gameSession.makeMark(at: (2, 0))
+        try! gameSession.makeMark(at: (0, 0))
+        try! gameSession.makeMark(at: (2, 2))
+        try! gameSession.makeMark(at: (1, 0))
+        
+        // Is the game full?
+        XCTAssertTrue(gameSession.board.isFull)
+        XCTAssertTrue(gameSession.gameIsOver)
+        // Did x not win?
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .x))
+        // Did o not win?
+        XCTAssertFalse(game(board: gameSession.board, isWonBy: .o))
+        
+        /*
+        My logic is as follows:
+            If the board is full and no one won, we got a cat's game.
+        */
+    }
 
 }
