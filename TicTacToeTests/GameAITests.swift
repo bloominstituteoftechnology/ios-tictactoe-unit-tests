@@ -18,6 +18,10 @@ class GameAITests: XCTestCase {
         XCTAssertFalse(game(board: board, isWonBy: loser))
     }
     
+    func placeMark(mark: GameBoard.Mark, on location: Coordinate) {
+        try! board.place(mark: mark, on: location)
+    }
+    
     
     func testWinCheckingVertical1() {
         /*
@@ -25,11 +29,11 @@ class GameAITests: XCTestCase {
          x o -
          x - -
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 2))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (1, 0))
+        placeMark(mark: .x, on: (0, 1))
+        placeMark(mark: .o, on: (1, 1))
+        placeMark(mark: .x, on: (0, 2))
         
         assertWin(winner: .x, loser: .o)
         
@@ -41,11 +45,11 @@ class GameAITests: XCTestCase {
          x o -
          - o -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 2))
+        placeMark(mark: .o, on: (1, 0))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (1, 1))
+        placeMark(mark: .x, on: (0, 1))
+        placeMark(mark: .o, on: (1, 2))
         assertWin(winner: .o, loser: .x)
     }
     
@@ -55,11 +59,11 @@ class GameAITests: XCTestCase {
          x x x
          o - -
          */
-        try! board.place(mark: .x, on: (1, 0))
-        try! board.place(mark: .o, on: (0, 1))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .o, on: (2, 0))
-        try! board.place(mark: .x, on: (1, 2))
+        placeMark(mark: .x, on: (1, 0))
+        placeMark(mark: .o, on: (0, 1))
+        placeMark(mark: .x, on: (1, 1))
+        placeMark(mark: .o, on: (2, 0))
+        placeMark(mark: .x, on: (1, 2))
         assertWin(winner: .x, loser: .o)
     }
     
@@ -69,11 +73,11 @@ class GameAITests: XCTestCase {
          - x -
          o o o
          */
-        try! board.place(mark: .o, on: (2, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (2, 1))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .o, on: (2, 2))
+        placeMark(mark: .o, on: (2, 0))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (2, 1))
+        placeMark(mark: .x, on: (1, 1))
+        placeMark(mark: .o, on: (2, 2))
         assertWin(winner: .o, loser: .x)
     }
     
@@ -83,11 +87,11 @@ class GameAITests: XCTestCase {
          - x -
          o o x
          */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .o, on: (2, 1))
-        try! board.place(mark: .x, on: (2, 2))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (0, 2))
+        placeMark(mark: .x, on: (1, 1))
+        placeMark(mark: .o, on: (2, 1))
+        placeMark(mark: .x, on: (2, 2))
         assertWin(winner: .x, loser: .o)
     }
     
@@ -97,11 +101,11 @@ class GameAITests: XCTestCase {
          - o -
          o x -
          */
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 1))
-        try! board.place(mark: .o, on: (2, 0))
+        placeMark(mark: .o, on: (0, 2))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (1, 1))
+        placeMark(mark: .x, on: (2, 1))
+        placeMark(mark: .o, on: (2, 0))
         assertWin(winner: .o, loser: .x)
     }
     
@@ -109,12 +113,12 @@ class GameAITests: XCTestCase {
         //        - x o
         //        o x o
         //        x - -
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (1, 1))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (2, 0))
-        try! board.place(mark: .o, on: (1, 2))
+        placeMark(mark: .x, on: (0, 1))
+        placeMark(mark: .o, on: (0, 2))
+        placeMark(mark: .x, on: (1, 1))
+        placeMark(mark: .o, on: (1, 0))
+        placeMark(mark: .x, on: (2, 0))
+        placeMark(mark: .o, on: (1, 2))
         
         XCTAssertFalse(board.isFull)
         XCTAssertFalse(game(board: board, isWonBy: .x))
@@ -126,15 +130,15 @@ class GameAITests: XCTestCase {
         //        x x o
         //        o o x
         //        x o x
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (0, 2))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (1, 2))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 0))
-        try! board.place(mark: .o, on: (2, 1))
-        try! board.place(mark: .x, on: (2, 2))
+        placeMark(mark: .x, on: (0, 0))
+        placeMark(mark: .o, on: (0, 2))
+        placeMark(mark: .x, on: (0, 1))
+        placeMark(mark: .o, on: (1, 0))
+        placeMark(mark: .x, on: (1, 2))
+        placeMark(mark: .o, on: (1, 1))
+        placeMark(mark: .x, on: (2, 0))
+        placeMark(mark: .o, on: (2, 1))
+        placeMark(mark: .x, on: (2, 2))
         
         XCTAssertTrue(board.isFull)
         XCTAssertFalse(game(board: board, isWonBy: .x))
