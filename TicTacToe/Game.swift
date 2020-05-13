@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum GameStatus {
-    case newGame(GameBoard.Mark)
-    case catsGame
-    case gameOver(GameBoard.Mark)
+enum GameState {
+    case active(GameBoard.Mark)
+    case cat
+    case won(GameBoard.Mark)
 }
 
 struct Game {
@@ -22,40 +22,40 @@ struct Game {
     internal var activePlayer: GameBoard.Mark?
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
-    var gameStatus: GameStatus = .newGame(.x)
+    var gameState: GameState = .active(.x)
     
     init() {
         self.board = GameBoard()
         activePlayer = .x
-        gameStatus = .newGame(.x)
+        gameState = .active(.x)
         gameIsOver = false
     }
     
     //MARK: - Functions
     mutating internal func restart() {
-        gameStatus = .newGame(.x)
+        gameState = .active(.x)
         gameIsOver = false
         winningPlayer = nil
         activePlayer = .x
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
-        guard case let GameStatus.newGame(player) = gameStatus else {
+        guard case let GameState.active(player) = gameState else {
             NSLog("Game Over")
             return
         }
         
         try board.place(mark: player, on: coordinate)
         if game(board: board, isWonBy: player) {
-            gameStatus = .gameOver(player)
+            gameState = .won(player)
             gameIsOver = true
             winningPlayer = player
         } else if board.isFull {
-            gameStatus = .catsGame
+            gameState = .cat
             gameIsOver = true
         } else {
             let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-            gameStatus = .newGame(newPlayer)
+            gameState = .active(newPlayer)
             gameIsOver = false
             winningPlayer = nil
             activePlayer = newPlayer
