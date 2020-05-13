@@ -11,24 +11,57 @@ import XCTest
 
 class GameTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testMakeMark() {
+        var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil)
+        let coordinate: Coordinate = (0, 0)
+
+       XCTAssertNoThrow(try! game.makeMark(at: coordinate))
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testOWin() {
+        var game = Game(board: GameBoard(), gameIsOver: false, winningPlayer: nil)
+
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (2, 1))
+        try! game.makeMark(at: (1, 2))
+
+        XCTAssertTrue(game.isGameOver())
+        XCTAssertEqual(GameBoard.Mark.o, game.getWinningPlayer())
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testXWin() {
+        var game = Game(board: GameBoard(), gameIsOver: false, winningPlayer: nil)
+
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (0, 2))
+
+        XCTAssertTrue(game.isGameOver())
+        XCTAssertEqual(GameBoard.Mark.x, game.getWinningPlayer())
+    }
+    
+    func testCatsGame() {
+        var game = Game(board: GameBoard(), gameIsOver: false, winningPlayer: nil)
+
+        try! game.makeMark(at: (0, 0))
+        try! game.makeMark(at: (0, 1))
+        try! game.makeMark(at: (1, 0))
+        try! game.makeMark(at: (2, 0))
+        try! game.makeMark(at: (0, 2))
+        try! game.makeMark(at: (1, 1))
+        try! game.makeMark(at: (2, 1))
+        try! game.makeMark(at: (1, 2))
+        try! game.makeMark(at: (2, 2))
+
+        XCTAssertTrue(game.isGameOver())
+        XCTAssertNotEqual(GameBoard.Mark.x, game.getWinningPlayer())
+        XCTAssertNotEqual(GameBoard.Mark.o, game.getWinningPlayer())
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
 
 }
