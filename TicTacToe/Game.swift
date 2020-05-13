@@ -17,10 +17,11 @@ struct Game {
     
     private(set) var board: GameBoard
     private(set) var gameState = GameState.active
+    private let aiIsActive = false
     
     var activePlayer: GameBoard.Mark? = .x {
         didSet {
-            if activePlayer == GameBoard.Mark.o {
+            if activePlayer == GameBoard.Mark.o, aiIsActive {
                 self.minimax(board: board, player: .o)
             }
         }
