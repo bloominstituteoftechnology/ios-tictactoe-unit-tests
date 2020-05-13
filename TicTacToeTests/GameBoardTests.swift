@@ -11,7 +11,7 @@ import XCTest
 
 class GameBoardTests: XCTestCase {
     
-    func testCreatingEmptyBoard() {
+    func testCreatingEmptyBoard() throws {
         let board = GameBoard()
 
         for x in 0..<3 {
@@ -21,7 +21,7 @@ class GameBoardTests: XCTestCase {
         }
     }
     
-    func testPlacingMarks() {
+    func testPlacingMarks() throws {
         var board = GameBoard()
         XCTAssertNoThrow(try board.place(mark: .o, on: (0, 0)))
         XCTAssertEqual(board[(0, 0)], .o)
@@ -41,21 +41,28 @@ class GameBoardTests: XCTestCase {
         }
     }
     
-    func testIsFull() {
+    func testIsFull() throws {
         var board = GameBoard()
         
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (0, 1))
-        try! board.place(mark: .x, on: (1, 0))
-        try! board.place(mark: .o, on: (2, 0))
-        try! board.place(mark: .x, on: (0, 2))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (2, 1))
-        try! board.place(mark: .o, on: (1, 2))
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (0, 1))
+        try board.place(mark: .x, on: (1, 0))
+        try board.place(mark: .o, on: (2, 0))
+        try board.place(mark: .x, on: (0, 2))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (2, 1))
+        try board.place(mark: .o, on: (1, 2))
         XCTAssertFalse(board.isFull)
         
-        try! board.place(mark: .x, on: (2, 2))
+        try board.place(mark: .x, on: (2, 2))
         XCTAssertTrue(board.isFull)
     }
 
+    func testMarkStringValues() throws {
+        let xMark = GameBoard.Mark.x
+        let oMark = GameBoard.Mark.o
+        
+        XCTAssertEqual(xMark.stringValue, "X")
+        XCTAssertEqual(oMark.stringValue, "O")
+    }
 }
