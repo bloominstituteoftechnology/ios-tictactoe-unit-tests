@@ -112,6 +112,51 @@ class GameAITests: XCTestCase {
     func testIncompleteGame() {
         var board = GameBoard()
         
+       /*
+         x o o
+         o x x
+         x o -
+       */
+        
+        //1 mark test case
+        try! board.place(mark: .x, on: (0, 0))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //2 mark test case
+        try! board.place(mark: .o, on: (1, 0))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //3 mark test case
+        try! board.place(mark: .o, on: (2, 0))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //4 mark test case
+        try! board.place(mark: .o, on: (0, 1))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //5 mark test case
+        try! board.place(mark: .x, on: (1, 1))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //6 mark test case
+        try! board.place(mark: .x, on: (2, 1))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //7 mark test case
+        try! board.place(mark: .x, on: (0, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
+        
+        //8 mark test case
+        try! board.place(mark: .o, on: (1, 2))
+        XCTAssertFalse(game(board: board, isWonBy: .o))
+        XCTAssertFalse(game(board: board, isWonBy: .x))
     }
 
     func testCatsGame() {
