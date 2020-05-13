@@ -10,46 +10,23 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
+    //MARK: - Properties
+    var gameController = Game()
+    var delegate: BoardViewController?
+    
+    //MARK: - Actions
+    @IBAction func restartButtonPressed(_ sender: UIButton) {
+        gameController.restart()
+        updateViews()
+        print("Game Restarted")
     }
     
-    @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
-    }
-    
-    // MARK: - BoardViewControllerDelegate
-    
-    func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
-        do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
-        } catch {
-            NSLog("Illegal move")
-        }
-    }
     
     // MARK: - Private
-    
-    private func updateViews() {
+    func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
+        switch gameController.gameState {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
@@ -57,13 +34,19 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case let .won(player):
             statusLabel.text = "Player \(player.stringValue) won!"
         }
+        
+        //Update Buttons
+        if let delegate = delegate as? BoardViewController {
+            delegate.updateButtons()
+        }
+        
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
+            delegate = segue.destination as? BoardViewController
         }
     }
     
@@ -78,12 +61,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
     
     private var board = GameBoard() {
         didSet {
