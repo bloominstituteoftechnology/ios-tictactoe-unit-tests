@@ -33,13 +33,27 @@ struct GameBoard {
         case empty
     }
     
+    private var squares = Array(repeating: Square.empty, count: 9)
+    
+//    private var squares: [Square] = {
+//        var squares = Array(repeating: Square.empty, count: 9)
+//
+//        squares[4] = .filled(.o)
+//        squares[6] = .filled(.x)
+//        squares[8] = .filled(.x)
+//
+//        return squares
+//    }()
+    
+    // let gameBoard = GameBoard()
+    // let mark = gameBoard[(x: 1, y: 2)]
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
             return mark
-        } else {
-            return nil
         }
+        
+        return nil
     }
     
     mutating func place(mark: Mark, on square: Coordinate) throws {
@@ -61,6 +75,4 @@ struct GameBoard {
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
-    
-    private var squares = Array(repeating: Square.empty, count: 9)
 }
