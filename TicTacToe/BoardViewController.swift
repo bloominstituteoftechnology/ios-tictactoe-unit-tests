@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BoardViewControllerDelegate: class {
-    func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate)
+    //Do Nothing
 }
 
 class BoardViewController: UIViewController {
@@ -38,8 +38,21 @@ class BoardViewController: UIViewController {
     }
     
     // MARK: - Private
-    private func updateButtons() {
-        guard let board = board, isViewLoaded else { return }
+    func updateButtons() {
+        
+        if !isViewLoaded {
+            return
+        }
+        
+        guard let gameController = delegate?.gameController else {
+            print("Bad gameController")
+            return
+        }
+        
+        print("Button Updated")
+        
+        let board = gameController.board
+        
         
         for x in 0..<3 {
             for y in 0..<3 {

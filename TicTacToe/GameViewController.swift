@@ -8,12 +8,11 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
-    
+class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     //MARK: - Properties
     var gameController = Game()
-    
+    var delegate: BoardViewController?
     
     //MARK: - Actions
     @IBAction func restartButtonPressed(_ sender: UIButton) {
@@ -35,13 +34,19 @@ class GameViewController: UIViewController {
         case let .won(player):
             statusLabel.text = "Player \(player.stringValue) won!"
         }
+        
+        //Update Buttons
+        if let delegate = delegate as? BoardViewController {
+            delegate.updateButtons()
+        }
+        
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EmbedBoard" {
             boardViewController = segue.destination as! BoardViewController
+            delegate = segue.destination as? BoardViewController
         }
     }
     
