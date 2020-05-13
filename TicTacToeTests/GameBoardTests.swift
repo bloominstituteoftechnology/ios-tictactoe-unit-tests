@@ -58,4 +58,11 @@ class GameBoardTests: XCTestCase {
         XCTAssertTrue(board.isFull)
     }
 
+    func testMarkStringValues() throws {
+        let xMark = GameBoard.Mark.x
+        let oMark = GameBoard.Mark.o
+        
+        XCTAssertEqual(xMark.stringValue, "X")
+        XCTAssertEqual(oMark.stringValue, "O")
+    }
 }

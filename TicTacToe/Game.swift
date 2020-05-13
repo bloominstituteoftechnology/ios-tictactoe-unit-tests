@@ -24,24 +24,21 @@ struct Game {
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
-        do {
-            let player = activePlayer ?? .x
-            
-            try board.place(mark: player, on: coordinate)
-            
-            if game(board: board, isWonBy: player) {
-                winningPlayer = player
-                activePlayer = nil
-                gameIsOver = true
-            } else if board.isFull {
-                activePlayer = nil
-                gameIsOver = true
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                activePlayer = newPlayer
-            }
-        } catch {
-            NSLog("Illegal move")
+        let player = activePlayer ?? .x
+        
+        try board.place(mark: player, on: coordinate)
+        
+        if game(board: board, isWonBy: player) {
+            winningPlayer = player
+            activePlayer = nil
+            gameIsOver = true
+        } else if board.isFull {
+            winningPlayer = nil
+            activePlayer = nil
+            gameIsOver = true
+        } else {
+            let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+            activePlayer = newPlayer
         }
     }
 }
