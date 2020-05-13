@@ -11,39 +11,39 @@ import XCTest
 
 class GameAITests: XCTestCase {
     
-    func testWinCheckingVertical1() {
+    func testWinCheckingVertical1() throws {
         var board = GameBoard()
         /*
         x o -
         x o -
         x - -
         */
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 2))
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (1, 0))
+        try board.place(mark: .x, on: (0, 1))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (0, 2))
         XCTAssertTrue(game(board: board, isWonBy: .x))
         XCTAssertFalse(game(board: board, isWonBy: .o))
     }
     
-    func testWinCheckingVertical2() {
+    func testWinCheckingVertical2() throws {
         var board = GameBoard()
         /*
          x o -
          x o -
          - o -
          */
-        try! board.place(mark: .o, on: (1, 0))
-        try! board.place(mark: .x, on: (0, 0))
-        try! board.place(mark: .o, on: (1, 1))
-        try! board.place(mark: .x, on: (0, 1))
-        try! board.place(mark: .o, on: (1, 2))
+        try board.place(mark: .o, on: (1, 0))
+        try board.place(mark: .x, on: (0, 0))
+        try board.place(mark: .o, on: (1, 1))
+        try board.place(mark: .x, on: (0, 1))
+        try board.place(mark: .o, on: (1, 2))
         XCTAssertTrue(game(board: board, isWonBy: .o))
         XCTAssertFalse(game(board: board, isWonBy: .x))
     }
     
-    func testWinCheckingHorizontal1() {
+    func testWinCheckingHorizontal1() throws {
         var board = GameBoard()
         /*
          - o -
@@ -52,7 +52,7 @@ class GameAITests: XCTestCase {
          */
     }
     
-    func testWinCheckingHorizontal2() {
+    func testWinCheckingHorizontal2() throws {
         var board = GameBoard()
         /*
          x - -
@@ -61,7 +61,7 @@ class GameAITests: XCTestCase {
          */
     }
     
-    func testWinCheckingDiagonal1() {
+    func testWinCheckingDiagonal1() throws {
         var board = GameBoard()
         /*
          x - -
@@ -70,7 +70,7 @@ class GameAITests: XCTestCase {
          */
     }
     
-    func testWinCheckingDiagonal2() {
+    func testWinCheckingDiagonal2() throws {
         var board = GameBoard()
         /*
          x - o
