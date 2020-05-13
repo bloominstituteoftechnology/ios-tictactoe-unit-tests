@@ -25,12 +25,19 @@ class BoardViewController: UIViewController {
         updateButtons()
     }
     
+    //MARK: - Properties
+    var delegate: GameViewController?
+    
     @IBAction func mark(_ sender: UIButton) {
-        delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
+        do {
+            try delegate?.gameController.makeMark(at: coordinate(for: sender))
+            delegate?.updateViews()
+        } catch {
+            print("Error making mark: \(error)")
+        }
     }
     
     // MARK: - Private
-
     private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
@@ -60,14 +67,11 @@ class BoardViewController: UIViewController {
     }
     
     // MARK: - Properties
-    
     var board: GameBoard? {
         didSet {
             updateButtons()
         }
     }
-    
-    weak var delegate: BoardViewControllerDelegate?
     
     @IBOutlet var buttons: [UIButton]!
 }
