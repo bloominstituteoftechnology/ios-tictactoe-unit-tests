@@ -7,13 +7,15 @@
 //
 
 import Foundation
+
+enum GameStatus {
+    case newGame(GameBoard.Mark)
+    case catsGame
+    case gameOver(GameBoard.Mark)
+}
+
 struct Game {
     
-    enum GameStatus: Equatable {
-        case newGame(GameBoard.Mark)
-        case catsGame
-        case gameOver(GameBoard.Mark)
-    }
     
     // MARK: - Properties
     private(set) var board: GameBoard
@@ -21,6 +23,13 @@ struct Game {
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
     var gameStatus: GameStatus = .newGame(.x)
+    
+    init() {
+        self.board = GameBoard()
+        activePlayer = .x
+        gameStatus = .newGame(.x)
+        gameIsOver = false
+    }
     
     //MARK: - Functions
     mutating internal func restart() {
