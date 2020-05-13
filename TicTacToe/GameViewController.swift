@@ -34,16 +34,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        if game.gameIsOver {
-            if game.board.isFull {
-                statusLabel.text = "Cat's game!"
-            } else {
-                guard let player = game.winningPlayer else { return }
-                statusLabel.text = "Player \(player.stringValue) won!"
-            }
-        } else {
-            guard let player = game.activePlayer else { return }
-            statusLabel.text = "Player \(player.stringValue)'s turn"
+        switch game.gameState {
+        case .active:
+            statusLabel.text = "Player \(game.activePlayer!.stringValue)'s turn"
+        case .cat:
+            statusLabel.text = "Cat's game!"
+        case .won:
+            statusLabel.text = "Player \(game.winningPlayer!.stringValue) won!"
         }
     }
     

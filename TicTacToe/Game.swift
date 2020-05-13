@@ -9,22 +9,29 @@
 import Foundation
 
 struct Game {
+    enum GameState {
+        case active
+        case cat
+        case won
+    }
     
     private(set) var board: GameBoard
+    private(set) var gameState = GameState.active
     
-    var activePlayer: GameBoard.Mark?
+    var activePlayer: GameBoard.Mark? = .x
     var gameIsOver = false
     var winningPlayer: GameBoard.Mark?
     
     mutating func restart() {
         board = GameBoard()
+        gameState = .active
         activePlayer = .x
         winningPlayer = nil
         gameIsOver = false
     }
     
     mutating func makeMark(at coordinate: Coordinate) throws {
-        let player = activePlayer ?? .x
+        guard let player = activePlayer else { return }
         
         try board.place(mark: player, on: coordinate)
         
@@ -32,10 +39,12 @@ struct Game {
             winningPlayer = player
             activePlayer = nil
             gameIsOver = true
+            gameState = .won
         } else if board.isFull {
             winningPlayer = nil
             activePlayer = nil
             gameIsOver = true
+            gameState = .cat
         } else {
             let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
             activePlayer = newPlayer
