@@ -35,6 +35,10 @@ struct Game {
             gameIsOver = true
             self.activePlayer = nil
             winningPlayer = activePlayer
+        } else if board.isFull {
+            gameIsOver = true
+            self.activePlayer = nil
+        } else {
             
         }
     }
