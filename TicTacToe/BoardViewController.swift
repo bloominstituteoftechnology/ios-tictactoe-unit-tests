@@ -14,6 +14,22 @@ protocol BoardViewControllerDelegate: class {
 
 class BoardViewController: UIViewController {
     
+    @IBOutlet var buttons: [UIButton]!
+    
+    var board: GameBoard? {
+        didSet {
+            updateButtons()
+        }
+    }
+    
+    weak var delegate: BoardViewControllerDelegate?
+    
+    private var game = Games() {
+        didSet {
+            self.board = game.board
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,14 +76,5 @@ class BoardViewController: UIViewController {
     }
     
     // MARK: - Properties
-    
-    var board: GameBoard? {
-        didSet {
-            updateButtons()
-        }
-    }
-    
-    weak var delegate: BoardViewControllerDelegate?
-    
-    @IBOutlet var buttons: [UIButton]!
+
 }
