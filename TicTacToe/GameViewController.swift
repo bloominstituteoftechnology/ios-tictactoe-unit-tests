@@ -16,10 +16,19 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case won(GameBoard.Mark) // Winning player
     }
     
+    
+    private var game = Game(board: <#GameBoard#>, gameIsOver: <#Bool#>) {
+        didSet {
+            boardViewController.board = board
+        }
+    }
+
     @IBAction func restartGame(_ sender: Any) {
         board = GameBoard()
-        gameState = .active(.x)
+        
     }
+    
+    
     
     // MARK: - BoardViewControllerDelegate
     
@@ -85,9 +94,4 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
 }

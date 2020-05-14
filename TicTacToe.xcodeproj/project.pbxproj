@@ -92,8 +92,8 @@
 				9DA41C702148DE1B001A3F45 /* BoardViewController.swift */,
 				9DA41C602148AE13001A3F45 /* GameBoard.swift */,
 				9DA41C662148B945001A3F45 /* GameAI.swift */,
-				9DA41C4D2148ABCA001A3F45 /* Resources */,
 				3F4DF22D246CDFA30041D687 /* Game.swift */,
+				9DA41C4D2148ABCA001A3F45 /* Resources */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
