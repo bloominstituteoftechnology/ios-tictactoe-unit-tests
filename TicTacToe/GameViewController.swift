@@ -16,6 +16,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case won(GameBoard.Mark) // Winning player
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateViews()
+    }
+    
     @IBAction func restartGame(_ sender: Any) {
         board = GameBoard()
         gameState = .active(.x)
