@@ -15,7 +15,7 @@ class GameTests: XCTestCase {
     var board = GameBoard()
 
     func testRestart() {
-        gameTest.gameStatus = .gameOver(.o)
+        gameTest.gameState = .active(.o)
         gameTest.restart()
         XCTAssertEqual(gameTest.activePlayer, .x )
         XCTAssertFalse(game(board: board, isWonBy: .x))

@@ -33,6 +33,7 @@ struct Game {
     
     //MARK: - Functions
     mutating internal func restart() {
+        board = GameBoard()
         gameState = .active(.x)
         gameIsOver = false
         winningPlayer = nil
