@@ -10,7 +10,7 @@ import Foundation
 
 struct Games {
     
-    private enum GameState {
+    enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
@@ -22,7 +22,7 @@ struct Games {
     internal var gameIsOver: Bool = false
     internal var winningPlayer: GameBoard.Mark? = nil
     
-    private var gameState = GameState.active(.x) {
+    var gameState = GameState.active(.x) {
         didSet {
             
         }
@@ -30,17 +30,29 @@ struct Games {
 
     mutating internal func restart() {
         board = GameBoard()
-               gameState = .active(.x)
+        activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
+        gameState = .active(.x)
     }
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         
         guard let activePlayer = activePlayer else { return }
         try board.place(mark: activePlayer, on: coordinate)
         
-        if self.activePlayer == .x {
-            self.activePlayer = .o
+        if game(board: board, isWonBy: activePlayer) {
+            gameIsOver = true
+            self.activePlayer = nil
+            winningPlayer = activePlayer
+        } else if board.isFull {
+            gameIsOver = true
+            self.activePlayer = nil
         } else {
-            self.activePlayer = .x
+            if self.activePlayer == .x {
+                self.activePlayer = .o
+            } else {
+                self.activePlayer = .x
+            }
         }
         
     }
