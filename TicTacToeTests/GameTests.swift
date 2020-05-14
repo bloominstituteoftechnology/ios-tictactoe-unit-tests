@@ -7,27 +7,21 @@
 //
 
 import XCTest
+@testable import TicTacToe
 
 class GameTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testActivePlayers() throws  {
+     var game = Game()
+        XCTAssertEqual(game.activePlayer, .x)
+        
+        try game.makeMark(at: (0, 0))
+        XCTAssertEqual(game.activePlayer, .o)
+        
+       try game.makeMark(at: (1, 0))
+        XCTAssertEqual(game.activePlayer, .x)
+        
     }
 
 }
