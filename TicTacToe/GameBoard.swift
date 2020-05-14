@@ -35,11 +35,8 @@ struct GameBoard {
     
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
-        if case let Square.filled(mark) = square {
-            return mark
-        } else {
-            return nil
-        }
+        if case let Square.filled(mark) = square { return mark }
+        return nil
     }
     
     mutating func place(mark: Mark, on square: Coordinate) throws {
