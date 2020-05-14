@@ -17,15 +17,14 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     
-    private var game = Game(board: <#GameBoard#>, gameIsOver: <#Bool#>) {
-        didSet {
-            boardViewController.board = board
-        }
-    }
+   private var game = Game() {
+       didSet {
+           boardViewController.board = game.board
+       }
+   }
 
     @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        
+        game.restart()
     }
     
     
@@ -93,5 +92,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             updateViews()
         }
     }
+    
     
 }
