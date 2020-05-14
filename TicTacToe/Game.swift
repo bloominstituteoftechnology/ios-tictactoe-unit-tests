@@ -17,12 +17,26 @@ struct Game {
      internal var winningPlayer: GameBoard.Mark?
 
     mutating internal func restart() {
-        
+        board = GameBoard()
+        activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
         
     }
     
     mutating internal func makeMark(at coordinate: Coordinate) throws {
-         
+         guard let activePlayer = activePlayer,
+            gameIsOver == false else {
+                return
+        }
+        try board.place(mark: activePlayer, on: coordinate)
+        
+        if game(board: board, isWonBy: activePlayer) {
+            gameIsOver = true
+            self.activePlayer = nil
+            winningPlayer = activePlayer
+            
+        }
     }
 
  
