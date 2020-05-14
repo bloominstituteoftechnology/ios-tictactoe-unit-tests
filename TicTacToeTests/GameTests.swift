@@ -50,18 +50,33 @@ class GameTests: XCTestCase {
     
     func testPlayerXWins() throws {
         var game = Game()
+    
+        XCTAssertNil(game.winningPlayer)
+        
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (0, 1))
+        try game.makeMark(at: (1, 0))
+        try game.makeMark(at: (0, 2))
+        try game.makeMark(at: (2, 0))
+        
+        XCTAssertEqual(game.winningPlayer, .x)
+        XCTAssertNotEqual(game.winningPlayer, .o)
+    }
+    
+      func testPlayerOWins() throws {
+        var game = Game()
         
         XCTAssertNil(game.winningPlayer)
         
-        try game.makeMark(at: (0, 2))
-        try game.makeMark(at: (1, 1))
-        try game.makeMark(at: (2, 0))
-        try game.makeMark(at: (0, 0))
-        try game.makeMark(at: (0, 1))
-        try game.makeMark(at: (2, 1))
+      try game.makeMark(at: (2, 1))
+      try game.makeMark(at: (0, 0))
+      try game.makeMark(at: (1, 0))
+      try game.makeMark(at: (1, 1))
+      try game.makeMark(at: (2, 0))
+      try game.makeMark(at: (2, 2))
         
-        XCTAssertEqual(game.activePlayer, .x)
-        XCTAssertNotEqual(game.activePlayer, .o)
+        XCTAssertEqual(game.winningPlayer, .o)
+        XCTAssertNotEqual(game.winningPlayer, .x)
     }
 
 }
