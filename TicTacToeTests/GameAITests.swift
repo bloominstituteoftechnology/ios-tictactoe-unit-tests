@@ -35,6 +35,7 @@ class GameAITests: XCTestCase {
          - o -
          */
         try! board.place(mark: .o, on: (1, 0))
+        
         try! board.place(mark: .x, on: (0, 0))
         try! board.place(mark: .o, on: (1, 1))
         try! board.place(mark: .x, on: (0, 1))

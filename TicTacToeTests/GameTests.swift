@@ -129,17 +129,17 @@ class GameTests: XCTestCase {
         try game.makeMark(at: (2, 2))
         
         do {
-                  try game.makeMark(at: (2, 2))
-              } catch {
-                  XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
-              }
+            try game.makeMark(at: (2, 2))
+        } catch {
+            XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
+        }
         
         try game.makeMark(at: (0, 2))
-               
-               do {
-                         try game.makeMark(at: (0, 2))
-                     } catch {
-                         XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
-                     }
+        
+        do {
+            try game.makeMark(at: (0, 2))
+        } catch {
+            XCTAssertEqual(error as? GameBoardError, GameBoardError.invalidSquare)
+        }
     }
 }

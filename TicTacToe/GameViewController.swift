@@ -28,15 +28,23 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
                boardViewController?.delegate = self
            }
        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateViews()
+    }
        
     private func updateViews() {
          guard isViewLoaded else { return }
          
         if let player = game.activePlayer {
              statusLabel.text = "Player \(player.stringValue)'s turn"
-        } else if game.gameIsOver {
+        }
+        if game.gameIsOver {
              statusLabel.text = "Cat's game!"
-        } else if let winningPlayer = game.winningPlayer {
+        }
+        if let winningPlayer = game.winningPlayer {
              statusLabel.text = "Player \(winningPlayer.stringValue) won!"
          }
      }

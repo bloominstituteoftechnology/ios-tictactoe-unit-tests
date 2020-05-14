@@ -34,12 +34,22 @@ class BoardViewController: UIViewController {
     private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
+        //top left
+        // top center
+        // top right
+        // middle left
+        // middle center
+        // middle right
+        
+        let xLabels = ["Left", "Center", "Right"]
+       let yLabels = ["Top", "Middle", "Bottom"]
         for x in 0..<3 {
             for y in 0..<3 {
                 let coord = (x, y)
                 let button = self.button(for: coord)
                 if let mark = board[coord] {
                     button.setTitle(mark.stringValue, for: .normal)
+                    button.accessibilityLabel = "\(yLabels[y]) \(xLabels[x]) is Empty"
                 } else {
                     button.setTitle(" ", for: .normal)
                 }
