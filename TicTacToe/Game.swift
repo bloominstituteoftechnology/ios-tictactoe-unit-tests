@@ -39,7 +39,7 @@ struct Game {
             gameIsOver = true
             self.activePlayer = nil
         } else {
-            
+            self.activePlayer = activePlayer == .x ? .o : .x
         }
     }
 
