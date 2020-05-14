@@ -47,5 +47,21 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game.gameIsOver)
         
     }
+    
+    func testPlayerXWins() throws {
+        var game = Game()
+        
+        XCTAssertNil(game.winningPlayer)
+        
+        try game.makeMark(at: (0, 2))
+        try game.makeMark(at: (1, 1))
+        try game.makeMark(at: (2, 0))
+        try game.makeMark(at: (0, 0))
+        try game.makeMark(at: (0, 1))
+        try game.makeMark(at: (2, 1))
+        
+        XCTAssertEqual(game.activePlayer, .x)
+        XCTAssertNotEqual(game.activePlayer, .o)
+    }
 
 }
