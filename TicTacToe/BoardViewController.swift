@@ -13,7 +13,7 @@ protocol BoardViewControllerDelegate: class {
 }
 
 class BoardViewController: UIViewController {
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +32,8 @@ class BoardViewController: UIViewController {
     // MARK: - Private
 
     private func updateButtons() {
-        guard let board = board, isViewLoaded else { return }
+        guard let game = game, isViewLoaded else { return }
+        let board = game.board
         
         for x in 0..<3 {
             for y in 0..<3 {
@@ -66,6 +67,11 @@ class BoardViewController: UIViewController {
             updateButtons()
         }
     }
+    var game: Game? {
+           didSet {
+               updateButtons()
+           }
+       }
     
     weak var delegate: BoardViewControllerDelegate?
     
