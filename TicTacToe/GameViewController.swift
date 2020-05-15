@@ -40,6 +40,12 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        statusLabel.text = "Player X's turn"
+        game.restart()
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +75,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     private var board = GameBoard() {
         didSet {
-            updateViews()
+//            updateViews()
             boardViewController.board = board
         }
     }

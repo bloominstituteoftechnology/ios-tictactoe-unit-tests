@@ -67,6 +67,11 @@ class BoardViewController: UIViewController {
             updateButtons()
         }
     }
+    var game: Game? {
+           didSet {
+               updateButtons()
+           }
+       }
     
     weak var delegate: BoardViewControllerDelegate?
     

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import TicTacToe
 
 extension XCUIElement {
     var visibleLabel: String {
@@ -96,7 +97,6 @@ class TicTacToeUITests: XCTestCase {
     
     func testWinCheckingVertical1() {
         app.launch()
-        
         XCTAssertEqual(buttonFor(1).visibleLabel, Mark.empty.rawValue)
         buttonFor(1).tap()
         XCTAssertEqual(buttonFor(1).visibleLabel, Mark.x.rawValue)
