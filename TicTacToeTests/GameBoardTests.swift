@@ -50,7 +50,7 @@ class GameBoardTests: XCTestCase {
         XCTAssertEqual(board[(2, 2)], .x)
         
         // Make sure things dont change if we place an .o on the same tile
-        XCTAssertThrowsError(try! board.place(mark: .o, on: (2, 2)))
+        XCTAssertThrowsError(try board.place(mark: .o, on: (2, 2)))
         XCTAssertEqual(board[(2, 2)], .x)
         
         for y in 0...2 {
