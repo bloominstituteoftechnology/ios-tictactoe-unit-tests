@@ -7,11 +7,34 @@
 //
 
 import XCTest
+@testable import TicTacToe
 
 class GameBoardTests: XCTestCase {
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCreatingEmptyBoard() {
+        let board = GameBoard()
+        
+        // XCTAssert(board[(x: 0, y: 0)] == nil)
+        
+        // Check the first row
+        XCTAssertNil(board[(x: 0, y: 0)])
+        XCTAssertNil(board[(x: 1, y: 0)])
+        XCTAssertNil(board[(x: 2, y: 0)])
+        
+        // Check the second row
+        XCTAssertNil(board[(x: 0, y: 1)])
+        XCTAssertNil(board[(x: 1, y: 1)])
+        XCTAssertNil(board[(x: 2, y: 1)])
+        
+        // Check the third row
+        XCTAssertNil(board[(x: 0, y: 2)])
+        XCTAssertNil(board[(x: 1, y: 2)])
+        XCTAssertNil(board[(x: 2, y: 2)])
+        
+        for y in 0...2 {
+            for x in 0...2 {
+                XCTAssertNil(board[(x, y)], "⚠️ The entry at (\(x), \(y)) was \(board[(x, y)]!) instead of nil :(")
+            }
+        }
     }
 }
