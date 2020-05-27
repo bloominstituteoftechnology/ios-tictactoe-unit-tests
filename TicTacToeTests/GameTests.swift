@@ -21,4 +21,8 @@ class GameTests: XCTestCase {
         // Make sure that the player starting is X
         XCTAssertEqual(game.activePlayer, .x)
     }
+    
+    func testmakeMark() throws {
+        
+    }
 }

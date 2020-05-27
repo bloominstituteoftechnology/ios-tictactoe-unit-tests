@@ -18,6 +18,10 @@ struct Game {
     // MARK: Functions
     mutating func restart() {
         // Restarts the game to a fresh state with an empty board, and player X starting.
+        board = GameBoard()
+        activePlayer = .x
+        gameIsOver = false
+        winningPlayer = nil
         
     }
     
