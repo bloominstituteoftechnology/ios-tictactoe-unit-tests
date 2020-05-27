@@ -31,12 +31,21 @@ struct Game {
         
         try board.place(mark: activePlayer, on: coordinate)
         
-        // Switch the player
-        if activePlayer == .x {
-            self.activePlayer = .o
+        if game(board: board, isWonBy: activePlayer) {
+            gameIsOver = true
+            winningPlayer = activePlayer
+        } else if board.isFull {
+            gameIsOver = true
+            winningPlayer = nil
         } else {
-            self.activePlayer = .x
+            // Switch the player
+            if activePlayer == .x {
+                self.activePlayer = .o
+            } else {
+                self.activePlayer = .x
+            }
         }
+        
     }
     
 }

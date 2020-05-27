@@ -10,17 +10,16 @@ import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     
+    // MARK: - Private Properties
     private var boardViewController: BoardViewController! {
         willSet {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = currentGame.board
             boardViewController?.delegate = self
         }
     }
-    
-    @IBOutlet weak var statusLabel: UILabel!
     
     private var gameState = GameState.active(.x) {
         didSet {
@@ -28,23 +27,29 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
-    
     private var currentGame: Game = Game() {
-        didSet {
-            updateViews()
-        }
-    }
+          didSet {
+              updateViews()
+          }
+      }
+      
+      private enum GameState {
+          case active(GameBoard.Mark) // Active player
+          case cat
+          case won(GameBoard.Mark) // Winning player
+      }
     
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-    }
+        private var board = GameBoard() {
+            didSet {
+                boardViewController.board = board
+            }
+        }
+    
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var statusLabel: UILabel!
+    
+  // MARK: - IBActions
     
     @IBAction func restartGame(_ sender: Any) {
         currentGame.restart()
@@ -80,8 +85,8 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EmbedBoard" {
-            boardViewController = segue.destination as! BoardViewController
+        if segue.identifier == "EmbedBoard", let destinationVC = segue.destination as? BoardViewController {
+            boardViewController = destinationVC
         }
     }
     
