@@ -28,7 +28,7 @@ struct GameBoard {
         }
     }
     
-    private enum Square: Equatable {
+    enum Square: Equatable {
         case filled(Mark)
         case empty
     }
@@ -58,9 +58,9 @@ struct GameBoard {
         return true
     }
     
-    private func arrayIndex(for square: Coordinate) -> Int {
+    func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
     
-    private var squares = Array(repeating: Square.empty, count: 9)
+    var squares = Array(repeating: Square.empty, count: 9)
 }
