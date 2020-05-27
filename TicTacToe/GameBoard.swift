@@ -58,6 +58,15 @@ struct GameBoard {
         return true
     }
     
+    var isEmpty: Bool {
+        for square in squares {
+            if square != .empty {
+                return false
+            }
+        }
+        return true
+    }
+    
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
