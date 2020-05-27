@@ -25,14 +25,18 @@ struct Game {
         
     }
     
-//    @IBAction func restartGame(_ sender: Any) {
-//        board = GameBoard()
-//        gameState = .active(.x)
-//    }
-    
     mutating func makeMark(at coordinate: Coordinate) throws {
         // adds a mark for the currently active player at the given coordinate. Updates game state.
+        guard let activePlayer = activePlayer else { return }
+        
+        try board.place(mark: activePlayer, on: coordinate)
+        
+        // Switch the player
+        if activePlayer == .x {
+            self.activePlayer = .o
+        } else {
+            self.activePlayer = .x
+        }
     }
-    
     
 }
