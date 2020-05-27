@@ -15,6 +15,22 @@ struct Game {
     var gameIsOver: Bool = false
     var winningPlayer: GameBoard.Mark? = nil
     
+    enum GameState {
+        case active(GameBoard.Mark) // Active player
+        case cat
+        case won(GameBoard.Mark) // Winning player
+    }
+    
+    var state: GameState {
+        if let winningPlayer = winningPlayer {
+            return .won(winningPlayer)
+        } else if gameIsOver {
+            return .cat
+        } else {
+            return .active(activePlayer!)
+        }
+    }
+    
     // MARK: Functions
     mutating func restart() {
         // Restarts the game to a fresh state with an empty board, and player X starting.

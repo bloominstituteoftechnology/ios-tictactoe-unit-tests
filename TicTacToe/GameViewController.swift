@@ -16,34 +16,17 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = currentGame.board
+            boardViewController?.board = game.board
             boardViewController?.delegate = self
         }
     }
     
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var currentGame: Game = Game() {
+    private var game = Game() {
           didSet {
-              updateViews()
+            boardViewController.board  = game.board
+            updateViews()
           }
       }
-      
-      private enum GameState {
-          case active(GameBoard.Mark) // Active player
-          case cat
-          case won(GameBoard.Mark) // Winning player
-      }
-    
-        private var board = GameBoard() {
-            didSet {
-                boardViewController.board = board
-            }
-        }
     
     
     // MARK: - IBOutlets
@@ -52,15 +35,16 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
   // MARK: - IBActions
     
     @IBAction func restartGame(_ sender: Any) {
-        currentGame.restart()
+        game.restart()
     }
     
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
+        guard !game.gameIsOver else { return }
         
         do {
-            try currentGame.makeMark(at: coordinate)
+            try game.makeMark(at: coordinate)
             updateViews()
         } catch {
             NSLog("Illegal move")
@@ -72,7 +56,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
+        switch game.state {
         case let .active(player):
             statusLabel.text = "Player \(player.stringValue)'s turn"
         case .cat:
