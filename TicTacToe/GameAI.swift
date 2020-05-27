@@ -23,5 +23,18 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         return true
     }
     
+    // checking vertical column 1
+    numberofMarks = 0
+    
+    for y in 0...2 {
+        if board[(1, y)] == player {
+            numberofMarks += 1
+        }
+    }
+    
+    if numberofMarks == 3 {
+        return true
+    }
+    
     return false
 }
