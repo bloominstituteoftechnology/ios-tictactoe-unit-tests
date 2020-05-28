@@ -8,6 +8,13 @@
 
 import Foundation
 
-func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {    
+func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
+    for x in 0..<3 {
+        var numMarks = 0
+        for y in 0..<3 {
+            if board[(x, y)] == player
+        }
+    }
+    
     return false
 }
