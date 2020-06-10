@@ -42,11 +42,11 @@ struct GameBoard {
         return true
     }
     
+    private var squares = Array(repeating: Square.empty, count: 9)
+    
     private func arrayIndex(for square: Coordinate) -> Int {
         return square.y * 3 + square.x
     }
-    
-    private var squares = Array(repeating: Square.empty, count: 9)
     
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
