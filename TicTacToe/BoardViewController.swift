@@ -14,6 +14,18 @@ protocol BoardViewControllerDelegate: class {
 
 class BoardViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var board: GameBoard? {
+        didSet {
+            updateButtons()
+        }
+    }
+    
+    weak var delegate: BoardViewControllerDelegate?
+    
+    @IBOutlet var buttons: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,16 +70,4 @@ class BoardViewController: UIViewController {
         let y = tag / 3
         return (x, y)
     }
-    
-    // MARK: - Properties
-    
-    var board: GameBoard? {
-        didSet {
-            updateButtons()
-        }
-    }
-    
-    weak var delegate: BoardViewControllerDelegate?
-    
-    @IBOutlet var buttons: [UIButton]!
 }
