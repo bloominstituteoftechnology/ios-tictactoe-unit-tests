@@ -33,6 +33,21 @@ struct GameBoard {
         case empty
     }
     
+    var isFull: Bool {
+        for square in squares {
+            if square == .empty {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func arrayIndex(for square: Coordinate) -> Int {
+        return square.y * 3 + square.x
+    }
+    
+    private var squares = Array(repeating: Square.empty, count: 9)
+    
     subscript(coordinate: Coordinate) -> Mark? {
         let square = squares[arrayIndex(for: coordinate)]
         if case let Square.filled(mark) = square {
@@ -48,19 +63,4 @@ struct GameBoard {
         }
         squares[arrayIndex(for: square)] = .filled(mark)
     }
-    
-    var isFull: Bool {
-        for square in squares {
-            if square == .empty {
-                return false
-            }
-        }
-        return true
-    }
-    
-    private func arrayIndex(for square: Coordinate) -> Int {
-        return square.y * 3 + square.x
-    }
-    
-    private var squares = Array(repeating: Square.empty, count: 9)
 }
