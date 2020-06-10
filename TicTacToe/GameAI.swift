@@ -9,65 +9,50 @@
 import Foundation
 
 func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
-    
-    // checking vertical columns
-    for x in 0...2 {
-        var numberofMarks = 0
-        
-        for y in 0...2 {
+    // Check verticals
+    for x in 0..<3 {
+        var numMarks = 0
+        for y in 0..<3 {
             if board[(x, y)] == player {
-                numberofMarks += 1
+                numMarks += 1
             }
         }
-        
-        if numberofMarks == 3 {
+        if numMarks == 3 {
             return true
         }
     }
     
-    // checking horizontal columns
-    for y in 0...2 {
-        var numberofMarks = 0
-        
-        for x in 0...2 {
+    // Check horizontals
+    for y in 0..<3 {
+        var numMarks = 0
+        for x in 0..<3 {
             if board[(x, y)] == player {
-                numberofMarks += 1
+                numMarks += 1
             }
         }
-        
-        if numberofMarks == 3 {
+        if numMarks == 3 {
             return true
-            
         }
     }
     
-    // checking diagonalA columns
-    let leftToRight: [Coordinate] = [(0, 0), (1,1), (2,2)]
-    var numberOfMarks = 0
-    
-    for coordinate in leftToRight {
-        if board[coordinate] == player {
-            numberOfMarks += 1
+    // Check diagonals
+    let ltr: [Coordinate] = [(0,0), (1, 1), (2,2)]
+    var numMatches = 0
+    for coord in ltr {
+        if board[coord] == player {
+            numMatches += 1
         }
     }
+    if numMatches == 3 { return true }
     
-    if numberOfMarks == 3 {
-        return true
-    }
-    
-    // checking diagonalB columns
-    let rightToLeft: [Coordinate] = [(2, 0), (1,1), (0,2)]
-    numberOfMarks = 0
-    
-    for coordinate in rightToLeft {
-        if board[coordinate] == player {
-            numberOfMarks += 1
+    let rtl: [Coordinate] = [(2,0), (1, 1), (0,2)]
+    numMatches = 0
+    for coord in rtl {
+        if board[coord] == player {
+            numMatches += 1
         }
     }
-    
-    if numberOfMarks == 3 {
-        return true
-    }
+    if numMatches == 3 { return true }
     
     return false
 }
