@@ -49,6 +49,10 @@ struct GameBoard {
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
+    mutating func removeAll() {
+        squares = []
+    }
+    
     var isFull: Bool {
         for square in squares {
             if square == .empty {
@@ -56,6 +60,15 @@ struct GameBoard {
             }
         }
         return true
+    }
+    
+    var isEmpty: Bool {
+        for square in squares {
+            if square == .empty {
+                return true
+            }
+        }
+        return false
     }
     
     private func arrayIndex(for square: Coordinate) -> Int {
