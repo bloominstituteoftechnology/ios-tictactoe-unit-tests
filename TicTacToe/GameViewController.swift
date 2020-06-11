@@ -25,18 +25,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = nil
         }
         didSet {
-            boardViewController?.board = board
+            boardViewController?.board = currentGame.board
             boardViewController?.delegate = self
         }
     }
     private var gameState = GameState.active(.x) {
         didSet {
             updateViews()
-        }
-    }
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
         }
     }
     
@@ -69,13 +64,25 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
+        switch currentGame.activePlayer {
+        case .x:
+            statusLabel.text = "X's Turn."
+        case .o:
+            statusLabel.text = "O's Turn."
+        default:
+            switch currentGame.winningPlayer {
+            case .x:
+                statusLabel.text = "X wins! Play again?"
+            case .o:
+                statusLabel.text = "Y wins! Play again?"
+            default:
+                switch currentGame.gameIsOver {
+                case true:
+                    statusLabel.text = "Game to the Cat. Play again?"
+                case false:
+                    restartGame(self)
+                }
+            }
         }
     }
     
