@@ -11,6 +11,7 @@ import UIKit
 class GameViewController: UIViewController, BoardViewControllerDelegate {
     //MARK: - Properties -
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var restartButton: UIButton!
     
     private var currentGame: Game = Game() {
         didSet {
@@ -55,6 +56,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     //MARK: - Actions -
     @IBAction func restartGame(_ sender: Any) {
         currentGame.restart()
+        restartButton.setTitle("Restart", for: .normal)
     }
     
     
@@ -66,8 +68,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         case true:
             if let winner = currentGame.winningPlayer {
                 statusLabel.text = "\(winner.stringValue) Wins!"
+                restartButton.setTitle("Play Again?", for: .normal)
             } else {
-                statusLabel.text = "Game goes to the cat. Play again?"
+                statusLabel.text = "Game goes to the cat."
+                restartButton.setTitle("Play Again?", for: .normal)
             }
         default:
             statusLabel.text = "It's \(currentGame.activePlayer!.stringValue)'s turn. Please mark a spot."
