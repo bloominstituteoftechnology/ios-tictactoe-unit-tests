@@ -33,12 +33,14 @@ class BoardViewController: UIViewController {
         updateButtons()
     }
     
+    
+    // MARK: - Actions -
     @IBAction func mark(_ sender: UIButton) {
         delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
     }
     
     
-    // MARK: - Actions -
+    //MARK: - Methods -
     private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
@@ -56,7 +58,6 @@ class BoardViewController: UIViewController {
     }
     
     
-    //MARK: - Methods -
     private func button(for coordinate: Coordinate) -> UIButton {
         let tag = coordinate.y * 3 + coordinate.x
         return view.viewWithTag(tag) as! UIButton
