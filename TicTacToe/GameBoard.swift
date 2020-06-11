@@ -14,6 +14,7 @@ enum GameBoardError: Error, Equatable {
 
 typealias Coordinate = (x: Int, y: Int)
 
+
 struct GameBoard {
     //MARK: - Types -
     enum Mark: Equatable {
@@ -42,6 +43,7 @@ struct GameBoard {
         }
     }
     
+    
     //MARK: - Properties -
     private var squares = Array(repeating: Square.empty, count: 9)
     var isFull: Bool {
@@ -60,10 +62,6 @@ struct GameBoard {
             throw GameBoardError.invalidSquare
         }
         squares[arrayIndex(for: square)] = .filled(mark)
-    }
-    
-    mutating func clear() {
-        squares = Array(repeating: Square.empty, count: 9)
     }
     
     

@@ -57,7 +57,6 @@ class BoardViewController: UIViewController {
         }
     }
     
-    
     private func button(for coordinate: Coordinate) -> UIButton {
         let tag = coordinate.y * 3 + coordinate.x
         return view.viewWithTag(tag) as! UIButton
