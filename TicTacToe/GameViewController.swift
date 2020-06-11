@@ -58,7 +58,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     }
     
     
-    // MARK: - Private
+    //MARK: - Methods -
     private func updateViews() {
         guard isViewLoaded else { return }
         
