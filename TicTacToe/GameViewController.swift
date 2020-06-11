@@ -9,17 +9,15 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
-    private enum GameState {
-        case active(GameBoard.Mark) // Active player
-        case cat
-        case won(GameBoard.Mark) // Winning player
-    }
-    
-    
     //MARK: - Properties -
-    var currentGame: Game = Game()
     @IBOutlet weak var statusLabel: UILabel!
     
+    private var currentGame: Game = Game() {
+        didSet {
+            updateViews()
+            boardViewController.board = currentGame.board
+        }
+    }
     private var boardViewController: BoardViewController! {
         willSet {
             boardViewController?.delegate = nil
@@ -29,15 +27,15 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
             boardViewController?.delegate = self
         }
     }
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
     
     
     // MARK: - BoardViewControllerDelegate -
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
+        guard !currentGame.gameIsOver else {
+            NSLog("GAME OVER")
+            return
+        }
+        
         do {
             try currentGame.makeMark(at: coordinate)
         } catch {
@@ -64,29 +62,15 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch currentGame.activePlayer {
-        case .x:
-            statusLabel.text = "X's Turn."
-        case .o:
-            statusLabel.text = "O's Turn."
-        default:
-            switch currentGame.winningPlayer {
-            case .x:
-                statusLabel.text = "X wins! Play again?"
-            case .o:
-                statusLabel.text = "Y wins! Play again?"
-            default:
-                switch currentGame.gameIsOver {
-                case true:
-                    statusLabel.text = "Game to the Cat. Play again?"
-                case false:
-                    restartGame(self)
-                }
+        switch currentGame.gameIsOver {
+        case true:
+            if let winner = currentGame.winningPlayer {
+                statusLabel.text = "\(winner.stringValue) Wins!"
+            } else {
+                statusLabel.text = "Game goes to the cat. Play again?"
             }
+        default:
+            statusLabel.text = "It's \(currentGame.activePlayer!.stringValue)'s turn. Please mark a spot."
         }
     }
-    
-    
-    
-    
 }

@@ -62,6 +62,10 @@ struct GameBoard {
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
+    mutating func clear() {
+        squares = Array(repeating: Square.empty, count: 9)
+    }
+    
     
     //MARK: - Methods -
     private func arrayIndex(for square: Coordinate) -> Int {
