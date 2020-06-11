@@ -9,43 +9,63 @@
 import UIKit
 
 class GameViewController: UIViewController, BoardViewControllerDelegate {
-    
     private enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
     }
     
-    @IBAction func restartGame(_ sender: Any) {
-        board = GameBoard()
-        gameState = .active(.x)
+    
+    //MARK: - Properties -
+    var currentGame: Game = Game()
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    private var boardViewController: BoardViewController! {
+        willSet {
+            boardViewController?.delegate = nil
+        }
+        didSet {
+            boardViewController?.board = board
+            boardViewController?.delegate = self
+        }
+    }
+    private var gameState = GameState.active(.x) {
+        didSet {
+            updateViews()
+        }
+    }
+    private var board = GameBoard() {
+        didSet {
+            boardViewController.board = board
+        }
     }
     
-    // MARK: - BoardViewControllerDelegate
     
+    // MARK: - BoardViewControllerDelegate -
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {
-        guard case let GameState.active(player) = gameState else {
-            NSLog("Game is over")
-            return
-        }
-        
         do {
-            try board.place(mark: player, on: coordinate)
-            if game(board: board, isWonBy: player) {
-                gameState = .won(player)
-            } else if board.isFull {
-                gameState = .cat
-            } else {
-                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                gameState = .active(newPlayer)
-            }
+            try currentGame.makeMark(at: coordinate)
         } catch {
-            NSLog("Illegal move")
+            NSLog("Invalid Move.")
         }
     }
+    
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EmbedBoard" {
+            boardViewController = (segue.destination as! BoardViewController)
+        }
+    }
+    
+    
+    //MARK: - Actions -
+    @IBAction func restartGame(_ sender: Any) {
+        currentGame.restart()
+    }
+    
     
     // MARK: - Private
-    
     private func updateViews() {
         guard isViewLoaded else { return }
         
@@ -59,35 +79,7 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-    // MARK: - Navigation
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "EmbedBoard" {
-            boardViewController = (segue.destination as! BoardViewController)
-        }
-    }
     
-    private var boardViewController: BoardViewController! {
-        willSet {
-            boardViewController?.delegate = nil
-        }
-        didSet {
-            boardViewController?.board = board
-            boardViewController?.delegate = self
-        }
-    }
     
-    @IBOutlet weak var statusLabel: UILabel!
-    
-    private var gameState = GameState.active(.x) {
-        didSet {
-            updateViews()
-        }
-    }
-    
-    private var board = GameBoard() {
-        didSet {
-            boardViewController.board = board
-        }
-    }
 }

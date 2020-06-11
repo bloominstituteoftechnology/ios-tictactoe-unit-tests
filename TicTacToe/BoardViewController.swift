@@ -13,15 +13,23 @@ protocol BoardViewControllerDelegate: class {
 }
 
 class BoardViewController: UIViewController {
+    // MARK: - Properties
+    @IBOutlet var buttons: [UIButton]!
+    weak var delegate: BoardViewControllerDelegate?
+    var board: GameBoard? {
+        didSet {
+            updateButtons()
+        }
+    }
     
+    
+    //MARK: - Life Cycles -
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         for button in buttons {
             button.layer.borderWidth = 2.0
             button.layer.borderColor = UIColor.black.cgColor
         }
-        
         updateButtons()
     }
     
@@ -29,8 +37,8 @@ class BoardViewController: UIViewController {
         delegate?.boardViewController(self, markWasMadeAt: coordinate(for: sender))
     }
     
-    // MARK: - Private
-
+    
+    // MARK: - Actions -
     private func updateButtons() {
         guard let board = board, isViewLoaded else { return }
         
@@ -47,6 +55,8 @@ class BoardViewController: UIViewController {
         }
     }
     
+    
+    //MARK: - Methods -
     private func button(for coordinate: Coordinate) -> UIButton {
         let tag = coordinate.y * 3 + coordinate.x
         return view.viewWithTag(tag) as! UIButton
@@ -58,16 +68,4 @@ class BoardViewController: UIViewController {
         let y = tag / 3
         return (x, y)
     }
-    
-    // MARK: - Properties
-    
-    var board: GameBoard? {
-        didSet {
-            updateButtons()
-        }
-    }
-    
-    weak var delegate: BoardViewControllerDelegate?
-    
-    @IBOutlet var buttons: [UIButton]!
 }
