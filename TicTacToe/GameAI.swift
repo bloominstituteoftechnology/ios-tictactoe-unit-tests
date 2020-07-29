@@ -14,10 +14,12 @@ func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {
         var numMarks = 0
         for y in 0..<3 {
             if board[(x, y)] == player {
+                // Player marked the board at this given coordinate on the board
                 numMarks += 1
             }
         }
         if numMarks == 3 {
+            // player won
             return true
         }
     }
