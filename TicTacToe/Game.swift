@@ -21,21 +21,24 @@ struct Game {
         do {
             try board.place(mark: activePlayer!, on: coordinate)
             if game(board: board, isWonBy: activePlayer!) {
-                //gameState = .won(activePlayer!)
+                winningPlayer = activePlayer
+                gameIsOver = true
             } else if board.isFull {
-                //gameState = .cat
+                winningPlayer = nil
+                gameIsOver = true
             } else {
                 let newPlayer = activePlayer == .x ? GameBoard.Mark.o : GameBoard.Mark.x
-                //gameState = .active(newPlayer)
+                winningPlayer = nil
+                gameIsOver = false
             }
         } catch {
             NSLog("Illegal move")
         }
     }
 
-  internal var board: GameBoard
-
-  internal var activePlayer: GameBoard.Mark?
-  internal var gameIsOver: Bool
-  internal var winningPlayer: GameBoard.Mark?
+    private(set) var board: GameBoard
+    
+    internal var activePlayer: GameBoard.Mark?
+    internal var gameIsOver: Bool
+    internal var winningPlayer: GameBoard.Mark?
 }
