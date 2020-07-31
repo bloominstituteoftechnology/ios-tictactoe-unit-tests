@@ -10,7 +10,7 @@ import UIKit
 
 
 struct Game {
-    enum GameState {
+    enum GameState: Equatable {
         case active(GameBoard.Mark) // Active player
         case cat
         case won(GameBoard.Mark) // Winning player
@@ -19,7 +19,6 @@ struct Game {
     mutating internal func restart() {
         board = GameBoard()
         gameState = .active(.x)
-        winningPlayer = nil
         gameIsOver = false
     }
     mutating internal func makeMark(at coordinate: Coordinate) throws {
