@@ -34,14 +34,13 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     private func updateViews() {
         guard isViewLoaded else { return }
         
-        switch game.gameState {
-        case let .active(player):
-            statusLabel.text = "Player \(player.stringValue)'s turn"
-        case .cat:
-            statusLabel.text = "Cat's game!"
-        case let .won(player):
-            statusLabel.text = "Player \(player.stringValue) won!"
-        }
+           if let winner = game.winningPlayer?.stringValue {
+               statusLabel.text = "Player \(winner) won!"
+           } else if let player = game.activePlayer?.stringValue {
+               statusLabel.text = "Player \(player)'s turn"
+           } else if game.gameIsOver {
+               statusLabel.text = "Cat's game!"
+           }
     }
     
     // MARK: - Navigation
@@ -64,9 +63,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    var game = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil, gameState: .active(.x)){
+    var game = Game(board: GameBoard(), gameState: .active(.x), activePlayer: .x, gameIsOver: false, winningPlayer: nil){
         didSet{
             boardViewController.board = game.board
+            updateViews()
         }
     }
 }

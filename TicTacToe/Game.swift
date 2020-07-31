@@ -9,6 +9,7 @@
 import Foundation
 
 struct Game {
+    
     enum GameState {
         case active(GameBoard.Mark) // Active player
         case cat
@@ -43,9 +44,26 @@ struct Game {
     }
     
     private(set) var board: GameBoard
+    internal var gameState = GameState.active(.x) {
+          didSet {
+              switch gameState {
+              case .active(let player):
+                  winningPlayer = nil
+                  gameIsOver = false
+                  activePlayer = player
+              case .cat:
+                  winningPlayer = nil
+                  gameIsOver = true
+                  activePlayer = nil
+              case .won(let player):
+                  winningPlayer = player
+                  gameIsOver = true
+                  activePlayer = nil
+              }
+          }
+      }
     
     internal var activePlayer: GameBoard.Mark?
     internal var gameIsOver: Bool
     internal var winningPlayer: GameBoard.Mark?
-    internal var gameState: GameState
 }
