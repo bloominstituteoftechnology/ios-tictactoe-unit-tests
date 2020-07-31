@@ -8,6 +8,11 @@
 
 import UIKit
 
+// Access controls
+// open - (only applicable for classes) any target can access and subclass
+// public - any target can access var/func/constant/class/struct
+// 
+
 class GameViewController: UIViewController, BoardViewControllerDelegate {
 
     override func viewDidLoad() {
@@ -68,9 +73,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
 //        }
 //    }
 
-    var games = Game(board: GameBoard(), activePlayer: .x, gameIsOver: false, winningPlayer: nil, gameState: .active(.x)) {
+    var games = Game(board: GameBoard(), gameIsOver: false, winningPlayer: nil, gameState: .active(.x)) {
         didSet {
             boardViewController.board = games.board
+            updateViews()
         }
     }
 }
