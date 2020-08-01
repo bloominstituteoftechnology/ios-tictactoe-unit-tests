@@ -8,6 +8,14 @@
 
 import XCTest
 @testable import TicTacToe
+//testable gives special access to internal variable/functions/actions
+//access controls
+//open- only applicable for classes, any target can access and subclass
+//public - anyone can access
+//internal- default setting, anyonein the same target can access
+//file private - only in same file
+//private - only in same class
+//final means it can't be subclasses
 
 class GameBoardTests: XCTestCase {
     

@@ -13,14 +13,35 @@ class GameTests: XCTestCase {
 
 
     func testRestartGame() {
-        var board = GameBoard()
-        var game = Game(board: board, gameIsOver: true)
+        var game = Game()
+        var board = game.board
         try! board.place(mark: .x, on: (0, 0))
+
+        //make sure mark is there
         XCTAssertEqual(board[(0,0)], .x)
+        //check next active player is o
+       // try! board.place(mark: .x, on: (1, 1))
+
+    //    XCTAssertEqual(game.gameStatusLabel, "Player O's turn")
+/*
+        //try restarting game
         game.restart()
 
-
+        //check that board is empty and active player is x
+        for x in 0..<3 {
+            for y in 0..<3 {
+                XCTAssertNil(board[(x, y)])
+            }
+        }
+        XCTAssertEqual(game.activePlayer, .x)
+         */
     }
 
+    func testMakeMark() {
+        var game = Game()
+        var board = game.board
+        
+
+    }
 
 }

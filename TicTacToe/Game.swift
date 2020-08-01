@@ -10,10 +10,17 @@ import Foundation
 
 struct Game {
 
+    init() {
+        board = GameBoard()
+        gameIsOver = false
+        gameStatusLabel = "Begin Game"
+    }
+
     mutating internal func restart() {
         board = GameBoard()
         gameState = .active(.x)
     }
+
     mutating internal func makeMark(at coordinate: Coordinate) throws {
         guard case let GameState.active(player) = gameState else {
             NSLog("Game is over")
@@ -34,13 +41,28 @@ struct Game {
             NSLog("Illegal move")
         }
     }
+    mutating internal func switchGameState() {
+        switch gameState {
+        case let .active(player):
+            gameStatusLabel = "Player \(player.stringValue)'s turn"
+        case .cat:
+            gameStatusLabel = "Cat's game!"
+        case let .won(player):
+            gameStatusLabel = "Player \(player.stringValue) won!"
+        }
+    }
 
   private(set) var board: GameBoard
 
+    internal var gameStatusLabel: String
   internal var activePlayer: GameBoard.Mark?
   internal var gameIsOver: Bool
   internal var winningPlayer: GameBoard.Mark?
-  private var gameState = GameState.active(.x)
+    private var gameState = GameState.active(.x) {
+        didSet {
+            switchGameState()
+        }
+    }
 
   private enum GameState {
       case active(GameBoard.Mark) // Active player
