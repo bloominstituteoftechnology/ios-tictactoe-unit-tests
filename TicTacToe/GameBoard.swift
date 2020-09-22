@@ -32,7 +32,7 @@ struct GameBoard {
         case filled(Mark)
         case empty
     }
-    
+    //test
     var isFull: Bool {
         for square in squares {
             if square == .empty {
@@ -57,6 +57,7 @@ struct GameBoard {
         }
     }
     
+    //test
     mutating func place(mark: Mark, on square: Coordinate) throws {
         if self[square] != nil {
             throw GameBoardError.invalidSquare
