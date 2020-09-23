@@ -11,17 +11,6 @@ import XCTest
 @testable import TicTacToe
 class GameBoardTests: XCTestCase {
 
-
-    func testCreatingEmptyBoard() {
-        let board = GameBoard()
-        
-        for x in 0..<3 {
-            for y in 0..<3 {
-                XCTAssertNil(board[(x, y)])
-            }
-        }
-    }
-    
    
     func testPlacingMarks() {
         var board = GameBoard()

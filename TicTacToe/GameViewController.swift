@@ -50,8 +50,6 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         }
     }
     
-
-    
     
     
     @IBAction func restartGame(_ sender: Any) {
