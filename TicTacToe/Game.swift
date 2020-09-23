@@ -37,7 +37,18 @@ struct Game {
             return
         }
         
-        
+        do {
+            try board.place(mark: player, on: coordinate)
+            if game(board: board, isWonBy: player) {
+                activePlayer = nil
+                gameIsOver = true
+                winningPlayer = player
+            } else {
+                let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+                activePlayer = newPlayer
+            }
+        } catch {
+            NSLog("try again")
+        }
     }
-    
 }
