@@ -10,7 +10,7 @@ import Foundation
 
 struct Game {
     
-    enum GameState {
+    enum GameState: Equatable {
         case active(GameBoard.Mark)
         case cat
         case won(GameBoard.Mark)

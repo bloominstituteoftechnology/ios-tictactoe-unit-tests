@@ -9,30 +9,82 @@
 import XCTest
 
 class TicTacToeUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-        let app = XCUIApplication()
-        app.launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+    
+    private enum Mark: Equatable {
+        case x
+        case o
+        case empty
+        
+        var stringValue: String {
+            switch self {
+            case .x: return "X"
+            case .o: return "O"
+            case .empty: return " "
+            }
+        }
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    
+    private var app: XCUIApplication {
+        return XCUIApplication()
+    }
+    
+    private var restartButton: XCUIElement {
+        return app.buttons["GameViewController.RestartButton"]
+    }
+    
+    private var turnLabel: XCUIElement {
+        return app.staticTexts["GameViewController.TurnLabel"]
+    }
+    
+    private func buttonFor(_ index: Int) -> XCUIElement {
+        return app.buttons["button\(index)"]
+    }
+    
+    override func setUp() {
+        super.setUp()
         
-        let app = XCUIApplication()
-        app.buttons["button0"].tap()
-        app.buttons["button1"].tap()
-        app.buttons["button3"].tap()
-        app.buttons["button4"].tap()
-        app.buttons["button6"].tap()
+        continueAfterFailure = false
+        XCUIApplication().launch()
+    }
+    
+    func testWinCheckingVertical1() {
+        /*
+         0 1 2
+         3 4 5
+         6 7 8
+         */
         
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        /*
+         x o -
+         x o -
+         x - -
+         */
+        
+        let button0 = buttonFor(0)
+        let button1 = buttonFor(1)
+        let button3 = buttonFor(3)
+        let button4 = buttonFor(4)
+        let button6 = buttonFor(6)
+        
+        button0.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button0.label, Mark.x.stringValue)
+        
+        button1.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button1.label, Mark.o.stringValue)
+        
+        button3.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button3.label, Mark.x.stringValue)
+        
+        button4.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button4.label, Mark.o.stringValue)
+        
+        button6.tap()
+        XCTAssertEqual(turnLabel.label, "Player X won!")
+        XCTAssertEqual(button6.label, Mark.x.stringValue)
     }
 
 }

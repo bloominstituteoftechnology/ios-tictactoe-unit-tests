@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		61B82532251AFAB20049126F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B82531251AFAB20049126F /* Game.swift */; };
 		61B8253C251C30510049126F /* TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B8253B251C30510049126F /* TicTacToeUITests.swift */; };
+		61B82547251C36070049126F /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B82546251C36070049126F /* GameTests.swift */; };
 		9DA41C3C2148ABB5001A3F45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA41C3B2148ABB5001A3F45 /* AppDelegate.swift */; };
 		9DA41C412148ABB5001A3F45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA41C3F2148ABB5001A3F45 /* Main.storyboard */; };
 		9DA41C432148ABB5001A3F45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DA41C422148ABB5001A3F45 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		61B82539251C30510049126F /* TicTacToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61B8253B251C30510049126F /* TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeUITests.swift; sourceTree = "<group>"; };
 		61B8253D251C30510049126F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61B82546251C36070049126F /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		9DA41C382148ABB4001A3F45 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DA41C3B2148ABB5001A3F45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DA41C402148ABB5001A3F45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				9DA41C622148AE68001A3F45 /* GameBoardTests.swift */,
 				9DA41C682148B9AC001A3F45 /* GameAITests.swift */,
 				9DA41C562148ABEE001A3F45 /* Info.plist */,
+				61B82546251C36070049126F /* GameTests.swift */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DA41C652148AE6D001A3F45 /* GameBoardTests.swift in Sources */,
+				61B82547251C36070049126F /* GameTests.swift in Sources */,
 				9DA41C692148B9AC001A3F45 /* GameAITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
