@@ -29,6 +29,7 @@ struct Game {
         
         do {
             try board.place(mark: player, on: coordinate)
+            lastMove = coordinate
             if game(board: board, isWonBy: player) {
                 gameState = .won(player)
             } else if board.isFull {
@@ -42,6 +43,17 @@ struct Game {
         }
     }
     
+    mutating internal func undo() {
+        guard let lastMove = lastMove,
+            gameState == .active(.x) || gameState == .active(.o) else { return }
+        if gameState == .active(.x) {
+            gameState = .active(.o)
+        } else {
+            gameState = .active(.x)
+        }
+        board.remove(on: lastMove)
+    }
+    
     private(set) var board: GameBoard
     
     internal var activePlayer: GameBoard.Mark?
@@ -49,4 +61,6 @@ struct Game {
     internal var winningPlayer: GameBoard.Mark?
     
     var gameState = GameState.active(.x)
+    
+    var lastMove: Coordinate?
 }

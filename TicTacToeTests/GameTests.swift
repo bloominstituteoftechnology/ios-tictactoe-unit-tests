@@ -101,5 +101,15 @@ class GameTests: XCTestCase {
         XCTAssertFalse(game(board: gameTest.board, isWonBy: .x))
         XCTAssertFalse(game(board: gameTest.board, isWonBy: .o))
     }
+    
+    func testUndo() {
+        var gameTest = Game(board: GameBoard(), gameIsOver: false)
+        
+        try! gameTest.makeMark(at: (0, 0))
+        gameTest.undo()
+        
+        XCTAssertNotEqual(gameTest.board[(0, 0)], .x)
+        XCTAssertEqual(gameTest.gameState, .active(.x))
+    }
 
 }

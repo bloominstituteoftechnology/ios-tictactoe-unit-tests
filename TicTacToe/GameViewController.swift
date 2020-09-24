@@ -14,6 +14,10 @@ class GameViewController: UIViewController, BoardViewControllerDelegate {
         currentGame.restart()
     }
     
+    @IBAction func undoButton(_ sender: UIButton) {
+        currentGame.undo()
+    }
+    
     // MARK: - BoardViewControllerDelegate
     
     func boardViewController(_ boardViewController: BoardViewController, markWasMadeAt coordinate: Coordinate) {

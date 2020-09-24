@@ -44,12 +44,21 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ID-Aj-gsJ">
+                                <rect key="frame" x="109.5" y="531" width="156" height="39"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Undo Last Move"/>
+                                <connections>
+                                    <action selector="undoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yDz-pH-cJk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JbU-62-13k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0Hi-5y-bID"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JbU-62-13k" secondAttribute="bottom" constant="40" id="4tN-3U-OKQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Bdp-7J-yOK" secondAttribute="bottom" constant="40" id="6CP-IW-UNP"/>
+                            <constraint firstItem="5ID-Aj-gsJ" firstAttribute="top" secondItem="Bdp-7J-yOK" secondAttribute="bottom" constant="50" id="6PE-qq-ePe"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="999" constant="40" id="9uw-Kz-K13"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bdp-7J-yOK" secondAttribute="bottom" priority="999" constant="40" id="ANm-fk-9CH"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QeD-8D-U0w"/>
@@ -60,6 +69,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Bdp-7J-yOK" secondAttribute="trailing" constant="40" id="hVg-OK-aep"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="ndw-dQ-dUp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bdp-7J-yOK" secondAttribute="trailing" priority="999" constant="40" id="wUu-f9-QpZ"/>
+                            <constraint firstItem="5ID-Aj-gsJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xYL-6e-wXo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
