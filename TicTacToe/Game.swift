@@ -24,6 +24,8 @@ struct Game {
     internal var gameIsOver: Bool = false
     internal var winningPlayer: GameBoard.Mark?
     
+    var latestSpot: Coordinate?
+    
     mutating internal func restart() {
         board = GameBoard()
         gameState = .active(.x)
@@ -46,7 +48,22 @@ struct Game {
             let newPlayer = player == .x ? GameBoard.Mark.o : GameBoard.Mark.x
             gameState = .active(newPlayer)
             activePlayer = newPlayer
+            latestSpot = coordinate
         }
+    }
+    
+    mutating func undo() {
+        guard let spot = latestSpot, let mark = activePlayer else { return }
+        
+        do {
+            try board.undo(mark: mark, on: spot)
+        } catch {
+            NSLog("There was an error you know what I'm sayin?")
+        }
+        
+        let newPlayer = mark == .x ? GameBoard.Mark.o : GameBoard.Mark.x
+        gameState = .active(newPlayer)
+        activePlayer = newPlayer
     }
     
     func game(board: GameBoard, isWonBy player: GameBoard.Mark) -> Bool {

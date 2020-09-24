@@ -46,15 +46,25 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYi-5Z-VW5">
+                                <rect key="frame" x="298" y="148" width="37" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="GameViewController.UndoButton"/>
+                                <state key="normal" title="Undo"/>
+                                <connections>
+                                    <action selector="undoMove:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZiJ-Cq-xyM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="JbU-62-13k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0Hi-5y-bID"/>
+                            <constraint firstItem="kYi-5Z-VW5" firstAttribute="trailing" secondItem="Bdp-7J-yOK" secondAttribute="trailing" id="0hN-ak-p0i"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JbU-62-13k" secondAttribute="bottom" constant="40" id="4tN-3U-OKQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Bdp-7J-yOK" secondAttribute="bottom" constant="40" id="6CP-IW-UNP"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" priority="999" constant="40" id="9uw-Kz-K13"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bdp-7J-yOK" secondAttribute="bottom" priority="999" constant="40" id="ANm-fk-9CH"/>
+                            <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" secondItem="kYi-5Z-VW5" secondAttribute="bottom" constant="8" id="NTU-YR-jZb"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QeD-8D-U0w"/>
                             <constraint firstItem="Bdp-7J-yOK" firstAttribute="top" secondItem="JbU-62-13k" secondAttribute="bottom" priority="999" constant="40" id="ShA-bE-mk0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JbU-62-13k" secondAttribute="trailing" constant="20" id="d15-n8-8bs"/>

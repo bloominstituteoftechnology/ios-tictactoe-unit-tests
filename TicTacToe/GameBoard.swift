@@ -49,6 +49,13 @@ struct GameBoard {
         squares[arrayIndex(for: square)] = .filled(mark)
     }
     
+    mutating func undo(mark: Mark, on square: Coordinate) throws {
+        if self[square] == nil {
+            throw GameBoardError.invalidSquare
+        }
+        squares[arrayIndex(for: square)] = .empty
+    }
+    
     var isFull: Bool {
         for square in squares {
             if square == .empty {

@@ -86,5 +86,63 @@ class TicTacToeUITests: XCTestCase {
         XCTAssertEqual(turnLabel.label, "Player X won!")
         XCTAssertEqual(button6.label, Mark.x.stringValue)
     }
+    
+    func testWinCheckingDiagonalRTL() {
+        /*
+         0 1 2
+         3 4 5
+         6 7 8
+         */
+        
+        /*
+         - o x
+         o x -
+         x - -
+         */
+        
+        let button1 = buttonFor(1)
+        let button2 = buttonFor(2)
+        let button3 = buttonFor(3)
+        let button4 = buttonFor(4)
+        let button6 = buttonFor(6)
+        
+        button2.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button2.label, Mark.x.stringValue)
+        
+        button1.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button1.label, Mark.o.stringValue)
+        
+        button4.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button4.label, Mark.x.stringValue)
+        
+        button3.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button3.label, Mark.o.stringValue)
+        
+        button6.tap()
+        XCTAssertEqual(turnLabel.label, "Player X won!")
+        XCTAssertEqual(button6.label, Mark.x.stringValue)
+    }
+    
+    func testRestartingGame() {
+        // Tap a square so the board isn't empty
+        let button4 = buttonFor(4)
+        button4.tap()
+        
+        // Make sure a mark has been placed on the board
+        XCTAssertEqual(button4.label, Mark.x.stringValue)
+        
+        // Check for the next player's turn
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        
+        restartButton.tap()
+        
+        for i in 0...8 {
+            XCTAssertEqual(buttonFor(i).label, Mark.empty.stringValue)
+        }
+    }
 
 }
