@@ -36,6 +36,10 @@ class TicTacToeUITests: XCTestCase {
         return app.staticTexts["GameViewController.TurnLabel"]
     }
     
+    private var undoButton: XCUIElement {
+        return app.buttons["GameViewController.UndoButton"]
+    }
+    
     private func buttonFor(_ index: Int) -> XCUIElement {
         return app.buttons["button\(index)"]
     }
@@ -143,6 +147,34 @@ class TicTacToeUITests: XCTestCase {
         for i in 0...8 {
             XCTAssertEqual(buttonFor(i).label, Mark.empty.stringValue)
         }
+    }
+    
+    func testUndo() {
+        let button4 = buttonFor(4)
+        let button2 = buttonFor(2)
+        let button3 = buttonFor(3)
+        
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        
+        button4.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button4.label, Mark.x.stringValue)
+        
+        button2.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button2.label, Mark.o.stringValue)
+        
+        undoButton.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button2.label, Mark.empty.stringValue)
+        
+        button3.tap()
+        XCTAssertEqual(turnLabel.label, "Player X's turn")
+        XCTAssertEqual(button3.label, Mark.o.stringValue)
+        
+        button2.tap()
+        XCTAssertEqual(turnLabel.label, "Player O's turn")
+        XCTAssertEqual(button2.label, Mark.x.stringValue)
     }
 
 }
